@@ -12,6 +12,7 @@ function init(_width, _height, intervalMilliSeconds) {
     screen = document.getElementById("screen");
     screenInfo = document.getElementById("screen-info");
     document.onmousemove = onMouseMove;
+    
     startLoop(intervalMilliSeconds);
 }
 
