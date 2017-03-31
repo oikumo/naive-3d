@@ -1,43 +1,37 @@
 var angle = 0.0;
-var triangle = new Triangle();
-
-triangle.a = {x:20, y:20}
-triangle.b = {x:70, y:20}
-triangle.c = {x:45, y:70}
-triangle.center = {x:45, y:45}
-
-function centerToCursor() {
-    var delta = { x:0, y:0 };
-    delta.x = cursorU - triangle.center.x;
-    delta.y = cursorV - triangle.center.y;
-
-    triangle.center.x = cursorU;
-    triangle.center.y = cursorV;
-
-    translateTriangle(triangle, delta);
-}
+var lastRenderTime = 0.0;
+var deltaTime = 0.01;
+var triangleRotationSpeed = 0.001;
+var geometry = new Geometry();
 
 function startLoop (intervalMilliSeconds) { 
-    document.getElementById("screen").onmousedown = centerToCursor;
+    document.getElementById("screen").onmousedown = onMouseDown;
     setInterval(draw, intervalMilliSeconds);
 }
 
-var lastRenderTime = 0.0;
-var deltaTime = 0.01;
-
-function draw () {
+function updateDeltaTime() {
     var now = Date.now();
     deltaTime = now - lastRenderTime;
     lastRenderTime = now;
+}
 
-    var raster = createRaster(createData(), width, height);
-    
+function draw () {
+    updateDeltaTime ();    
+    var raster = createRaster(createData(), width, height);    
     drawCursor(raster);
     renderOnScreen(raster);
 }
 
+function onMouseDown () {
+    addTriangle();
+}
+
+function addTriangle () {
+    var triangle = addTriangleToGeometry(geometry);
+    centerTriangleTo(triangle, cursorU, cursorV);
+}
+
 function createData () {
-    //var data = createNoiseTexture(width, height, ['*', '-', '+']);
     var data = createTexture(width, height, " ");
 
     drawLine2D('A', 0, 0, cursorU, cursorV, data, width);
@@ -45,11 +39,17 @@ function createData () {
     drawLine2D('C', 0, height - 1, cursorU, cursorV, data, width);
     drawLine2D('D', width - 1, 0, cursorU, cursorV, data, width);
 
-    angle = 0.001 * deltaTime;
-    
-    rotateTriangle(triangle.center, triangle, angle);
-    drawTriangle2D(triangle, "P", data, width);
+    angle = triangleRotationSpeed * deltaTime;
 
+    var geometries = geometry.shapes;
+    var geo;
+
+    for (var i = geometries.length - 1; i >= 0; --i) {
+        geo = geometries[i];
+        rotateTriangle(geo.center, geo, angle);
+        drawTriangle2D(geo, "P", data, width);
+    }
+    
     return data;
 }
 
