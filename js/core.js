@@ -5,7 +5,6 @@ var cursorV = 0;
 var screen;
 var screenInfo;
 
-
 function init(_width, _height, intervalMilliSeconds) {
     width = _width;
     height = _height;

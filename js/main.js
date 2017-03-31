@@ -16,40 +16,29 @@ function updateDeltaTime() {
 }
 
 function draw () {
-    updateDeltaTime ();    
-    var raster = createRaster(createData(), width, height);    
-    drawCursor(raster);
-    renderOnScreen(raster);
+    updateDeltaTime ();        
+    renderOnScreen(createRaster(createData(), width, height));
 }
 
 function onMouseDown () {
-    addTriangle();
-}
-
-function addTriangle () {
-    var triangle = addTriangleToGeometry(geometry);
-    centerTriangleTo(triangle, cursorU, cursorV);
+    centerTriangleTo(addTriangleToGeometry(geometry), cursorU, cursorV); // Add triangle
 }
 
 function createData () {
     var data = createTexture(width, height, " ");
-
     drawLine2D('A', 0, 0, cursorU, cursorV, data, width);
     drawLine2D('B', width - 1, height - 1, cursorU, cursorV, data, width);
     drawLine2D('C', 0, height - 1, cursorU, cursorV, data, width);
     drawLine2D('D', width - 1, 0, cursorU, cursorV, data, width);
 
     angle = triangleRotationSpeed * deltaTime;
-
     var geometries = geometry.shapes;
-    var geo;
-
-    for (var i = geometries.length - 1; i >= 0; --i) {
-        geo = geometries[i];
-        rotateTriangle(geo.center, geo, angle);
-        drawTriangle2D(geo, "P", data, width);
+    var i;
+    for (i = geometries.length - 1; i >= 0; --i) {
+        rotateTriangle(geometries[i], angle);
+        drawTriangle2D(geometries[i], data, width);
     }
-    
+
     return data;
 }
 
@@ -64,15 +53,17 @@ function createTexture (width, height, colors) {
 function createNoiseTexture (width, height, colors) {
     var n = width * height;
     var data = new Array(n);
-    for (var i = n; i >= 0; --i) {
+    var i;
+    for (i = n; i >= 0; --i) {
         data[i] = pickRandomElement(colors);
     }
     return data;
 }
 
 function createRaster (data, width, height) {
-    var raster = '', j = 0;
-    for (var i = 0, len = width * height; i < len; i++) {
+    var raster = '', i, j = 0;
+    var len = width * height;
+    for (i = 0; i < len; i++) {
         raster += data[i];
         if (j + 1 == width) {
             raster += "</br>";
@@ -82,15 +73,4 @@ function createRaster (data, width, height) {
         }
     }
     return raster;
-}
-
-function drawCursor(raster) {
-    if (cursorU < width) {
-        raster = setCharAt(raster, (cursorV * (5 + width)) + cursorU, '#');
-    }
-}
-
-function setCharAt(str,index,chr) {
-	if(index > str.length-1) return str;
-	return str.substr(0,index) + chr + str.substr(index+1);
 }
