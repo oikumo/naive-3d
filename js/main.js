@@ -4,8 +4,20 @@ var deltaTime = 0.01;
 var triangleRotationSpeed = 0.001;
 var geometry = new Geometry();
 
+var context2D;
+var imageData;
+var canvas;
+
+function initCanvas() {
+    canvas = document.getElementById("canvas");
+    context2D = canvas.getContext("2d");
+    imageData = context2D.createImageData(canvas.width, canvas.height);
+    context2D.putImageData(imageData, 0, 0);
+}
+
 function startLoop (intervalMilliSeconds) { 
-    document.getElementById("screen").onmousedown = onMouseDown;
+    screen.onmousedown = onMouseDown;
+    initCanvas();
     setInterval(draw, intervalMilliSeconds);
 }
 
@@ -16,8 +28,10 @@ function updateDeltaTime() {
 }
 
 function draw () {
-    updateDeltaTime ();        
-    renderOnScreen(createRaster(createData(), width, height));
+    updateDeltaTime ();     
+    var data = createData();
+    renderOnScreen(createRaster(data, width, height));
+    renderOnCanvas(data);
 }
 
 function onMouseDown () {
@@ -43,7 +57,22 @@ function createData () {
 }
 
 function renderOnScreen(raster) {
-    document.getElementById("screen").innerHTML = raster;
+    screen.innerHTML = raster;
+}
+
+function renderOnCanvas(data) {
+    var i, dataIndex = 0;
+    var img = imageData.data;
+    var n = img.length;
+
+    for (i=0; i < n; i+=4) {
+      img[i] = data[dataIndex++] !== ' ' ? 0 : 255; // r
+      img[i+1] = 0; // g
+      img[i+2] = 0; // b
+      img[i+3] = 255; // a
+    }
+
+    context2D.putImageData(imageData, 0, 0);
 }
 
 function createTexture (width, height, colors) {

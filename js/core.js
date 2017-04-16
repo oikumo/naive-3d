@@ -11,11 +11,11 @@ function init(_width, _height, intervalMilliSeconds) {
     screen = document.getElementById("screen");
     screenInfo = document.getElementById("screen-info");
     document.onmousemove = onMouseMove;
-    
+
     startLoop(intervalMilliSeconds);
 }
 
-function onMouseMove(event) {    
+function onMouseMove(event) {
     var _x = event.x - screen.offsetLeft + window.pageXOffset;
     var _y = event.y - screen.offsetTop + window.pageYOffset;
 
