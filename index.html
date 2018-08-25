@@ -21,22 +21,20 @@
             touch-action: manipulation;
             }
     </style>
-        <script type="text/javascript" src="js/core.js"></script>
         <script type="text/javascript" src="js/common.js"></script>
-        <script type="text/javascript" src="js/shapes.js"></script>
-        <script type="text/javascript" src="js/draw2d.js"></script>
-        <script type="text/javascript" src="js/geometry.js"></script>
-        <script type="text/javascript" src="js/main.js"></script>
-        <script type="text/javascript" src="js/screen-info.js"></script>
+        <script type="text/javascript" src="js/draw2d.js"></script>  
     </head>
     <body >
-      <canvas id="canvas" width="150" height="70" style="border:1px solid #000000;" ></canvas>
-    </br>
-
+      <canvas id="canvas" width="800" height="800" style="border:1px solid #000000;" ></canvas>
+        </br>
         <pre class="unselectable" width="1" id='screen-info'></pre>
         <center>
             <pre class="unselectable" width="1" id='screen'></pre>
         </center>
-        <script> init(150, 70, 10); </script>
+        <script type="module">
+            import {init} from "./js/core/main.js";
+            init(800, 800, 10);
+        </script>
+        
     </body>
 </html>

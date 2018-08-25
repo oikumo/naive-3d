@@ -1,8 +1,12 @@
-function Geometry () {
-    this.shapes = [];
+import {Triangle} from './triangle.js'
+
+export class Geometry {
+    constructor () {    
+        this.shapes = [];
+    }
 }
 
-function addTriangleToGeometry (geometry) {
+export function addTriangleToGeometry (geometry) {
     var triangle = new Triangle();
     triangle.a = {x:20, y:20}
     triangle.b = {x:70, y:20}
@@ -11,4 +15,3 @@ function addTriangleToGeometry (geometry) {
     geometry.shapes.push(triangle);
     return triangle;
 }
-
