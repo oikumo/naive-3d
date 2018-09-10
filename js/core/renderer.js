@@ -17,8 +17,8 @@ export class Renderer {
         let n = img.length;
     
         for (i=0; i < n; i+=4) {
-          img[i] = data[dataIndex++] !== ' ' ? 0 : 255; // r
-          img[i+1] = 255; // g
+          img[i] = data[dataIndex++]// r
+          img[i+1] = 0; // g
           img[i+2] = 0; // b
           img[i+3] = 255; // a
         }
