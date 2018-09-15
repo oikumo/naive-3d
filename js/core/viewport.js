@@ -1,22 +1,13 @@
 export class Viewport {
-    constructor() {        
-    }
-    
-    init(xOffset, yOffset, xOffsetWidth, yOffsetHeight, xOffsetWindow, yOffsetWindow, width, height){
-        this.xOffset = xOffset;
-        this.yOffset = yOffset;
-        this.xOffsetWidth = xOffsetWidth;
-        this.yOffsetHeight = yOffsetHeight;
-        this.xOffsetWindow = xOffsetWindow;
-        this.yOffsetWindow = yOffsetWindow;
+    constructor(screen, width, height) {        
+        this.screen = screen;
         this.width = width;
         this.height = height;
         this.cursorU = 0;
         this.cursorV = 0;
     }
-
     cursorUpdate(event) {
-        this.cursorU = Math.floor(clamp((event.x - this.xOffset + this.xOffsetWindow), 0, this.xOffsetWidth) / this.xOffsetWidth * this.width);
-        this.cursorV = Math.floor(clamp((event.y - this.yOffset + this.yOffsetWindow), 0, this.yOffsetHeight) / this.yOffsetHeight * this.height);
+        this.cursorU = Math.floor(clamp((event.x - this.screen.xOffset + this.screen.xOffsetWindow), 0, this.screen.xOffsetWidth) / this.screen.xOffsetWidth * this.width);
+        this.cursorV = Math.floor(clamp((event.y - this.screen.yOffset + this.screen.yOffsetWindow), 0, this.screen.yOffsetHeight) / this.screen.yOffsetHeight * this.height);
     }
 }
