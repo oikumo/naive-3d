@@ -1,37 +1,61 @@
-export class Drawer {
+import {Sprite, Texture} from '../geometry/texture.js'
+
+export class Drawer {    
+    constructor() {
+        let tex1 = new Texture(100,100, 255);
+        let tex2 = new Texture(100,100, 255);
+        this.sprite1 = new Sprite({x: 0,y: 0}, tex1);
+        this.sprite2 = new Sprite({x: 0,y: 0}, tex2);        
+    }
     update (viewport, geometry, sprites, deltaTime, speed, angle) {        
         const width = viewport.width;
         const height = viewport.height;
         const cursorU = viewport.cursorU;
         const cursorV = viewport.cursorV; 
+
         if (this.texture === undefined) {
             this.texture = new Array(width * height);
-            this.texture.fill(125);
-        } else {
-            this.texture.fill(125);
         }
-
-        this.drawLine2D(11, 0, 0, cursorU, cursorV, this.texture, width);
-        this.drawLine2D(11, width - 1, height - 1, cursorU, cursorV, this.texture, width);
-        this.drawLine2D(11, 0, height - 1, cursorU, cursorV, this.texture, width);
-        this.drawLine2D(11, width - 1, 0, cursorU, cursorV, this.texture, width);
-    
+        this.texture.fill(0);
+        
+        this.drawLine2D(255, 0, 0, cursorU, cursorV, this.texture, width);
+        this.drawLine2D(255, width - 1, height - 1, cursorU, cursorV, this.texture, width);
+        this.drawLine2D(255, 0, height - 1, cursorU, cursorV, this.texture, width);
+        this.drawLine2D(255, width - 1, 0, cursorU, cursorV, this.texture, width);
+        
         let i;
         // Draw sprites
+        this.drawSprite(viewport, this.sprite1, 0);
+        this.drawSprite(viewport, this.sprite2, 20);    
+                
         for (i = sprites.length - 1; i >= 0; --i) {
-            sprites[i].center.x += 1;        
+            sprites[i].center.x += 1;     
             sprites[i].draw(this.texture, width);
             if (sprites[i].center.x > width)
                 sprites[i].center.x = 0;
         }
-    
+
         // Draw geometry
         angle = speed * deltaTime;
         let geometries = geometry.shapes;
         for (i = geometries.length - 1; i >= 0; --i) {
             rotateTriangle(geometries[i], angle);
             this.drawTriangle2D(geometries[i], this.texture, width);
-        }
+        }     
+    }
+    drawSprite(viewport, sprite, offset) {
+        const width = viewport.width;
+        const height = viewport.height;
+        const cursorU = viewport.cursorU;
+        const cursorV = viewport.cursorV; 
+        let i = 0;
+        //for (i = 10 - 1; i >= 0; --i) {
+            sprite.center.x = cursorU + i * offset;
+            sprite.center.y = cursorV - i*i + offset;            
+            sprite.draw(this.texture, width);
+            if (sprite.center.x > width)
+                sprite.center.x = 0;
+        //}
     }
     drawLine2D (color, _p1, _p2, _q1, _q2, data, width) {
         var p1 = Math.ceil(_p1);

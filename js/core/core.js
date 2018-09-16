@@ -1,16 +1,17 @@
 import * as geo from '../geometry/geometry.js'
-import {Sprite} from '../geometry/sprite.js'
 import {centerTriangleTo} from '../geometry/triangle.js' 
 import {Renderer} from './renderer.js'
 import {Viewport} from './viewport.js'
 import {Drawer} from './drawer.js'
 import {Screen} from './screen.js'
+import {Sprite, Texture} from '../geometry/texture.js'
 
 export class Core
 {
     constructor(width, height, intervalMilliSeconds) {
-        this.width = width;
-        this.height = height;
+        let canvas = document.getElementById("canvas");
+        this.width = canvas.width;
+        this.height = canvas.height;
         this.intervalMilliSeconds = intervalMilliSeconds;
         
         this.renderer = new Renderer();
@@ -29,13 +30,13 @@ export class Core
     }
     init() {
         document.onmousemove = (event) => this.onMouseMove(event);
-        this.renderer.init(canvas);
+        this.renderer.init(canvas, this.width, this.height);
         this.startLoop();
     }
     startLoop () { 
         let canvas = document.getElementById("canvas");
         canvas.onmousedown = ()=> this.onMouseDown();
-        this.lastRenderTime = Date.now();
+        this.lastRenderTime = Date.now();    
         setInterval(()=>this.draw(), this.intervalMilliSeconds);
     }
     draw () {
@@ -56,18 +57,19 @@ export class Core
             this.elapsed = 0;
             this.framesCounter = 0;
         }
-        console.log("fps: " + this.fps);
     }
     onMouseMove(event) {        
         for (let i  = this.sprites.length - 1; i >= 0; --i) {            
             if (Math.abs(this.sprites[i].center.x - this.viewport.cursorU) < 10) {
-                this.sprites[i].color += 5;
+                //let tex2 = new Texture(100,100, 0);
+                //this.sprites[i].texture = tex2;
             }                
-        }
+        }        
         this.viewport.cursorUpdate(event);
     }
     onMouseDown () {    
         centerTriangleTo(geo.addTriangleToGeometry(this.geometry), this.viewport.cursorU, this.viewport.cursorV);
-        this.sprites.push(new Sprite({x: this.viewport.cursorU,y: this.viewport.cursorV}, 100, 50));    
+        let tex2 = new Texture(100,100, 255);
+        this.sprites.push(new Sprite({x: this.viewport.cursorU,y: this.viewport.cursorV}, tex2));    
     }
 }
