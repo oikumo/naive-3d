@@ -12,7 +12,7 @@ export function addTriangleToGeometry (geometry) {
     triangle.b = {x:70, y:20}
     triangle.c = {x:45, y:70}
     triangle.center = {x:45, y:45}
-    triangle.color = 100;
+    triangle.color = 1;
     geometry.shapes.push(triangle);
     return triangle;
 }

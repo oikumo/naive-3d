@@ -4,11 +4,12 @@ import {Renderer} from './renderer.js'
 import {Viewport} from './viewport.js'
 import {Drawer} from './drawer.js'
 import {Screen} from './screen.js'
-import {Sprite, Texture} from '../geometry/texture.js'
+import {Texture} from '../geometry/texture.js'
+import {Sprite} from '../geometry/sprite.js'
 
 export class Core
 {
-    constructor(width, height, intervalMilliSeconds) {
+    constructor(intervalMilliSeconds) {
         let canvas = document.getElementById("canvas");
         this.width = canvas.width;
         this.height = canvas.height;
@@ -68,7 +69,7 @@ export class Core
         this.viewport.cursorUpdate(event);
     }
     onMouseDown () {    
-        centerTriangleTo(geo.addTriangleToGeometry(this.geometry), this.viewport.cursorU, this.viewport.cursorV);
+       centerTriangleTo(geo.addTriangleToGeometry(this.geometry), this.viewport.cursorU, this.viewport.cursorV);
         let tex2 = new Texture(100,100, 255);
         this.sprites.push(new Sprite({x: this.viewport.cursorU,y: this.viewport.cursorV}, tex2));    
     }

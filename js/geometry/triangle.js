@@ -4,7 +4,7 @@ export class Triangle {
         this.b = { x:0, y: 0 };
         this.c = { x:0, y: 0 };
         this.center = { x:0, y:0 };
-        this.color = 0;
+        this.color = 3;
     }
 }
 
