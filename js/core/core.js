@@ -3,9 +3,8 @@ import {Viewport} from './viewport.js'
 import {Drawer} from './drawer.js'
 import {Screen} from './screen.js'
 import {Input} from '../input/input.js'
-import { Time } from './time.js';
+import {Time} from './time.js';
 import {Scene} from '../scene/scene.js'
-
 
 export class Core
 {
