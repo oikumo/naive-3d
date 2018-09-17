@@ -1,84 +1,50 @@
-import {Texture} from '../geometry/texture.js'
-import {Sprite}  from '../geometry/sprite.js'
+import {rotateTriangle} from '../transform/transform.js'
+import {drawLine2D} from '../rendering/brush.js'
 
 export class Drawer {    
-    constructor() {
-        let tex1 = new Texture(100,100, 255);
-        let tex2 = new Texture(100,100, 255);
-        this.sprite1 = new Sprite({x: 0,y: 0}, tex1);
-        this.sprite2 = new Sprite({x: 0,y: 0}, tex2);        
+    constructor(viewport, scene) {
+        this.width = viewport.width;
+        this.height = viewport.height;
+        this.viewport = viewport;
+        this.scene = scene;
+        this.texture = new Uint8Array(this.width * this.height);
     }
-    update (viewport, geometry, sprites, deltaTime, speed, angle) {        
-        const width = viewport.width;
-        const height = viewport.height;
-        const cursorU = viewport.cursorU;
-        const cursorV = viewport.cursorV; 
-
-        if (this.texture === undefined) {
-            this.texture = new Uint8Array(width * height);
-            this.texture.fill(0);                        
-        } 
-        else {
-            this.texture.fill(0);
-        }
-        
-        this.drawLine2D(1, 0, 0, cursorU, cursorV, this.texture, width);
-        this.drawLine2D(1, width - 1, height - 1, cursorU, cursorV, this.texture, width);
-        this.drawLine2D(1, 0, height - 1, cursorU, cursorV, this.texture, width);
-        this.drawLine2D(1, width - 1, 0, cursorU, cursorV, this.texture, width);
-        
-        // Draw sprites        
-        this.drawSprite(viewport, this.sprite1, 0);
-        this.drawSprite(viewport, this.sprite2, 20);    
-  
-        let i;
+    update (deltaTime, speed) {         
+        this.texture.fill(0);
+        this.cursorU = this.viewport.cursorU;
+        this.cursorV = this.viewport.cursorV; 
+        this.drawAim();
+        this.drawSprites(this.scene.sprites);
+        this.drawShapes(this.scene.shapes, speed * deltaTime);
+    }
+    drawAim() {
+        drawLine2D(1, 0, 0, this.cursorU, this.cursorV, this.texture, this.width);
+        drawLine2D(1, this.width - 1, this.height - 1, this.cursorU, this.cursorV, this.texture, this.width);
+        drawLine2D(1, 0, this.height - 1, this.cursorU, this.cursorV, this.texture, this.width);
+        drawLine2D(1, this.width - 1, 0, this.cursorU, this.cursorV, this.texture, this.width);
+    }    
+    drawSprites(sprites) {
+        let i;    
         for (i = sprites.length - 1; i >= 0; --i) {
             sprites[i].center.x += 1;     
-            sprites[i].draw(this.texture, width);
-            if (sprites[i].center.x > width)
+            sprites[i].draw(this.texture, this.width);
+            if (sprites[i].center.x > this.width)
                 sprites[i].center.x = 0;
         }
-
-        // Draw geometry
-        angle = speed * deltaTime;
-        const geometries = geometry.shapes;
-        for (i = geometries.length - 1; i >= 0; --i) {
-            rotateTriangle(geometries[i], angle);
-            this.drawTriangle2D(geometries[i], this.texture, width);
+    }
+    drawShapes(shapes, angle) {
+        let i;      
+        for (i = shapes.length - 1; i >= 0; --i) {
+            rotateTriangle(shapes[i], angle);
+            this.drawTriangle2D(shapes[i], this.texture, this.width);
         }   
     }
-
-    drawSprite(viewport, sprite, offset) {
-        const width = viewport.width;
-        const height = viewport.height;
-        const cursorU = viewport.cursorU;
-        const cursorV = viewport.cursorV; 
-        let i = 0;
-        //for (i = 10 - 1; i >= 0; --i) {
-            sprite.center.x = cursorU + i * offset;
-            sprite.center.y = cursorV - i*i + offset;            
-            sprite.draw(this.texture, width);
-            if (sprite.center.x > width)
-                sprite.center.x = 0;
-        //}
-    }
-    drawLine2D (color, _p1, _p2, _q1, _q2, data, width) {
-        const p1 = Math.ceil(_p1);
-        const p2 = Math.ceil(_p2);
-        const deltaQ1P1 = Math.ceil(_q1) - p1;
-        const deltaQ2P2 = Math.ceil(_q2) - p2;
-        const  n = Math.floor(Math.sqrt(Math.pow(deltaQ1P1, 2) + Math.pow(deltaQ2P2, 2)));
-        
-        let  i, x, t, y = 0;
-        for (i = 0; i < n; i++) {
-            t = i / n;
-            x = Math.floor(p1 + (t * deltaQ1P1));
-            if (x < 0 || x >= width) 
-                continue;
-    
-            y = p2 + Math.floor(t * deltaQ2P2);
-            data[(y * width) + x] = color;
-        }
+    drawSprite(sprite, offset) {
+        sprite.center.x = this.cursorU + i * offset;
+        sprite.center.y =this.cursorV - i*i + offset;            
+        sprite.draw(this.texture, this.width);
+        if (sprite.center.x > this.width)
+            sprite.center.x = 0;
     }
     drawTriangle2D (triangle, data, dataLineWidth) {
         const p1 = triangle.a;
@@ -86,8 +52,8 @@ export class Drawer {
         const p3 = triangle.c;
         const color = triangle.color;
     
-        this.drawLine2D(color, p1.x, p1.y, p2.x, p2.y, data, dataLineWidth);
-        this.drawLine2D(color, p2.x, p2.y, p3.x, p3.y, data, dataLineWidth);
-        this.drawLine2D(color, p3.x, p3.y, p1.x, p1.y, data, dataLineWidth);
+        drawLine2D(color, p1.x, p1.y, p2.x, p2.y, data, dataLineWidth);
+        drawLine2D(color, p2.x, p2.y, p3.x, p3.y, data, dataLineWidth);
+        drawLine2D(color, p3.x, p3.y, p1.x, p1.y, data, dataLineWidth);
     }
 }
