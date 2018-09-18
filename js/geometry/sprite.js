@@ -3,16 +3,23 @@ export class Sprite {
         this.texture = texture;
         this.center = center;
     }
-    draw(data, w) {
-        let i = 0;
-        let pixel;
-        let position;
-        let length = this.texture.pixels.length;
-        
-        for (i = 0; i < length; i++) {
-            pixel = this.texture.pixels[i];            
-            position = this.center.x + pixel.y  + (this.center.y + pixel.x) * w;            
-            data[position] = pixel.color;
+    draw(data, width) {
+        let i
+        const texWidth = this.texture.width
+        const centerX = this.center.x
+        const centerY = this.center.y
+        let x = 0 , y = 0
+        const len = this.texture.pixels.length
+        const pixels = this.texture.pixels
+
+        for (i = 0; i < len; i++) {            
+            data[(centerY + x) * width + (centerX + y)] = pixels[i]                        
+            if (x == texWidth) {
+                x = 0
+                y++
+            } else {
+                x++
+            }
         }
     }
 }

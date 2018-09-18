@@ -1,21 +1,14 @@
-import {Triangle, centerTriangleTo} from '../geometry/triangle.js'
+import {TriangleBuffer} from '../geometry/triangle.js'
 
 export class Scene {
     constructor() {
-        this.shapes = [];
-        this.sprites = [];
+        this.sprites = []
+        this.buffer = new TriangleBuffer()
     }
-    addEntity(x, y) {
-        let triangle = new Triangle()
-        triangle.a = {x:20, y:20}
-        triangle.b = {x:70, y:20}
-        triangle.c = {x:45, y:70}
-        triangle.center = { x: 45, y: 45 }
-        triangle.color = 2
-        centerTriangleTo(triangle, x, y)
-        this.shapes.push(triangle)
+    addEntity(x, y, color) {
+        this.buffer.add(x,y, color)
     }
     addSprite(sprite) {
-        this.sprites.push(sprite);
+        this.sprites.push(sprite)
     }
 }

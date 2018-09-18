@@ -1,22 +1,18 @@
-import {Pixel} from './pixel.js'
-
 export class Texture {
-    constructor(x, y, color) {
-        this.pixels = [];
-        this.dimensions = { width: x, height:y };
-        this.createProcedural();
+    constructor(width, height) {
+        this.pixels = new Uint32Array(width * height)
+        this.width = width
+        this.height = height
+        this.createProcedural()
     }
     createProcedural() {
-        let x = 0, y =0;
-        let size = this.dimensions.width * this.dimensions.height;
-        let i = 0;
+        let i =0, x = 0, y = 0
+        const width = this.width
+        const size = this.width * this.height
 
-        for (i = 0; i < size; i++)
-        {    
-            let color = Math.ceil(3 * Math.random());        
-            this.pixels.push(new Pixel(x, y, color));
-
-            if (x == this.dimensions.width) {
+        for (i = 0; i < size; i++) {
+            this.pixels[y + width * x ] = Math.ceil(1111111111 * Math.random())
+            if (x == width) {
                 x = 0;
                 y++;
             }
