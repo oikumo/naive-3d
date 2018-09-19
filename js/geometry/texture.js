@@ -3,7 +3,18 @@ export class Texture {
         this.pixels = new Uint32Array(width * height)
         this.width = width
         this.height = height
+
+        this.color = {
+            0 : parseInt(0xFF0000FF), // red
+            1 : parseInt(0xFFFF0000), // bluew
+            2 : parseInt(0xFF00FF00), // grean
+            3 : parseInt(0xFF00FFFF) // yellow
+        }
+
         this.createProcedural()
+    }
+    sampleColor() {
+        return this.color[Math.floor(Math.random() * 5)]
     }
     createProcedural() {
         let i =0, x = 0, y = 0
@@ -11,7 +22,7 @@ export class Texture {
         const size = this.width * this.height
 
         for (i = 0; i < size; i++) {
-            this.pixels[y + width * x ] = Math.ceil(1111111111 * Math.random())
+            this.pixels[y + width * x ] = this.sampleColor()
             if (x == width) {
                 x = 0;
                 y++;
