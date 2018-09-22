@@ -9,9 +9,10 @@ export class Drawer {
         this.texture = renderer.texture
         this.angle = 0
         
+        /*
         for (let i = 0; i < 1000; i++) {
             this.scene.addEntity(Math.random() * this.width, Math.random() * this.height, 255111111);
-        }
+        }*/
     }
     update (deltaTime, speed) {
         this.cursorU = this.viewport.cursorU
@@ -31,7 +32,7 @@ export class Drawer {
     drawSprites(sprites) {
         let i;    
         for (i = sprites.length - 1; i >= 0; --i) {
-            sprites[i].center.x += 1;     
+            //sprites[i].center.x += 1;     
             sprites[i].draw(this.texture, this.width);
             if (sprites[i].center.x > this.width)
                 sprites[i].center.x = 0;
