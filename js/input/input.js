@@ -1,5 +1,5 @@
 import {Sprite} from '../geometry/sprite.js'
-import { TextureFactory } from '../geometry/textures/textureFactory.js';
+import {TextureFactory} from '../geometry/textures/textureFactory.js'
 import {Pallete} from '../geometry/pallete.js'
 
 export class Input {
