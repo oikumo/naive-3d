@@ -1,16 +1,14 @@
 import {Texture} from './texture.js' 
 import {CheckerFiller} from './fillers/checkerFiller.js'
-import {Pallete} from '../pallete.js'
 
 export class TextureFactory {
     constructor(width, heigth) {
         this.width = width
         this.heigth = heigth
     }
-    checker() {
-        const texture = new Texture(this.width, this.heigth, 255)    
-        const pallete = new Pallete()     
-        const filler = new CheckerFiller(pallete.color[0], pallete.color[4])        
+    checker(color, otherColor, tileWidth, tileHeigth) {
+        const texture = new Texture(this.width, this.heigth)        
+        const filler = new CheckerFiller(color, otherColor, tileWidth, tileHeigth)        
         texture.fill(filler)
         return texture
     }
