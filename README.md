@@ -1,5 +1,5 @@
 # Naive-3D
 
-A very simple HTML 3D engine.
+A very simple JavaScript 3D engine.
 
 http://oikumo.com
