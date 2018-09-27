@@ -1,4 +1,7 @@
 import {drawLine2D} from '../rendering/brush.js'
+import {Quad} from '../geometry/quad.js'
+import {TextureFactory} from '../geometry/textures/textureFactory.js'
+import {Pallete} from '../geometry/pallete.js'
 
 export class Drawer {    
     constructor(viewport, scene, renderer) {
@@ -8,6 +11,9 @@ export class Drawer {
         this.scene = scene
         this.texture = renderer.texture
         this.angle = 0
+        const pallete = new Pallete()
+        const tex =  new TextureFactory(100, 100).checker(pallete.color[1], pallete.color[0], 10, 10)
+        this.quad = new Quad(50,50, 100, tex)
     }
     update (deltaTime, speed) {
         this.cursorU = this.viewport.cursorU
@@ -15,7 +21,10 @@ export class Drawer {
         this.texture.fill(3333333333)
         this.drawSprites(this.scene.sprites)
         this.drawShapesBuffer(this.scene.buffer, this.angle)
-        this.drawAim()
+        this.drawAim() 
+        this.quad.centerX = this.viewport.cursorU
+        this.quad.centerY = this.viewport.cursorV
+        this.quad.draw(this.texture, this.width, this.angle)
         this.angle += 0.01        
     }
     drawAim() {
