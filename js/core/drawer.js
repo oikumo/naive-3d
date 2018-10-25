@@ -24,7 +24,7 @@ export class Drawer {
         this.drawAim() 
         this.quad.centerX = this.viewport.cursorU
         this.quad.centerY = this.viewport.cursorV
-        this.quad.draw(this.texture, this.width, this.angle)
+        this.quad.draw(this.texture, this.width, this.height, this.angle,  Math.fround(this.angle / 10))
         this.angle += 0.01        
     }
     drawAim() {
