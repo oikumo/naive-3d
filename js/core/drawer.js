@@ -36,7 +36,7 @@ export class Drawer {
     drawSprites(sprites) {
         let i;    
         for (i = sprites.length - 1; i >= 0; --i) {
-            sprites[i].draw(this.texture, this.width);
+            sprites[i].draw(this.texture, this.width, this.height);
             if (sprites[i].center.x > this.width)
                 sprites[i].center.x = 0;
         }
@@ -87,7 +87,7 @@ export class Drawer {
     drawSprite(sprite, offset) {
         sprite.center.x = this.cursorU + i * offset
         sprite.center.y = this.cursorV - i * i + offset
-        sprite.draw(this.texture, this.width)
+        sprite.draw(this.texture, this.width, this.height)
         if (sprite.center.x > this.width)
             sprite.center.x = 0
     }
