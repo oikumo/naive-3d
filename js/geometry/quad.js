@@ -7,7 +7,7 @@ export class Quad {
     }
     draw(data, width, height, angle, scale) {        
         let col = 0, row = 0
-        let x = 0, y = 0        
+        let x = 0, y = 0
         let i = 0, tx = 0, ty = 0, color = 0
 
         const cos = Math.cos(angle)
@@ -24,7 +24,7 @@ export class Quad {
 
         const unscaledDimension = Math.floor(dimension / scale)
 
-        for (i = 0; i < len; i++) {
+        for (i = len - 1; i >= 0; --i) {
             x = col + dimDelta
             y = row + dimDelta
 
