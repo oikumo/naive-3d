@@ -47,7 +47,7 @@ export class Drawer {
         const len = buffer.len
         let i, index, ax, ay, bx, by, cx, cy, px, py, centerX, centerY, cos, sin, color = 0
 
-        for (i = 0; i < len; i++) {
+        for (i = len - 1; i >= 0; --i) {
             index = i * 8
             ax = triangles[index]
             ay = triangles[index + 1]
