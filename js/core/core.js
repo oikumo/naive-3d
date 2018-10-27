@@ -12,7 +12,7 @@ export class Core
         let canvas = document.getElementById("canvas")
         this.width = canvas.width
         this.height = canvas.height
-        this.intervalMilliSeconds = 10
+        this.intervalMilliSeconds = 5
         this.triangleRotationSpeed = 0.001
 
         this.time = new Time()

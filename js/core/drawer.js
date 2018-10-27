@@ -18,14 +18,14 @@ export class Drawer {
     update (deltaTime, speed) {
         this.cursorU = this.viewport.cursorU
         this.cursorV = this.viewport.cursorV
-        this.texture.fill(3333333333)
+        this.texture.fill(0xFF555500)
         this.drawSprites(this.scene.sprites)
         this.drawShapesBuffer(this.scene.buffer, this.angle)
         this.drawAim() 
         this.quad.centerX = this.viewport.cursorU
         this.quad.centerY = this.viewport.cursorV
         this.quad.draw(this.texture, this.width, this.height, this.angle,  Math.fround(this.angle / 10))
-        this.angle += 0.01        
+        this.angle += 0.001 * deltaTime       
     }
     drawAim() {
         drawLine2D(1111111111, 0, 0, this.cursorU, this.cursorV, this.texture, this.width)
@@ -34,11 +34,9 @@ export class Drawer {
         drawLine2D(1111111111, this.width - 1, 0, this.cursorU, this.cursorV, this.texture, this.width)
     }    
     drawSprites(sprites) {
-        let i;    
+        let i
         for (i = sprites.length - 1; i >= 0; --i) {
             sprites[i].draw(this.texture, this.width, this.height);
-            if (sprites[i].center.x > this.width)
-                sprites[i].center.x = 0;
         }
     }
     drawShapesBuffer(buffer, angle) {
@@ -88,7 +86,5 @@ export class Drawer {
         sprite.center.x = this.cursorU + i * offset
         sprite.center.y = this.cursorV - i * i + offset
         sprite.draw(this.texture, this.width, this.height)
-        if (sprite.center.x > this.width)
-            sprite.center.x = 0
     }
 }
