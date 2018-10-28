@@ -1,5 +1,6 @@
 import {drawLine2D} from '../rendering/brush.js'
 import {Quad} from '../geometry/quad.js'
+import {Cube} from '../geometry/cube.js'
 import {TextureFactory} from '../geometry/textures/textureFactory.js'
 import {Pallete} from '../geometry/pallete.js'
 
@@ -12,20 +13,24 @@ export class Drawer {
         this.texture = renderer.texture
         this.angle = 0
         const pallete = new Pallete()
+        this.cube = new Cube({ x: 350, y: 350, z: 350}, 100)
         const tex =  new TextureFactory(100, 100).checker(pallete.color[1], pallete.color[0], 10, 10)
-        this.quad = new Quad(50,50, 100, tex)
+        this.quad = new Quad({ x: 50, y: 50}, 100, tex)
     }
     update (deltaTime, speed) {
         this.cursorU = this.viewport.cursorU
         this.cursorV = this.viewport.cursorV
-        this.texture.fill(0xFF555500)
+        this.texture.fill(0xFF555500)        
         this.drawSprites(this.scene.sprites)
         this.drawShapesBuffer(this.scene.buffer, this.angle)
         this.drawAim() 
-        this.quad.centerX = this.viewport.cursorU
-        this.quad.centerY = this.viewport.cursorV
+        this.quad.center.x = this.viewport.cursorU
+        this.quad.center.y = this.viewport.cursorV
+        this.quad.center.z = 0
         this.quad.draw(this.texture, this.width, this.height, this.angle,  Math.fround(this.angle / 10))
-        this.angle += 0.001 * deltaTime       
+        this.cube.scale(1.001)
+        this.drawCubes()
+        this.angle += 0.001 * deltaTime
     }
     drawAim() {
         drawLine2D(1111111111, 0, 0, this.cursorU, this.cursorV, this.texture, this.width)
@@ -38,6 +43,38 @@ export class Drawer {
         for (i = sprites.length - 1; i >= 0; --i) {
             sprites[i].draw(this.texture, this.width, this.height);
         }
+    }
+    drawCubes() {
+        this.cube.transform()
+        const vectors = this.cube.vectors
+        const width = this.width
+        const red = 0xFF0000FF
+        const blue = 0xFFFF0000
+        const green = 0xFF00FF00
+
+        const a = vectors[0]
+        const b = vectors[1]
+        const c = vectors[2]
+        const d = vectors[3]
+        const e = vectors[4]
+        const f = vectors[5]
+        const g = vectors[6]
+        const h = vectors[7]
+
+        drawLine2D(red, a.x, a.y, b.x, b.y, this.texture, width)
+        drawLine2D(red, b.x, b.y, c.x, c.y, this.texture, width)
+        drawLine2D(red, c.x, c.y, d.x, d.y, this.texture, width)
+        drawLine2D(red, d.x, d.y, a.x, a.y, this.texture, width)
+
+        drawLine2D(green, e.x, e.y, f.x, f.y, this.texture, width)
+        drawLine2D(green, f.x, f.y, g.x, g.y, this.texture, width)
+        drawLine2D(green, g.x, g.y, h.x, h.y, this.texture, width)        
+        drawLine2D(green, h.x, h.y, e.x, e.y, this.texture, width)
+
+        drawLine2D(blue, a.x, a.y, e.x, e.y, this.texture, width)
+        drawLine2D(blue, b.x, b.y, f.x, f.y, this.texture, width)
+        drawLine2D(blue, c.x, c.y, g.x, g.y, this.texture, width)
+        drawLine2D(blue, d.x, d.y, h.x, h.y, this.texture, width)
     }
     drawShapesBuffer(buffer, angle) {
         const triangles = buffer.triangles

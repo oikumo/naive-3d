@@ -1,7 +1,6 @@
 export class Quad {
-    constructor(centerX, centerY, dimension, texture) {
-        this.centerX = centerX
-        this.centerY = centerY
+    constructor(center, dimension, texture) {
+        this.center = center
         this.dimension = dimension    
         this.texture = texture        
     }
@@ -18,8 +17,9 @@ export class Quad {
         const translation = dimension 
         const dimDelta = dimension * .5
 
-        const dx = this.centerX - dimension
-        const dy = this.centerY - dimension
+        const dx = this.center.x - dimension
+        const dy = this.center.y - dimension
+        const dz = this.center.z - dimension
         const pixels = this.texture.pixels
 
         const unscaledDimension = Math.floor(dimension / scale)
