@@ -3,6 +3,7 @@ import {Quad} from '../geometry/quad.js'
 import {Cube} from '../geometry/cube.js'
 import {TextureFactory} from '../geometry/textures/textureFactory.js'
 import {Pallete} from '../geometry/pallete.js'
+import {drawQuadTexture} from '../geometry/textures/drawers/textureDrawer.js'
 
 export class Drawer {    
     constructor(viewport, scene, renderer) {
@@ -16,6 +17,7 @@ export class Drawer {
         this.cube = new Cube({ x: 350, y: 350, z: 350}, 100)
         const tex =  new TextureFactory(100, 100).checker(pallete.color[1], pallete.color[0], 10, 10)
         this.quad = new Quad({ x: 50, y: 50}, 100, tex)
+        this.cubeTexture = new TextureFactory(1000, 1000).checker(pallete.color[1], pallete.color[0], 10, 10)
     }
     update (deltaTime, speed) {
         this.cursorU = this.viewport.cursorU
@@ -26,9 +28,9 @@ export class Drawer {
         this.drawAim() 
         this.quad.center.x = this.viewport.cursorU
         this.quad.center.y = this.viewport.cursorV
-        this.quad.center.z = 0
+        this.quad.center.z = 0 
         this.quad.draw(this.texture, this.width, this.height, this.angle,  Math.fround(this.angle / 10))
-        this.cube.scale(1.001)
+        this.cube.scale(1.000001)
         this.drawCubes()
         this.angle += 0.001 * deltaTime
     }
@@ -45,6 +47,7 @@ export class Drawer {
         }
     }
     drawCubes() {
+
         this.cube.transform()
         const vectors = this.cube.vectors
         const width = this.width
@@ -61,10 +64,14 @@ export class Drawer {
         const g = vectors[6]
         const h = vectors[7]
 
+        
         drawLine2D(red, a.x, a.y, b.x, b.y, this.texture, width)
         drawLine2D(red, b.x, b.y, c.x, c.y, this.texture, width)
         drawLine2D(red, c.x, c.y, d.x, d.y, this.texture, width)
         drawLine2D(red, d.x, d.y, a.x, a.y, this.texture, width)
+
+        const quadVectors = [a.x, a.y, b.x, b.y, d.x, d.y, d.x, d.y]
+        drawQuadTexture(this.texture, this.cubeTexture.pixels, this.width, this.height, quadVectors)
 
         drawLine2D(green, e.x, e.y, f.x, f.y, this.texture, width)
         drawLine2D(green, f.x, f.y, g.x, g.y, this.texture, width)
