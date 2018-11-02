@@ -32,13 +32,3 @@ export class TriangleBuffer {
         this.len++;
     }
 }
-
-export function centerTriangleTo(triangle, centerX, centerY) {
-    var delta = { 
-        x : centerX - triangle.center.x,
-        y : centerY - triangle.center.y 
-    }
-    triangle.center.x = centerX
-    triangle.center.y = centerY
-    translateTriangle(triangle, delta)
-}

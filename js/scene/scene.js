@@ -1,4 +1,4 @@
-import {TriangleBuffer} from '../geometry/triangle.js'
+import {TriangleBuffer} from '../geometry/triangleBuffer.js'
 
 export class Scene {
     constructor() {

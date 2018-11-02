@@ -4,6 +4,7 @@ import {Cube} from '../geometry/cube.js'
 import {TextureFactory} from '../geometry/textures/textureFactory.js'
 import {Pallete} from '../geometry/pallete.js'
 import {drawQuadTexture} from '../geometry/textures/drawers/textureDrawer.js'
+import {drawTrianglesBuffer} from '../geometry/drawers/triangleBufferDrawer.js'
 
 export class Drawer {    
     constructor(viewport, scene, renderer) {
@@ -24,8 +25,7 @@ export class Drawer {
         this.cursorV = this.viewport.cursorV
         this.texture.fill(0xFF555500)        
         this.drawSprites(this.scene.sprites)
-        this.drawShapesBuffer(this.scene.buffer, this.angle)
-        this.drawAim() 
+        drawTrianglesBuffer(this.texture, this.width, this.scene.buffer, this.angle)
         this.quad.center.x = this.viewport.cursorU
         this.quad.center.y = this.viewport.cursorV
         this.quad.center.z = 0 
@@ -34,12 +34,6 @@ export class Drawer {
         this.drawCubes()
         this.angle += 0.001 * deltaTime
     }
-    drawAim() {
-        drawLine2D(1111111111, 0, 0, this.cursorU, this.cursorV, this.texture, this.width)
-        drawLine2D(1111111111, this.width - 1, this.height - 1, this.cursorU, this.cursorV, this.texture, this.width)
-        drawLine2D(1111111111, 0, this.height - 1, this.cursorU, this.cursorV, this.texture, this.width)
-        drawLine2D(1111111111, this.width - 1, 0, this.cursorU, this.cursorV, this.texture, this.width)
-    }    
     drawSprites(sprites) {
         let i
         for (i = sprites.length - 1; i >= 0; --i) {
@@ -47,7 +41,6 @@ export class Drawer {
         }
     }
     drawCubes() {
-
         this.cube.transform()
         const vectors = this.cube.vectors
         const width = this.width
@@ -64,7 +57,6 @@ export class Drawer {
         const g = vectors[6]
         const h = vectors[7]
 
-        
         drawLine2D(red, a.x, a.y, b.x, b.y, this.texture, width)
         drawLine2D(red, b.x, b.y, c.x, c.y, this.texture, width)
         drawLine2D(red, c.x, c.y, d.x, d.y, this.texture, width)
@@ -82,49 +74,6 @@ export class Drawer {
         drawLine2D(blue, b.x, b.y, f.x, f.y, this.texture, width)
         drawLine2D(blue, c.x, c.y, g.x, g.y, this.texture, width)
         drawLine2D(blue, d.x, d.y, h.x, h.y, this.texture, width)
-    }
-    drawShapesBuffer(buffer, angle) {
-        const triangles = buffer.triangles
-        const colors = buffer.colors
-        const len = buffer.len
-        let i, index, ax, ay, bx, by, cx, cy, px, py, centerX, centerY, cos, sin, color = 0
-
-        for (i = len - 1; i >= 0; --i) {
-            index = i * 8
-            ax = triangles[index]
-            ay = triangles[index + 1]
-            bx = triangles[index + 2]
-            by = triangles[index + 3]
-            cx = triangles[index + 4]
-            cy = triangles[index + 5]
-
-            centerX = triangles[index + 6]
-            centerY = triangles[index + 7]
-
-            cos = Math.cos(angle)
-            sin = Math.sin(angle)
-
-            px = ax - centerX
-            py = ay - centerY
-            ax = (cos * px) - (sin * py) + centerX
-            ay = (sin * px) + (cos * py) + centerY
-
-            px = bx - centerX
-            py = by - centerY
-            bx = (cos * px) - (sin * py) + centerX
-            by = (sin * px) + (cos * py) + centerY
-
-            px = cx - centerX
-            py = cy - centerY
-            cx = (cos * px) - (sin * py) + centerX
-            cy = (sin * px) + (cos * py) + centerY
-            
-            color = colors[i]
-
-            drawLine2D(color, ax, ay, bx, by, this.texture, this.width)
-            drawLine2D(color, bx, by, cx, cy, this.texture, this.width)
-            drawLine2D(color, cx, cy, ax, ay, this.texture, this.width)
-        }   
     }
     drawSprite(sprite, offset) {
         sprite.center.x = this.cursorU + i * offset
