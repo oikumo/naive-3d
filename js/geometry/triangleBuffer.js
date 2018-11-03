@@ -1,5 +1,3 @@
-import {translateTriangle} from '../transform/transform.js'
-
 export class TriangleBuffer {
     constructor () {
         this.triangles = new ArrayBuffer(1024);
