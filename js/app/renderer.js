@@ -1,7 +1,7 @@
 export class Renderer {
-    constructor(width, height) {
+    constructor() {
         this.context2D = canvas.getContext("2d")
-        this.imageData = this.context2D.createImageData(width, height)
+        this.imageData = this.context2D.createImageData(canvas.width, canvas.height)
         this.context2D.putImageData(this.imageData, 0, 0)
 
         const buf = new ArrayBuffer(this.imageData.data.length)

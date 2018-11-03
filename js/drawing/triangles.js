@@ -1,4 +1,4 @@
-import {drawLine2D} from '../../rendering/brush.js'
+import {drawLine2D} from './brush.js'
 
 export function drawTrianglesBuffer(texture, textureWidth, buffer, angle) {
     const triangles = buffer.triangles
