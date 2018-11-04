@@ -3,11 +3,13 @@ import {Quad} from '../geometry/quad.js'
 import {Cube} from '../geometry/cube.js'
 import {TextureFactory} from '../textures/textureFactory.js'
 import {Pallete} from '../colors/pallete.js'
+import { CubeBuffer } from '../geometry/cubesBuffer.js';
 
 export class Scene {
     constructor() {
         this.sprites = []
-        this.buffer = new TriangleBuffer()
+        this.triangles = new TriangleBuffer()
+        this.cubes = new CubeBuffer()
 
         const pallete = new Pallete()
         this.cube = new Cube({ x: 350, y: 350, z: 350}, 100)
@@ -17,7 +19,8 @@ export class Scene {
         this.cubeTexture = new TextureFactory(1000, 1000).checker(pallete.color[1], pallete.color[0], 10, 10)
     }
     addEntity(x, y, color) {
-        this.buffer.add(x,y, color)
+        this.triangles.add(x,y, color)
+        this.cubes.add()
     }
     addSprite(sprite) {
         this.sprites.push(sprite)

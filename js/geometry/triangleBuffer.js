@@ -7,7 +7,7 @@ export class TriangleBuffer {
     add(x, y, color) {
         if ((this.len + 2) * 8 == this.triangles.length)
             return
-        const index = this.len * 8;     
+        const index = this.len * 8;
         const ax = 20
         const ay = 20
         const bx = 70

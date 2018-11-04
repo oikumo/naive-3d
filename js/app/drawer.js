@@ -1,5 +1,6 @@
 import {drawTrianglesBuffer} from '../drawing/triangles.js'
 import {cubeBufferDrawer} from '../drawing/cube.js'
+import { drawCubes, translate, rotateY, rotateX } from '../drawing/cubes.js';
 
 export class Drawer {    
     constructor(viewport, scene, renderer) {
@@ -9,6 +10,7 @@ export class Drawer {
         this.scene = scene
         this.texture = renderer.texture
         this.angle = 0
+        this.drawCubes = new drawCubes(this.texture, this.width, this.height)
     }
     update (deltaTime, speed) {
         this.cursorU = this.viewport.cursorU
@@ -16,8 +18,8 @@ export class Drawer {
         this.texture.fill(0xFF555500)
 
         this.drawSprites(this.scene.sprites)
-        drawTrianglesBuffer(this.texture, this.width, this.scene.buffer, this.angle)
-
+        drawTrianglesBuffer(this.texture, this.width, this.scene.triangles, this.angle)
+        
         const quad = this.scene.quad
         quad.center.x = this.viewport.cursorU
         quad.center.y = this.viewport.cursorV
@@ -28,6 +30,11 @@ export class Drawer {
         cube.scale(1.000001)
         cube.transform()  
         cubeBufferDrawer(cube.vectors, this.texture, this.width, this.height)
+
+        translate(this.scene.cubes.buffer, this.scene.cubes.elementsCount, 5, 1, 1)
+        rotateX(this.scene.cubes.buffer, this.scene.cubes.elementsCount)
+        rotateY(this.scene.cubes.buffer, this.scene.cubes.elementsCount)
+        this.drawCubes.draw(this.scene.cubes.buffer, this.scene.cubes.elementsCount)
         this.angle += 0.001 * deltaTime
     }
     drawSprites(sprites) {
