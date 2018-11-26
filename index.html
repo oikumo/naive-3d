@@ -2,33 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        <title>Naive 3D - Cube</title>
-        <style>
-         .pixel {
-             color: red;
-         }
-        .unselectable {
-            -moz-user-select:none;
-            -webkit-user-select:none;
-            font-family: Consolas,monospace;
-            font-size: 1%;
-            -webkit-align-content: center;
-            align-content: center;
-            display: inline-block;
-        }
-        html {
-            -ms-touch-action: manipulation;
-            touch-action: manipulation;
-            }
-    </style>
+        <link rel="stylesheet" type="text/css" href="./css/style.css"/>
+        <title>naive3d</title>
     </head>
-    <body >
-      <canvas id="canvas" width="800" height="800" style="border:1px solid #000000;" ></canvas>
-        </br>
-        <pre class="unselectable" width="1" id='screen-info'></pre>
-        <center>
-            <pre class="unselectable" width="1" id='screen'></pre>
-        </center>
+    <body>
+        <canvas id="canvas" width="640" height="640" class="naive3dCanvas" />
         <script type="module">
             import {App} from './js/app/app.js';
             var app = new App()

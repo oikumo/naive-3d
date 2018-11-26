@@ -1,79 +1,72 @@
-export class drawCubes {
-    constructor(texture, textureWidth, textureHeight) {
-        this.texture = texture
-        this.textureWidth = textureWidth
-        this.textureHeight= textureHeight
+function drawLine2D(texture, textureWidth, textureHeight, color, p1, p2, q1, q2) {
+    let  i, t, x, y
+    const delta1 = q1 - p1
+    const delta2 = q2 - p2
+    const n = Math.floor(Math.sqrt(Math.pow(delta1, 2) + Math.pow(delta2, 2)))
+    
+    for (i = n - 1; i >= 0 ; --i) { 
+        t = i / n
+
+        x = Math.floor(p1 + (t * delta1))       
+        if (x < 0 || x >= textureWidth)
+          continue
+
+        y = p2 + Math.floor(t * delta2)
+        if (y < 0 || y  >= textureHeight)
+            continue
+
+        texture[Math.floor(y * textureWidth) + x] = color
     }
+}
 
-    draw(vertices, elementsCount) {
-        let i
-        const red = 0xFF0000FF
-        const blue = 0xFFFF0000
-        const green = 0xFF00FF00
+export function drawCubes(texture, textureWidth, textureHeight, vertices, elementsCount) {
+    let i
+    const red = 0xFF0000FF
+    const blue = 0xFFFF0000
+    const green = 0xFF00FF00
 
-        const length = 24 + 3
-        const len = elementsCount * length
-        let ax, ay, bx, by, cx, cy, dx, dy, ex, ey, fx, fy, gx,gy, hx, hy
+    const length = 24 + 3
+    const len = elementsCount * length
+    let ax, ay, bx, by, cx, cy, dx, dy, ex, ey, fx, fy, gx,gy, hx, hy
 
-        for (i = 0; i < len; i += length) {
-            // a
-            ax = Math.ceil(vertices[i + 3])
-            ay = Math.ceil(vertices[i + 4])
-            // b Math.ceil(
-            bx = Math.ceil(vertices[i + 6]) 
-            by = Math.ceil(vertices[i + 7]) 
-            // c Math.ceil(
-            cx = Math.ceil(vertices[i + 9]) 
-            cy = Math.ceil(vertices[i + 10])
-            // d Math.ceil(
-            dx = Math.ceil(vertices[i + 12]) 
-            dy = Math.ceil(vertices[i + 13])
-            // e Math.ceil(
-            ex = Math.ceil(vertices[i + 15]) 
-            ey = Math.ceil(vertices[i + 16])
-            // f Math.ceil(
-            fx = Math.ceil(vertices[i + 18]) 
-            fy = Math.ceil(vertices[i + 19])
-            // g Math.ceil(
-            gx = Math.ceil(vertices[i + 21]) 
-            gy = Math.ceil(vertices[i + 22])
-            // h Math.ceil(
-            hx = Math.ceil(vertices[i + 24]) 
-            hy = Math.ceil(vertices[i + 25])
-        
-            this.drawLine2D(red, ax, ay, bx, by)
-            this.drawLine2D(red, bx, by, cx, cy)
-            this.drawLine2D(red, cx, cy, dx, dy)
-            this.drawLine2D(red, dx, dy, ax, ay)
-            this.drawLine2D(green, ex, ey, fx, fy)
-            this.drawLine2D(green, fx, fy, gx, gy)
-            this.drawLine2D(green, gx, gy, hx, hy)        
-            this.drawLine2D(green, hx, hy, ex, ey)
-            this.drawLine2D(blue, ax, ay, ex, ey)
-            this.drawLine2D(blue, bx, by, fx, fy)
-            this.drawLine2D(blue, cx, cy, gx, gy)
-            this.drawLine2D(blue, dx, dy, hx, hy)
-        }
-    }
-    drawLine2D(color, p1, p2, q1, q2) {
-        let  i, t, x, y
-        const delta1 = q1 - p1
-        const delta2 = q2 - p2
-        const n = Math.floor(Math.sqrt(Math.pow(delta1, 2) + Math.pow(delta2, 2)))
-        
-        for (i = n - 1; i >= 0 ; --i) { 
-            t = i / n
-
-            x = Math.floor(p1 + (t * delta1))       
-            if (x < 0 || x >= this.textureWidth)
-              continue
-
-            y = p2 + Math.floor(t * delta2)
-            if (y < 0 || y  >= this.textureHeight)
-                continue
-
-            this.texture[Math.floor(y * this.textureWidth) + x] = color
-        }
+    for (i = 0; i < len; i += length) {
+        // a
+        ax = Math.ceil(vertices[i + 3])
+        ay = Math.ceil(vertices[i + 4])
+        // b Math.ceil(
+        bx = Math.ceil(vertices[i + 6]) 
+        by = Math.ceil(vertices[i + 7]) 
+        // c Math.ceil(
+        cx = Math.ceil(vertices[i + 9]) 
+        cy = Math.ceil(vertices[i + 10])
+        // d Math.ceil(
+        dx = Math.ceil(vertices[i + 12]) 
+        dy = Math.ceil(vertices[i + 13])
+        // e Math.ceil(
+        ex = Math.ceil(vertices[i + 15]) 
+        ey = Math.ceil(vertices[i + 16])
+        // f Math.ceil(
+        fx = Math.ceil(vertices[i + 18]) 
+        fy = Math.ceil(vertices[i + 19])
+        // g Math.ceil(
+        gx = Math.ceil(vertices[i + 21]) 
+        gy = Math.ceil(vertices[i + 22])
+        // h Math.ceil(
+        hx = Math.ceil(vertices[i + 24]) 
+        hy = Math.ceil(vertices[i + 25])
+    
+        drawLine2D(texture, textureWidth, textureHeight, red, ax, ay, bx, by)
+        drawLine2D(texture, textureWidth, textureHeight, red, bx, by, cx, cy)
+        drawLine2D(texture, textureWidth, textureHeight, red, cx, cy, dx, dy)
+        drawLine2D(texture, textureWidth, textureHeight, red, dx, dy, ax, ay)
+        drawLine2D(texture, textureWidth, textureHeight, green, ex, ey, fx, fy)
+        drawLine2D(texture, textureWidth, textureHeight, green, fx, fy, gx, gy)
+        drawLine2D(texture, textureWidth, textureHeight, green, gx, gy, hx, hy)        
+        drawLine2D(texture, textureWidth, textureHeight, green, hx, hy, ex, ey)
+        drawLine2D(texture, textureWidth, textureHeight, blue, ax, ay, ex, ey)
+        drawLine2D(texture, textureWidth, textureHeight, blue, bx, by, fx, fy)
+        drawLine2D(texture, textureWidth, textureHeight, blue, cx, cy, gx, gy)
+        drawLine2D(texture, textureWidth, textureHeight, blue, dx, dy, hx, hy)
     }
 }
 

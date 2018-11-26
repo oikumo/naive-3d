@@ -10,7 +10,6 @@ export class Drawer {
         this.scene = scene
         this.texture = renderer.texture
         this.angle = 0
-        this.drawCubes = new drawCubes(this.texture, this.width, this.height)
     }
     update (deltaTime, speed) {
         this.cursorU = this.viewport.cursorU
@@ -34,7 +33,7 @@ export class Drawer {
         translate(this.scene.cubes.buffer, this.scene.cubes.elementsCount, 5, 1, 1)
         rotateX(this.scene.cubes.buffer, this.scene.cubes.elementsCount)
         rotateY(this.scene.cubes.buffer, this.scene.cubes.elementsCount)
-        this.drawCubes.draw(this.scene.cubes.buffer, this.scene.cubes.elementsCount)
+        drawCubes(this.texture, this.width, this.height, this.scene.cubes.buffer, this.scene.cubes.elementsCount)
         this.angle += 0.001 * deltaTime
     }
     drawSprites(sprites) {
