@@ -1,6 +1,5 @@
 import {Scene} from '../scene/scene.js'
 import {draw} from './drawer.js'
-import {Time} from './time.js'
 import {Viewport} from '../app/viewport.js'
 import {TriangleBuffer} from './geometry/triangleBuffer.js'
 import {Quad} from './geometry/quad.js'
@@ -14,31 +13,17 @@ export class Core
     constructor(viewport, scene, renderer) {
         this.viewport = viewport
         this.scene = scene
-        this.renderer = renderer
-        this.intervalMilliSeconds = 5
-        this.triangleRotationSpeed = 0.001
-        this.time = new Time()
+        this.renderer = renderer     
         this.angle = 0.0
         this.sprites = []
         this.triangles = new TriangleBuffer()
         this.cubes = new CubeBuffer()
     }
-    start() {    
-        this.time.start()
-        this.startLoop()        
-    }
-    pause() {
-        clearInterval(this.loop)
-    }
-    startLoop () { 
-        this.loop = setInterval(this.draw.bind(this), this.intervalMilliSeconds)
-    }
-    draw () {
-        this.time.update()
+    draw (deltaTime) {
         this.renderer.clear()
         draw(this.renderer.texture, this.viewport.width, this.viewport.height, this.triangles, this.cubes, this.angle);
         this.renderer.draw()
-        this.angle = this.angle + (0.001 * this.time.deltaTime)
+        this.angle = this.angle + (0.001 * deltaTime)
     }
     createCube() {
         const pallete = new Pallete()

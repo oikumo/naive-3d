@@ -5,9 +5,12 @@ import {Screen} from './screen.js'
 import {Input} from './input/input.js'
 import {Scene} from '../scene/scene.js'
 import {create} from './actions/sprites.js'
+import {Time} from './time.js'
 
 export class App {
     init() {
+        this.intervalMilliSeconds = 5
+        this.time = new Time()
         const canvas = document.getElementById("canvas")
         const renderer = new Renderer()
         
@@ -18,7 +21,21 @@ export class App {
 
         this.core = new Core(this.viewport, this.scene, renderer)
         this.scene = new Scene(this.core)
-        this.core.start()
+        this.start()
+    }
+    start() {    
+        this.time.start()
+        this.startLoop()        
+    }
+    pause() {
+        clearInterval(this.loop)
+    }
+    startLoop () { 
+        this.loop = setInterval(this.update.bind(this), this.intervalMilliSeconds)
+    }
+    update() {
+        this.time.update()
+        this.core.draw(this.time.deltaTime)
     }
     onMouseDown() {
         const x = this.viewport.cursorU
