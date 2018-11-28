@@ -1,4 +1,4 @@
-import {Sprite} from '../../geometry/sprite.js'
+import {Sprite} from '../../core/geometry/sprite.js'
 import {TextureFactory} from '../../textures/textureFactory.js'
 import {Pallete} from '../../colors/pallete.js'
 

@@ -13,4 +13,7 @@ export class Renderer {
        this.imageData.data.set(this.buf8)
        this.context2D.putImageData(this.imageData, 0, 0)
     }
+    clear() {
+        this.texture.fill(0xFF555500)
+    }
 }
