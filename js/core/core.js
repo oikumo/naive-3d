@@ -1,27 +1,24 @@
-import {Scene} from '../scene/scene.js'
 import {draw} from './drawer.js'
-import {Viewport} from '../app/viewport.js'
 import {TriangleBuffer} from './geometry/triangleBuffer.js'
 import {Quad} from './geometry/quad.js'
 import {Cube} from './geometry/cube.js'
-import { CubeBuffer } from './geometry/cubesBuffer.js'
+import {CubeBuffer} from './geometry/cubesBuffer.js'
 import {TextureFactory} from '../textures/textureFactory.js'
 import {Pallete} from '../colors/pallete.js'
+import {Renderer} from './renderer.js'
+import {Sprite} from './geometry/sprite.js'
 
-export class Core
-{
-    constructor(viewport, scene, renderer) {
-        this.viewport = viewport
-        this.scene = scene
-        this.renderer = renderer     
+export class Core {
+    constructor() {
+        this.renderer = new Renderer()
         this.angle = 0.0
         this.sprites = []
         this.triangles = new TriangleBuffer()
         this.cubes = new CubeBuffer()
     }
-    draw (deltaTime) {
+    draw (width, height, deltaTime) {    
         this.renderer.clear()
-        draw(this.renderer.texture, this.viewport.width, this.viewport.height, this.triangles, this.cubes, this.angle);
+        draw(this.renderer.texture, width, height, this.triangles, this.cubes, this.sprites, this.angle)
         this.renderer.draw()
         this.angle = this.angle + (0.001 * deltaTime)
     }
@@ -34,13 +31,15 @@ export class Core
         const tex =  new TextureFactory(100, 100).checker(pallete.color[1], pallete.color[0], 10, 10)
         this.quad = new Quad({ x: 50, y: 50}, 100, tex)        
     }
-    addTriangle(x,y, color) {
-        this.triangles.add(x, y, color)
+    addTriangle(x,y) {
+        this.triangles.add(x, y, 0xFF00FFFF)
     }
     addCube() {
         this.cubes.add()
     }
-    addSprite(sprite) {
-        this.sprites.push(sprite)
+    addSprite(x, y) {
+        const pallete = new Pallete()
+        const texture = new TextureFactory(200,200).checker(pallete.color[0], pallete.color[4], 10, 10)           
+        this.sprites.push(new Sprite({x: x,y: y}, texture))
     }
 }

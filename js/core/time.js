@@ -1,4 +1,16 @@
-export class Time {
+export class DeltaTime {
+    constructor() {
+        this.time = Date.now()
+    }
+    get() {
+        const now =  Date.now()
+        const delta = now - this.time
+        this.time = now
+        return delta
+    }
+}
+
+export class Fps {
     constructor() {
         this.lastRenderTime = 0.0
         this.elapsed = 0.0
