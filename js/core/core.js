@@ -38,7 +38,7 @@ export class Core {
   createCube() {
     const pallete = new Pallete();
     this.cube = new Cube({ x: 350, y: 350, z: 350 }, 100);
-    this.cubeTexture = new TextureFactory(1000, 1000).checker(
+    this.cubeTexture = new TextureFactory(128, 128).checker(
       pallete.color[1],
       pallete.color[0],
       10,

@@ -1,3 +1,5 @@
+import { drawLine2D } from "./brush.js";
+
 export function drawTexture(
   targetTex,
   targetWidth,
@@ -7,37 +9,48 @@ export function drawTexture(
   texWidth,
   texHeigth
 ) {
-  const fmQ1 = (quad.b.y - quad.a.y) / (quad.b.x - quad.a.x);
-  const fnQ1 = quad.b.x - quad.a.x;
-  let bx = quad.b.x - quad.a.x;
-  let by = quad.b.y - quad.a.y;
-  const bAngle = Math.atan2(by, bx);
-  const bCos = Math.cos(-bAngle);
-  const bSin = Math.sin(-bAngle);
-  const scale = 0.5;
-  let u = 0;
-  let v = 0;
-  let r = 0;
-  let s = 0;
+  const red = 0xff0000ff;
+
+  let col = 0;
+  let row = 0;
+  let color;
   let x = 0;
   let y = 0;
-  const pixels = tex.pixels;
+  let tx = 0;
+  let ty = 0;
+  let index = 0;
+  let texX = 0;
+  let texY = 0;
+  let dx = 0;
+  let dy = 0;
 
-  for (var i = targetTex.length - 1; i >= 0; --i) {
-    if (y > x * fmQ1 + fnQ1) {
-      u = x - quad.a.x;
-      v = y - quad.a.y;
-      r = ((bCos * u - bSin * v) / targetWidth) * texWidth * scale;
-      s = ((bSin * u + bCos * v) / targetHeight) * texHeigth * scale;
-      r = Math.floor(r);
-      s = Math.floor(s);
-      targetTex[x + y * targetWidth] = pixels[r + s * texHeigth];
-    }
-    if (x >= targetWidth) {
+  let len = targetWidth * targetHeight;
+
+  for (index = len - 1; index >= 0; --index) {
+    tx = x / targetWidth;
+    ty = y / targetHeight;
+
+    tx += (0.001 * index) / 1000;
+    ty += (0.001 * index) / 1000;
+
+    //dx = Math.floor((quad.b.x + x * (quad.c.x - quad.b.x)) / targetWidth);
+    //dy = Math.floor((quad.b.y + y * (quad.c.y - quad.b.y)) / targetHeight);
+
+    texX = Math.floor(tx * texWidth);
+    texY = Math.floor(ty * texHeigth);
+
+    texX = texX > texWidth ? texWidth - texX : texX;
+    texY = texY > texHeigth ? texHeigth - texY : texY;
+
+    color = tex.pixels[texX + texY * texHeigth];
+
+    targetTex[x + y * targetWidth] = color;
+
+    if (x < targetWidth) {
+      x++;
+    } else {
       x = 0;
       y++;
-    } else {
-      x++;
     }
   }
 }

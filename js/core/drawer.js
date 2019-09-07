@@ -24,9 +24,24 @@ export function draw(
   rotateY(cubes.buffer, cubes.elementsCount);
   drawCubes(texture, texWidth, texHeight, cubes.buffer, cubes.elementsCount);
 
-  drawTexture(texture, texWidth, texHeight, quad, cubeTexture, 1000, 1000);
+  quad = {
+    a: { x: 0, y: 0 },
+    b: { x: 200, y: 0 },
+    c: { x: 0, y: 200 },
+    d: { x  : 200, y: 200 }
+  };
 
-  if (cube !== undefined)
+  drawTexture(
+    texture,
+    texWidth,
+    texHeight,
+    quad,
+    cubeTexture,
+    cubeTexture.width,
+    cubeTexture.height
+  );
+
+  if (cube !== undefined) {
     cubeTexturedDrawer(
       cube.vectors,
       texture,
@@ -36,4 +51,5 @@ export function draw(
       1000,
       1000
     );
+  }
 }
