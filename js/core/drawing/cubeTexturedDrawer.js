@@ -28,9 +28,6 @@ export function cubeTexturedDrawer(
   drawLine2D(red, c.x, c.y, d.x, d.y, texture, textureWidth);
   drawLine2D(red, d.x, d.y, a.x, a.y, texture, textureWidth);
 
-  const quadVectors = [a.x, a.y, b.x, b.y, d.x, d.y, d.x, d.y];
-  drawQuadTexture(texture, cubeTex, textureWidth, textureHeight, quadVectors);
-
   drawLine2D(green, e.x, e.y, f.x, f.y, texture, textureWidth);
   drawLine2D(green, f.x, f.y, g.x, g.y, texture, textureWidth);
   drawLine2D(green, g.x, g.y, h.x, h.y, texture, textureWidth);

@@ -20,78 +20,112 @@ export function drawTexture(
   let y = 0;
 
   const l1 = createLine(
-    Math.ceil(quad.a.x),
-    Math.ceil(quad.a.y),
+    quad.a.x,
+    quad.a.y,
     quad.c.x,
     quad.c.y,
     targetWidth
   );
 
   const l2 = createLine(
-    Math.ceil(quad.a.x),
-    Math.ceil(quad.a.y),
+    quad.a.x,
+    quad.a.y,
     quad.b.x,
     quad.b.y,
     targetWidth
   );
 
   const l3 = createLine(
-    Math.ceil(quad.b.x),
-    Math.ceil(quad.b.y),
+    quad.b.x,
+    quad.b.y,
     quad.d.x,
     quad.d.y,
     targetWidth
   );
 
   const l4 = createLine(
-    Math.ceil(quad.c.x),
-    Math.ceil(quad.c.y),
+    quad.c.x,
+    quad.c.y,
     quad.d.x,
     quad.d.y,
     targetWidth
   );
 
-  // TODO vector projection into lines to determines uv coordinates
+  l1.add(quad.a.x + quad.a.y * targetHeight)
+  l2.add(quad.b.x + quad.b.y * targetHeight)
+  l3.add(quad.c.x + quad.c.y * targetHeight)
+  l4.add(quad.d.x + quad.d.y * targetHeight)
 
-  let inside1 = false;
+  // TODO vector projection into lines to determines uv coordinates
+  let index = 0;
+  let lineStart = null;
+  const a = quad.a.x + quad.a.y * targetHeight;
+  const b = quad.b.x + quad.b.y * targetHeight;
+  const c = quad.c.x + quad.c.y * targetHeight;
+  const d = quad.d.x + quad.d.y * targetHeight;
 
   for (let i = 0; i < len; i++) {
-    if (!inside1 && l1.has(x + y * targetHeight)) {
-      inside1 = true;
+    index = x + y * targetHeight;
+
+    if (lineStart == null) {
+      if (l1.has(index)) {
+        lineStart = l1;
+      } else if (l2.has(index)) {
+        lineStart = l2;
+      } else if (l3.has(index)) {
+        lineStart = l3;
+      } else if (l4.has(index)) {
+        lineStart = l4;
+      } else {
+        if (x - 1 < targetWidth) {
+          x++;
+        } else {
+          x = 0;
+          y++;
+        }
+        continue;
+      }
     }
 
-    if (
-      inside1 &&
-      (l2.has(x + y * targetHeight) ||
-        l3.has(x + y * targetHeight) ||
-        l4.has(x + y * targetHeight))
+    if (index === a || index === b || index === c || index === d) {
+      lineStart = null;
+    }
+
+    if (lineStart !== null &&
+      ((lineStart !== l1 && l1.has(index)) ||
+        (lineStart !== l2 && l2.has(index)) ||
+        (lineStart !== l3 && l3.has(index)) ||
+        (lineStart !== l4 && l4.has(index)))
     ) {
-      inside1 = false;
+      lineStart = null;
+      x = 0;
+      y++;
+      i += targetWidth - x + 1;
     }
 
-    if (inside1) {
-      targetTex[x + y * targetWidth] = red;
+    if (lineStart !== null) {
+      targetTex[index] = red;
     }
 
-    if (x < targetWidth) {
+    if (x - 1 < targetWidth) {
       x++;
     } else {
       x = 0;
       y++;
-      inside1 = false;
+      lineStart = null;
     }
   }
 }
 
 function createLine(ax, ay, bx, by, width) {
-  const line = new Set();
-  const dx = bx - ax;
-  const dy = by - ay;
-  const n = Math.floor(Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2)));
-  let i,
-    x,
-    t,
-    y = 0;
+  ax = Math.floor(ax)
+  ay = Math.floor(ay)
+  const line = new Set()
+  const dx = bx - ax
+  const dy = by - ay
+  const n = Math.floor(Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2)))
+  let i = 0, x = 0, t = 0, y = 0
+
   for (i = n - 1; i >= 0; --i) {
     t = i / n;
     x = Math.floor(ax + t * dx);

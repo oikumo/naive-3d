@@ -3,19 +3,18 @@ export class Cube {
         this.center = center
 
         this.vectors = [
-            { x: -1, y: 1, z: -1}, // a
-            { x:  1, y: 1, z: -1},  // b
-            { x:  1, y: 1, z:  1},  // c             
-            { x: -1, y: 1, z: 1},   // d
-            { x: -1, y: -1, z: -1}, // e
-            { x:  1, y: -1, z: -1}, // f
-            { x: 1, y: -1, z:  1},  // g
-            { x: -1, y: -1, z:  1}  // h
+            { x: -1, y: 1, z: -1 }, // a
+            { x: 1, y: 1, z: -1 },  // b
+            { x: 1, y: 1, z: 1 },  // c             
+            { x: -1, y: 1, z: 1 },   // d
+            { x: -1, y: -1, z: -1 }, // e
+            { x: 1, y: -1, z: -1 }, // f
+            { x: 1, y: -1, z: 1 },  // g
+            { x: -1, y: -1, z: 1 }  // h
         ]
-                
+
         let i, v
-        for (i = this.vectors.length - 1; i >= 0; --i )
-        {
+        for (i = this.vectors.length - 1; i >= 0; --i) {
             v = this.vectors[i]
             v.x *= scale
             v.y *= scale
@@ -34,18 +33,16 @@ export class Cube {
             z: this.center.z / 2
         })
     }
-    transform() {
+    transform(t) {
         this.toOrigin()
-        this.rotateY(.01)
-        this.rotateX(.01)
+        this.rotateY(t)
+        this.rotateX(t)
         this.toCenter()
-        this.translate({ x: 0,  y: 0, z: 0 })
     }
     scale(s) {
         this.toOrigin()
         let i, v
-        for (i = this.vectors.length - 1; i >= 0; --i )
-        {
+        for (i = this.vectors.length - 1; i >= 0; --i) {
             v = this.vectors[i]
             v.x *= s
             v.y *= s
@@ -53,32 +50,31 @@ export class Cube {
         }
         this.toCenter()
     }
-    toOrigin(){
-        let t        
-        t = { x: -this.center.x / 2,  y: -this.center.y / 2, z: -this.center.z / 2 }
+    toOrigin() {
+        let t
+        t = { x: -this.center.x / 2, y: -this.center.y / 2, z: -this.center.z / 2 }
         this.translate(t)
     }
     toCenter() {
-        let t        
-        t = { x: this.center.x / 2,  y: this.center.y / 2, z: this.center.z / 2 }
+        let t
+        t = { x: this.center.x / 2, y: this.center.y / 2, z: this.center.z / 2 }
         this.translate(t)
     }
     translate(t) {
         let i, v
-        for (i = this.vectors.length - 1; i >= 0; --i ) {
+        for (i = this.vectors.length - 1; i >= 0; --i) {
             v = this.vectors[i]
             v.x += t.x
             v.y += t.y
             v.z += t.z
-        }    
+        }
     }
     rotateY(angle) {
         let i, v, rX, rZ
         const cos = Math.cos(angle)
         const sin = Math.sin(angle)
 
-        for (i = this.vectors.length - 1; i >= 0; --i )
-        {
+        for (i = this.vectors.length - 1; i >= 0; --i) {
             v = this.vectors[i]
             rX = (v.x * cos) + (v.z * sin)
             rZ = (v.x * -sin) + (v.z * cos)
@@ -92,8 +88,7 @@ export class Cube {
         const cos = Math.cos(angle)
         const sin = Math.sin(angle)
 
-        for (i = this.vectors.length - 1; i >= 0; --i )
-        {
+        for (i = this.vectors.length - 1; i >= 0; --i) {
             v = this.vectors[i]
             rY = (v.y * cos) + (v.z * -sin)
             rZ = (v.y * sin) + (v.z * cos)
@@ -102,5 +97,5 @@ export class Cube {
             v.z = rZ
         }
     }
-   
+
 }

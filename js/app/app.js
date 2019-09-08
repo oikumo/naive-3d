@@ -8,10 +8,10 @@ export class App {
     this.height = canvas.height;
     this.core = new Core();
     this.core.quad = {
-      a: { x: 200, y: 200 },
-      b: { x: 500, y: 200 },
-      c: { x: 300, y: 500 },
-      d: { x: 400, y: 400 }
+      a: { x: 100, y: 200 },
+      b: { x: 400, y: 200 },
+      c: { x: 200, y: 400 },
+      d: { x: 400, y: 600 }
     };
 
     canvas.onmousemove = evt => {

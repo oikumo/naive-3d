@@ -24,6 +24,15 @@ export function draw(
   rotateY(cubes.buffer, cubes.elementsCount);
   drawCubes(texture, texWidth, texHeight, cubes.buffer, cubes.elementsCount);
 
+  quad.a.x = cube.vectors[1].x;
+  quad.a.y = cube.vectors[1].y;
+  quad.b.x = cube.vectors[0].x;
+  quad.b.y = cube.vectors[0].y;
+  quad.c.x = cube.vectors[2].x;
+  quad.c.y = cube.vectors[2].y;
+  quad.d.x = cube.vectors[3].x;
+  quad.d.y = cube.vectors[3].y;
+
   drawTexture(
     texture,
     texWidth,

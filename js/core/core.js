@@ -32,12 +32,12 @@ export class Core {
       this.quad
     );
     this.renderer.draw();
-    this.cube.transform();
+    this.cube.transform(0.025);
     this.angle = this.angle + 0.001 * deltaTime;
   }
   createCube() {
     const pallete = new Pallete();
-    this.cube = new Cube({ x: 350, y: 350, z: 350 }, 100);
+    this.cube = new Cube({ x: 400, y: 400, z: 400 }, 100);
     this.cubeTexture = new TextureFactory(128, 128).checker(
       pallete.color[1],
       pallete.color[0],
