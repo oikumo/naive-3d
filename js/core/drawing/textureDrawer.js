@@ -79,7 +79,6 @@ export function drawTexture(
       x = 0;
       y++;
       inside1 = false;
-      inside2 = false;
     }
   }
 }

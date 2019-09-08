@@ -10,7 +10,7 @@ export class App {
     this.core.quad = {
       a: { x: 200, y: 200 },
       b: { x: 500, y: 200 },
-      c: { x: 200, y: 500 },
+      c: { x: 300, y: 500 },
       d: { x: 400, y: 400 }
     };
 
