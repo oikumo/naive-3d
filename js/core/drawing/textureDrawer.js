@@ -51,10 +51,7 @@ export function drawTexture(
     targetWidth
   );
 
-  l1.add(quad.a.x + quad.a.y * targetHeight)
-  l2.add(quad.b.x + quad.b.y * targetHeight)
-  l3.add(quad.c.x + quad.c.y * targetHeight)
-  l4.add(quad.d.x + quad.d.y * targetHeight)
+
 
   // TODO vector projection into lines to determines uv coordinates
   let index = 0;
@@ -63,6 +60,11 @@ export function drawTexture(
   const b = quad.b.x + quad.b.y * targetHeight;
   const c = quad.c.x + quad.c.y * targetHeight;
   const d = quad.d.x + quad.d.y * targetHeight;
+
+  l1.add(a)
+  l2.add(b)
+  l3.add(c)
+  l4.add(c)
 
   for (let i = 0; i < len; i++) {
     index = x + y * targetHeight;
