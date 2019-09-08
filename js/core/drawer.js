@@ -24,13 +24,6 @@ export function draw(
   rotateY(cubes.buffer, cubes.elementsCount);
   drawCubes(texture, texWidth, texHeight, cubes.buffer, cubes.elementsCount);
 
-  quad = {
-    a: { x: 0, y: 0 },
-    b: { x: 200, y: 0 },
-    c: { x: 0, y: 200 },
-    d: { x  : 200, y: 200 }
-  };
-
   drawTexture(
     texture,
     texWidth,

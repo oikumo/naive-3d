@@ -1,56 +1,106 @@
 import { drawLine2D } from "./brush.js";
 
 export function drawTexture(
+  // Texture
   targetTex,
   targetWidth,
   targetHeight,
+  //
   quad,
-  tex,
-  texWidth,
-  texHeigth
+  // Image
+  image,
+  imageWidth,
+  imageHeigth
 ) {
   const red = 0xff0000ff;
-
-  let col = 0;
-  let row = 0;
-  let color;
-  let x = 0;
-  let y = 0;
-  let tx = 0;
-  let ty = 0;
-  let index = 0;
-  let texX = 0;
-  let texY = 0;
-  let dx = 0;
-  let dy = 0;
+  const green = 0xff00ff00;
 
   let len = targetWidth * targetHeight;
+  let x = 0;
+  let y = 0;
 
-  for (index = len - 1; index >= 0; --index) {
-    tx = x / targetWidth;
-    ty = y / targetHeight;
+  const l1 = createLine(
+    Math.ceil(quad.a.x),
+    Math.ceil(quad.a.y),
+    quad.c.x,
+    quad.c.y,
+    targetWidth
+  );
 
-    tx += (0.001 * index) / 1000;
-    ty += (0.001 * index) / 1000;
+  const l2 = createLine(
+    Math.ceil(quad.a.x),
+    Math.ceil(quad.a.y),
+    quad.b.x,
+    quad.b.y,
+    targetWidth
+  );
 
-    //dx = Math.floor((quad.b.x + x * (quad.c.x - quad.b.x)) / targetWidth);
-    //dy = Math.floor((quad.b.y + y * (quad.c.y - quad.b.y)) / targetHeight);
+  const l3 = createLine(
+    Math.ceil(quad.b.x),
+    Math.ceil(quad.b.y),
+    quad.d.x,
+    quad.d.y,
+    targetWidth
+  );
 
-    texX = Math.floor(tx * texWidth);
-    texY = Math.floor(ty * texHeigth);
+  const l4 = createLine(
+    Math.ceil(quad.c.x),
+    Math.ceil(quad.c.y),
+    quad.d.x,
+    quad.d.y,
+    targetWidth
+  );
 
-    texX = texX > texWidth ? texWidth - texX : texX;
-    texY = texY > texHeigth ? texHeigth - texY : texY;
+  // TODO vector projection into lines to determines uv coordinates
 
-    color = tex.pixels[texX + texY * texHeigth];
+  let inside1 = false;
 
-    targetTex[x + y * targetWidth] = color;
+  for (let i = 0; i < len; i++) {
+    if (!inside1 && l1.has(x + y * targetHeight)) {
+      inside1 = true;
+    }
+
+    if (
+      inside1 &&
+      (l2.has(x + y * targetHeight) ||
+        l3.has(x + y * targetHeight) ||
+        l4.has(x + y * targetHeight))
+    ) {
+      inside1 = false;
+    }
+
+    if (inside1) {
+      targetTex[x + y * targetWidth] = red;
+    }
 
     if (x < targetWidth) {
       x++;
     } else {
       x = 0;
       y++;
+      inside1 = false;
+      inside2 = false;
     }
   }
+}
+
+function createLine(ax, ay, bx, by, width) {
+  const line = new Set();
+  const dx = bx - ax;
+  const dy = by - ay;
+  const n = Math.floor(Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2)));
+  let i,
+    x,
+    t,
+    y = 0;
+  for (i = n - 1; i >= 0; --i) {
+    t = i / n;
+    x = Math.floor(ax + t * dx);
+    if (x < 0 || x >= width) continue;
+
+    y = ay + Math.floor(t * dy);
+    line.add(Math.floor(y * width) + x);
+  }
+
+  return line;
 }
