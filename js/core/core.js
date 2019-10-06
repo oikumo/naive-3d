@@ -3,8 +3,8 @@ import { TriangleBuffer } from "./geometry/triangleBuffer.js";
 import { Quad } from "./geometry/quad.js";
 import { Cube } from "./geometry/cube.js";
 import { CubeBuffer } from "./geometry/cubesBuffer.js";
-import { TextureFactory } from "../textures/textureFactory.js";
-import { Pallete } from "../colors/pallete.js";
+import { TextureFactory } from "./textures/textureFactory.js";
+import { Pallete } from "./colors/pallete.js";
 import { Renderer } from "./renderer.js";
 import { Sprite } from "./geometry/sprite.js";
 
