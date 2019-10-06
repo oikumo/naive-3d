@@ -1,5 +1,5 @@
-import { Core } from "../core/core.js";
-import { DeltaTime } from "../core/time.js";
+import { Core } from "../engine/core.js";
+import { DeltaTime } from "../engine/time.js";
 
 export class App {
   init(interval = 5) {
