@@ -1,4 +1,4 @@
-import { Core } from "../engine/core.js";
+import { Engine } from "../engine/engine.js";
 import { DeltaTime } from "../engine/time.js";
 
 export class App {
@@ -6,7 +6,7 @@ export class App {
     const canvas = document.getElementById("canvas");
     this.width = canvas.width;
     this.height = canvas.height;
-    this.core = new Core();
+    this.core = new Engine();
     this.core.quad = {
       a: { x: 100, y: 200 },
       b: { x: 400, y: 200 },

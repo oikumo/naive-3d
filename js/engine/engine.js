@@ -8,7 +8,7 @@ import { Pallete } from "./rendering/colors/pallete.js";
 import { Renderer } from "./rendering/renderer.js";
 import { Sprite } from "./rendering/geometry/sprite.js";
 
-export class Core {
+export class Engine {
   constructor() {
     this.renderer = new Renderer();
     this.angle = 0.0;
