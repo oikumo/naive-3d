@@ -1,38 +1,42 @@
 import { Engine } from "../engine/engine.js";
-import { DeltaTime } from "../engine/time.js";
+import { deltaTime } from "../engine/time.js";
 
-export class App {
-  init(interval = 5) {
-    const canvas = document.getElementById("canvas");
-    this.width = canvas.width;
-    this.height = canvas.height;
-    this.core = new Engine();
-    this.core.quad = {
-      a: { x: 100, y: 200 },
-      b: { x: 400, y: 200 },
-      c: { x: 200, y: 400 },
-      d: { x: 400, y: 600 }
-    };
-
-    canvas.onmousemove = evt => {
-      //this.core.quad.b.x = this.width - evt.screenX;
-      //this.core.quad.c.y = this.height - evt.screenY;
-    };
-
-    canvas.onmousedown = e => {
-      this.core.addTriangle(e.x, e.y);
-      this.core.addCube();
-      this.core.addSprite(e.x, e.y);
-    };
-    this.deltaTime = new DeltaTime();
-
-    clearInterval(this.loop);
-
-    this.loop = setInterval(() => {
-      this.core.draw(this.width, this.height, this.deltaTime.get());
-    }, interval);
+export const run = () => {
+  const canvas = document.getElementById("canvas")
+  const interval = 5
+  const timer = {
+    last: Date.now(),
+    delta: function () {
+      const now = Date.now()
+      const delta = now - this.last
+      return delta
+    }
   }
-  pause() {
-    clearInterval(this.loop);
+
+  const width = canvas.width
+  const height = canvas.height
+  const core = new Engine()
+  core.aim = core.createQuad()
+
+  canvas.onmousemove = evt => {
+    core.aim.center.x = evt.screenX
+    core.aim.center.y = evt.screenY - 100
   }
+
+  canvas.onmousedown = e => {
+    core.addTriangle(e.x, e.y)
+    core.addCube()
+    core.addSprite(e.x, e.y)
+  }
+
+  core.quad = {
+    a: { x: 100, y: 200 },
+    b: { x: 400, y: 200 },
+    c: { x: 200, y: 400 },
+    d: { x: 400, y: 600 }
+  }
+
+  setInterval(() => {
+    core.draw(width, height, timer.delta() * 0.001);
+  }, interval)
 }

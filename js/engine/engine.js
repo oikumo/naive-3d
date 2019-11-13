@@ -11,11 +11,12 @@ import { Sprite } from "./rendering/geometry/sprite.js";
 export class Engine {
   constructor() {
     this.renderer = new Renderer();
-    this.angle = 0.0;
+    this.angle = 1;
     this.sprites = [];
     this.triangles = new TriangleBuffer();
     this.cubes = new CubeBuffer();
     this.createCube();
+    this.aim = undefined
   }
   draw(width, height, deltaTime) {
     this.renderer.clear();
@@ -29,7 +30,8 @@ export class Engine {
       this.angle,
       this.cube,
       this.cubeTexture,
-      this.quad
+      this.quad,
+      this.aim
     );
     this.renderer.draw();
     this.cube.transform(0.025);
@@ -53,7 +55,7 @@ export class Engine {
       10,
       10
     );
-    this.quad = new Quad({ x: 50, y: 50 }, 100, tex);
+    return  new Quad({ x: 50, y: 50 }, 100, tex);
   }
   addTriangle(x, y) {
     this.triangles.add(x, y, 0xff00ffff);
