@@ -1,3 +1,13 @@
+export function Timer() {
+    this.last = Date.now
+    this.delta = () => {
+        const now = Date.now()
+        const delta = now - this.last
+        this.last = now
+        return delta
+    }
+}
+
 export const deltaTime = (instant, last) => {
     const now = instant()
     const delta = now - last
