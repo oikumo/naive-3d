@@ -3,5 +3,5 @@ export function World(scene) {
 }
 
 World.prototype.update = function (data, width, height) {
-    this.scene.update(data, width, height)
+    
 }

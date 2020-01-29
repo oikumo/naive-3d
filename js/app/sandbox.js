@@ -82,3 +82,23 @@ const partial = (f, ...args) => {
 
 const add3 = partial(add, 3)
 let res2 = add3(2)
+
+  /*
+  canvas.onmousemove = evt => {
+    engine.aim.center.x = evt.screenX
+    engine.aim.center.y = evt.screenY - 100
+  }
+
+  canvas.onmousedown = e => {
+    engine.addTriangle(e.x, e.y)
+    engine.addCube()
+    engine.addSprite(e.x, e.y)
+  }
+
+  engine.quad = {
+    a: { x: 100, y: 200 },
+    b: { x: 400, y: 200 },
+    c: { x: 200, y: 400 },
+    d: { x: 400, y: 600 }
+  }
+  */
