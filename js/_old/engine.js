@@ -16,8 +16,6 @@ Engine.prototype.addEvent = function (event) {
 }
 
 Engine.prototype.run = function () {
-  const dt = new Timer().delta
-
   setInterval(() => {
     for (let event = this.events.length - 1; event >= 0; --event) {
       this.events[event](this)

@@ -1,13 +1,6 @@
-export function SceneRenderer(width, height) {
-    this.width = width
-    this.height = height
-}
-
-SceneRenderer.prototype.renderEntities = function (scene, canvas) {
+export function renderEntities(scene, renderTex, width, height) {
     const entities = scene.entities
-    const data = canvas
-    const width = this.width
-    const height = this.height
+    const data = renderTex
 
     for (let i = entities.length - 1; i >= 0; --i) {
         const sprites = entities[i].sprites

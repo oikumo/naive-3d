@@ -1,27 +1,38 @@
-import { Engine } from "../engine/engine.js";
-import { World } from "../engine/world/world.js";
-import { Renderer } from "../engine/rendering/renderer.js"
+import { CanvasRenderer } from "./canvas-renderer.js"
+import { RenderTexture } from "./render-texture.js"
 import { Scene } from "../engine/world/scene.js"
-import actor from "../engine/controllers/actor.js"
-import entities from "../engine/world/entities/entity-creator.js"
+import { renderEntities } from "./rendering.js"
+import { SceneEvents } from "./scene-events.js"
+
+const interval = 5
 
 export const run = () => {
   const canvas = document.getElementById("canvas")
+
+  // Objects
   const scene = new Scene()
-  const world = new World(scene)
-  const renderer = new Renderer()
 
-  const movement = (actor.move(world))({ a: "1" })
-  const actorMovement = movement
+  // Rendering
+  const canvasRender = new CanvasRenderer(canvas)
+  const width = canvasRender.width
+  const height = canvasRender.height
+  const renderTex = new RenderTexture(canvasRender.imageSize())
+  let bgColor = 0xFF555500
 
-  actorMovement(2, 3, 4)
+  // Events
+  const sceneEvents = new SceneEvents()
 
-  canvas.onmousedown = e => {
-    const x = e.x
-    const y = e.y
-    engine.addEvent((engine) => engine.world.scene.addEntity(entities.createEntity(x, y)))
+  // User Input
+  canvas.onmousedown = (evt) => {
+    sceneEvents.addEntity(evt.x, evt.y)
+    const img = canvas.toDataURL("image/png");
   }
 
-  const engine = new Engine(world, renderer, canvas.width, canvas.height)
-  engine.run()
+  // Loop
+  setInterval(() => {
+    renderTex.clear(bgColor)
+    sceneEvents.apply(scene)
+    renderEntities(scene, renderTex.texture, width, height)
+    canvasRender.draw(renderTex.buf8)
+  }, interval)
 }
