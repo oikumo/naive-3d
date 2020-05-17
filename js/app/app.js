@@ -1,38 +1,38 @@
-import { Core } from "../core/core.js";
-import { DeltaTime } from "../core/time.js";
+import { CanvasRenderer } from "./canvas-renderer.js"
+import { RenderTexture } from "./render-texture.js"
+import { Scene } from "../engine/world/scene.js"
+import { renderEntities } from "./rendering.js"
+import { SceneEvents } from "./scene-events.js"
 
-export class App {
-  init(interval = 5) {
-    const canvas = document.getElementById("canvas");
-    this.width = canvas.width;
-    this.height = canvas.height;
-    this.core = new Core();
-    this.core.quad = {
-      a: { x: 100, y: 200 },
-      b: { x: 400, y: 200 },
-      c: { x: 200, y: 400 },
-      d: { x: 400, y: 600 }
-    };
+const interval = 5
 
-    canvas.onmousemove = evt => {
-      //this.core.quad.b.x = this.width - evt.screenX;
-      //this.core.quad.c.y = this.height - evt.screenY;
-    };
+export const run = () => {
+  const canvas = document.getElementById("canvas")
 
-    canvas.onmousedown = e => {
-      this.core.addTriangle(e.x, e.y);
-      this.core.addCube();
-      this.core.addSprite(e.x, e.y);
-    };
-    this.deltaTime = new DeltaTime();
+  // Objects
+  const scene = new Scene()
 
-    clearInterval(this.loop);
+  // Rendering
+  const canvasRender = new CanvasRenderer(canvas)
+  const width = canvasRender.width
+  const height = canvasRender.height
+  const renderTex = new RenderTexture(canvasRender.imageSize())
+  let bgColor = 0xFF555500
 
-    this.loop = setInterval(() => {
-      this.core.draw(this.width, this.height, this.deltaTime.get());
-    }, interval);
+  // Events
+  const sceneEvents = new SceneEvents()
+
+  // User Input
+  canvas.onmousedown = (evt) => {
+    sceneEvents.addEntity(evt.x, evt.y)
+    const img = canvas.toDataURL("image/png");
   }
-  pause() {
-    clearInterval(this.loop);
-  }
+
+  // Loop
+  setInterval(() => {
+    renderTex.clear(bgColor)
+    sceneEvents.apply(scene)
+    renderEntities(scene, renderTex.texture, width, height)
+    canvasRender.draw(renderTex.buf8)
+  }, interval)
 }

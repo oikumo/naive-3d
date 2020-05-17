@@ -1,3 +1,7 @@
+export const texture = (width, heigth, filler) => {
+
+}
+
 export class Texture {
     constructor(width, height) {
         this.pixels = new Uint32Array(width * height)
