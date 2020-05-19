@@ -1,6 +1,6 @@
 import { Pallete } from "../../rendering/colors/pallete.js"
 import { TextureFactory } from "../../rendering/textures/textureFactory.js"
-import { Entity } from "../entity.js"
+import { Entity } from "../entity.mjs"
 import { Sprite } from "../../rendering/geometry/sprite.js"
 
 const pallete = new Pallete()
