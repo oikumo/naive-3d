@@ -5,7 +5,7 @@
             "type": "node",
             "request": "launch",
             "name": "Launch Tests",
-            "program": "${workspaceFolder}/test-runnner.mjs",
+            "program": "${workspaceFolder}/test-runner.mjs",
             "skipFiles": [
                 "<node_internals>/**"
             ]
