@@ -1,0 +1,29 @@
+{
+  "name": "naive-3d",
+  "version": "0.0.1",
+  "description": "A naive 3D Javascript Engine",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "node test-runner.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oikumo/Naive-3D.git"
+  },
+  "keywords": [
+    "3D",
+    "javascript"
+  ],
+  "author": "oikumo",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/oikumo/Naive-3D/issues"
+  },
+  "homepage": "https://github.com/oikumo/Naive-3D#readme",
+  "dependencies": {
+    "naive-tests": "^1.0.9"
+  }
+}

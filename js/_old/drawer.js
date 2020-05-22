@@ -1,7 +1,7 @@
-import { drawTrianglesBuffer } from "./drawing/triangles.js";
-import { drawCubes, translate, rotateY, rotateX } from "./drawing/cubes.js";
-import { cubeTexturedDrawer } from "./drawing/cubeTexturedDrawer.js";
-import { drawTexture } from "./drawing/textureDrawer.js";
+import { drawTrianglesBuffer } from "./rendering/drawing/triangles.js";
+import { drawCubes, translate, rotateY, rotateX } from "./rendering/drawing/cubes.js";
+import { cubeTexturedDrawer } from "./rendering/drawing/cubeTexturedDrawer.js";
+import { drawTexture } from "./rendering/drawing/textureDrawer.js";
 
 export function draw(
   texture,
@@ -13,13 +13,14 @@ export function draw(
   angle,
   cube,
   cubeTexture,
-  quad
+  quad,
+  aim
 ) {
   for (let i = sprites.length - 1; i >= 0; --i)
     sprites[i].draw(texture, texWidth, texHeight);
 
   drawTrianglesBuffer(texture, texWidth, triangles, angle);
-  translate(cubes.buffer, cubes.elementsCount, 5, 1, 1);
+  translate(cubes.buffer, cubes.elementsCount, 5, 5, 1);
   rotateX(cubes.buffer, cubes.elementsCount);
   rotateY(cubes.buffer, cubes.elementsCount);
   drawCubes(texture, texWidth, texHeight, cubes.buffer, cubes.elementsCount);
@@ -53,5 +54,9 @@ export function draw(
       1000,
       1000
     );
+  }
+
+  if (aim !== undefined) {
+    aim.draw(texture, texWidth, texHeight, angle * 1.1, angle)
   }
 }
