@@ -4,8 +4,8 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch Test",
-            "program": "${workspaceFolder}/tests/src/dummy-test.mjs",
+            "name": "Launch Tests",
+            "program": "${workspaceFolder}/test-runnner.mjs",
             "skipFiles": [
                 "<node_internals>/**"
             ]
