@@ -1,38 +1,27 @@
 import { CanvasRenderer } from "./canvas-renderer.js"
 import { RenderTexture } from "./render-texture.js"
-import { Scene } from "../engine/world/scene.js"
-import { renderEntities } from "./rendering.js"
-import { SceneEvents } from "./scene-events.js"
+import { Texture } from '../engine/rendering/textures/texture.mjs'
 
 const interval = 5
 
 export const run = () => {
   const canvas = document.getElementById("canvas")
-
-  // Objects
-  const scene = new Scene()
-
-  // Rendering
   const canvasRender = new CanvasRenderer(canvas)
-  const width = canvasRender.width
-  const height = canvasRender.height
+
   const renderTex = new RenderTexture(canvasRender.imageSize())
-  let bgColor = 0xFF555500
+  let bgColor = 0xFF555555
 
-  // Events
-  const sceneEvents = new SceneEvents()
+  const tex = new Texture(100, 100)
+  tex.fill(() => parseInt(0xFF0000FF))
 
-  // User Input
+  const brushes = []
   canvas.onmousedown = (evt) => {
-    sceneEvents.addEntity(evt.x, evt.y)
-    const img = canvas.toDataURL("image/png");
+    brushes.push(() => tex.paintTo(renderTex.texture, canvasRender.width, evt.x, evt.y))
   }
 
-  // Loop
   setInterval(() => {
     renderTex.clear(bgColor)
-    sceneEvents.apply(scene)
-    renderEntities(scene, renderTex.texture, width, height)
+    brushes.forEach((brush) => brush())
     canvasRender.draw(renderTex.buf8)
   }, interval)
 }
