@@ -24,6 +24,6 @@
   },
   "homepage": "https://github.com/oikumo/Naive-3D#readme",
   "dependencies": {
-    "naive-tests": "^1.0.10"
+    "naive-tests": "^1.0.11"
   }
 }
