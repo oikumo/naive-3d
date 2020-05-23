@@ -5,4 +5,3 @@ test('entity movement', () => {
     const entity = new Entity(2, 2)
     equals(entity.center.posX, 2)
 })
-
