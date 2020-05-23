@@ -11,6 +11,20 @@ test('fill a squared texture with a solid color', () => {
     tex.pixels.forEach((pixel) => equals(pixel, red))
 })
 
+test('paint texture into an a pixel array', () => {
+    const red = parseInt(0xFF0000FF)
+    const tex = new Texture(2, 2)
+    const target = new Uint32Array(4 * 4)
+    tex.fill(() => red)
+    tex.paintTo(target, 4)
+
+    equals(tex.pixels[0], target[0])
+    equals(tex.pixels[1], target[1])
+    equals(tex.pixels[2], target[4])
+    equals(tex.pixels[3], target[5])
+    equals(0, target[6])
+})
+
 test('fill a rectangular texture with lines', () => {
     const tex = new Texture(3, 5)
     const white = parseInt(0x00000000)
