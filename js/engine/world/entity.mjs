@@ -1,7 +1,10 @@
-export function Entity(x, y, sprites) {
+export function Entity(x, y, dimWidth, dimHeight) {
     this.center = {
         x: x,
         y: y
     }
-    this.sprites = sprites
+    this.dim = {
+        width: dimWidth,
+        height: dimHeight
+    }
 }

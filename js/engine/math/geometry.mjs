@@ -1,3 +1,16 @@
+const Rect = function (x, y, width, height) {
+    const halfW = width / 2
+    const halfH = height / 2
+    this.topLeft = {
+        x: x - halfW,
+        y: y + halfH
+    }
+    this.bottomRight = {
+        x: x + halfW,
+        y: y - halfH
+    }
+}
+
 const rectPointsInOther = (rect1, rect2) => {
     const collisions = []
 
@@ -25,5 +38,6 @@ const inRect = (point, rect) =>
     && point.x <= rect.bottomRight.x
 
 export {
-    rectPointsInOther
+    rectPointsInOther,
+    Rect
 }
