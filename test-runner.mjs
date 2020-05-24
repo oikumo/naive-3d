@@ -10,14 +10,14 @@ runTests(path.join(process.cwd(), 'tests'), (err, results) => {
         if (result.errors.length > 0) {
             console.error(result.info)
             result.errors.forEach((error) => {
-                console.error(error)
+                console.log(error)
             })
             errors++
+        } else { 
+            console.log(result)
         }
     })
 
     if (errors > 0)
-        throw new Error(`errors count: ${errors}`)
-
-    console.log('pass')
+        throw new Error('tests')
 })
