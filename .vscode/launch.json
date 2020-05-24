@@ -11,11 +11,18 @@
             ]
         },
         {
-            "name": "Launch Web",
+            "name": "Launch Paint app",
             "type": "firefox",
             "request": "launch",
             "reAttach": true,
-            "file": "${workspaceFolder}/www/index.html"
+            "file": "${workspaceFolder}/browser/paint.html"
+        },
+        {
+            "name": "Launch Maze app",
+            "type": "firefox",
+            "request": "launch",
+            "reAttach": true,
+            "file": "${workspaceFolder}/browser/maze.html"
         }
     ]
 }
