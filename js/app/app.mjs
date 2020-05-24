@@ -1,7 +1,8 @@
 import { CanvasRenderer } from "./canvas-renderer.js"
 import { RenderTexture } from "./render-texture.js"
 import { Texture } from '../engine/rendering/textures/texture.mjs'
-import { Entity, moveTo } from '../engine/world/entity.mjs'
+import { Entity } from '../engine/world/entity.mjs'
+import { moveTo } from '../engine/math/vector.mjs'
 
 const interval = 5
 
