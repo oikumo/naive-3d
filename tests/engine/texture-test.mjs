@@ -1,5 +1,5 @@
 import { equals, test } from 'naive-tests'
-import { Texture } from '../js/engine/rendering/textures/texture.mjs'
+import { Texture } from '../../js/engine/rendering/textures/texture.mjs'
 
 test('fill a squared texture with a solid color', () => {
     const tex = new Texture(10, 10)

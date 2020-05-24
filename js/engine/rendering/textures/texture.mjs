@@ -27,7 +27,7 @@ Texture.prototype.paintTo = function (to, toWidth, dx = 0, dy = 0) {
     let row = 0
 
     for (let i = 0; i < size; i++) {
-        to[dx + col + (dy + row) * toWidth] = this.pixels[col + row * this.width]
+        to[Math.ceil(dx + col) + Math.ceil(dy + row) * toWidth] = this.pixels[col + row * this.width]
         if (col + 1 == this.width) {
             col = 0
             row++
