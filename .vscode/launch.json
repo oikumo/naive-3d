@@ -9,13 +9,6 @@
             "skipFiles": [
                 "<node_internals>/**"
             ]
-        },
-        {
-            "name": "Launch Web",
-            "type": "firefox",
-            "request": "launch",
-            "reAttach": true,
-            "file": "${workspaceFolder}/www/index.html"
         }
     ]
 }

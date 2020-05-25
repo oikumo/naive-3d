@@ -1,5 +1,14 @@
 import { equals, test } from 'naive-tests'
-import { rectPointsInOther } from '../../../js/engine/math/geometry.mjs'
+import { rectPointsInOther, Rect } from '../../../engine/math/geometry.mjs'
+
+test('rect point in other using Rect', () => {
+    const container = new Rect(100, 100, 200, 200)
+    const inside = new Rect(110, 110, 20, 20)
+    const rect1rect2 = rectPointsInOther(inside, container)
+    equals(rect1rect2.length, 4)
+    const rect2rect1 = rectPointsInOther(container, inside)
+    equals(rect2rect1.length, 0)
+})
 
 test('rect point in other and viceversa', () => {
     const rect1 = { topLeft: { x: 10, y: 30 }, bottomRight: { x: 30, y: 10 } }
