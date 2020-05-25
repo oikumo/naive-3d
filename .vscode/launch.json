@@ -9,20 +9,6 @@
             "skipFiles": [
                 "<node_internals>/**"
             ]
-        },
-        {
-            "name": "Launch Paint app",
-            "type": "firefox",
-            "request": "launch",
-            "reAttach": true,
-            "file": "${workspaceFolder}/browser/paint.html"
-        },
-        {
-            "name": "Launch Maze app",
-            "type": "firefox",
-            "request": "launch",
-            "reAttach": true,
-            "file": "${workspaceFolder}/browser/maze.html"
         }
     ]
 }

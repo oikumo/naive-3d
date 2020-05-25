@@ -1,5 +1,5 @@
 import { equals, test } from 'naive-tests'
-import { rectPointsInOther, Rect } from '../../../js/engine/math/geometry.mjs'
+import { rectPointsInOther, Rect } from '../../../engine/math/geometry.mjs'
 
 test('rect point in other using Rect', () => {
     const container = new Rect(100, 100, 200, 200)
