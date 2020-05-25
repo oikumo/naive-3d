@@ -1,6 +1,6 @@
 {
   "name": "naive-3d",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "A naive 3D Engine for javascript",
   "main": "index.js",
   "directories": {
