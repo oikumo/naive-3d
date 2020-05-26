@@ -1,6 +1,22 @@
 import { equals, test } from 'naive-tests'
 import { rectPointsInOther, Rect } from '../../../engine/math/geometry.mjs'
 
+test('rect creation', () => {
+    const rect = new Rect(20, 20, 10, 20)
+    equals(rect.topLeft.x, 15)
+    equals(rect.topLeft.y, 30)
+    equals(rect.bottomRight.x, 25)
+    equals(rect.bottomRight.y, 10)
+})
+
+test('rect square creation', () => {
+    const rect = new Rect(20, 20, 10, 10)
+    equals(rect.topLeft.x, 15)
+    equals(rect.topLeft.y, 25)
+    equals(rect.bottomRight.x, 25)
+    equals(rect.bottomRight.y, 15)
+})
+
 test('rect point in other using Rect', () => {
     const container = new Rect(100, 100, 200, 200)
     const inside = new Rect(110, 110, 20, 20)
