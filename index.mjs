@@ -4,6 +4,7 @@ import { Entity } from './engine/world/entity.mjs'
 import { Texture } from './engine/rendering/textures/texture.mjs'
 import { moveTo } from './engine/math/vector.mjs'
 import { rectPointsInOther, Rect } from './engine/math/geometry.mjs'
+import { uiComponent } from './engine/ui/ui-component.mjs'
 
 export {
     CanvasRenderer,
@@ -12,5 +13,6 @@ export {
     Texture,
     moveTo,
     rectPointsInOther,
-    Rect
+    Rect,
+    uiComponent
 }
