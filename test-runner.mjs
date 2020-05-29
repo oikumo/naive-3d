@@ -3,7 +3,7 @@ import path from 'path'
 
 runTests(path.join(process.cwd(), 'tests'), (err, results) => {
     if (err)
-        throw new Error('test runner import fails')
+        throw new Error(`test runner import fails - Error${err.message}` )
 
     results.forEach(result => {
         if (result.errors.length > 0) {
