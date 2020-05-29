@@ -1,13 +1,15 @@
 const Rect = function (x, y, width, height) {
-    const halfW = width / 2
-    const halfH = height / 2
+    this.x = x
+    this.y = y
+    this.width = width
+    this.height = height
     this.topLeft = {
-        x: x - halfW,
-        y: y + halfH
+        x: this.x - this.width / 2,
+        y: this.y + this.height / 2
     }
     this.bottomRight = {
-        x: x + halfW,
-        y: y - halfH
+        x: this.x + this.width / 2,
+        y: this.y - this.height / 2
     }
 }
 
