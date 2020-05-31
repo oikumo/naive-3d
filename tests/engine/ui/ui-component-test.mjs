@@ -1,30 +1,33 @@
 import { equals, test } from 'naive-tests'
-import { uiComponent } from '../../../engine/ui/ui-component.mjs'
+import { ui, createRectFromCorners } from '../../../index.mjs'
+const { createUiComponent, drawUiComponent } = ui
 
-test('paint component', () => {
-    const w = 10
-    const h = 20
-    const color = 0xFF555555
-    const tex = new Uint32Array(w * h)
+test('draw ui component', () => {
+    const rect = createRectFromCorners({ x: 5, y: 5 }, { x: 5, y: 5 })
+    const backgroundColor = 0xFF555555
+    const component = createUiComponent(rect, backgroundColor)
 
-    const compTopX = 5
-    const compTopY = 5
-    const compWidth = 5
-    const compHeight = 5
+    const targetTextureWidth = 10
+    const targetTextureHeight = 20
+    const targetTexture = new Uint32Array(targetTextureWidth * targetTextureHeight)
 
-    uiComponent(color, tex, w, compTopX, compTopY, compWidth, compWidth)
+    drawUiComponent(component, targetTexture, targetTextureWidth)
 
+    const componentTop = component.rect.topLeft
+    const componentWidth = component.rect.width
+    const componentHight = component.rect.height
+    const targetTextureSize = targetTextureWidth * targetTextureHeight
     let col = 0
     let row = 0
-    for (let i = 0; i < w * h; i++) {
-        if (compTopX <= col && col < compTopX + compWidth
-            && compTopY <= row && row < compTopY + compHeight) {
-            equals(tex[i], color)
+    for (let i = 0; i < targetTextureSize; i++) {
+        if (componentTop.x <= col && col < componentTop.x + componentWidth
+            && componentTop.y <= row && row < componentTop.y + componentHight) {
+            equals(targetTexture[i], backgroundColor)
         }
         else {
-            equals(tex[i], 0)
+            equals(targetTexture[i], 0)
         }
-        if (col + 1 == w) {
+        if (col + 1 == targetTextureWidth) {
             col = 0
             row++
         }

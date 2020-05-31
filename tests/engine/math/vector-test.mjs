@@ -1,5 +1,5 @@
 import { equals, test } from 'naive-tests'
-import { moveTo } from '../../../engine/math/vector.mjs'
+import { moveTo } from '../../../index.mjs'
 
 test('move a point using interpolation', () => {
     const movement = moveTo({ x: 2, y: 2 }, { x: 3, y: 2 })

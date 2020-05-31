@@ -1,6 +1,5 @@
 import { equals, test } from 'naive-tests'
-import { rectInOther } from '../../../../engine/math/rect/rect-collisions.mjs'
-import { createRectFromCenter, createRectFromCorners } from '../../../../engine/math/rect/rect.mjs'
+import { rectInOther, createRectFromCenter, createRectFromCorners } from '../../../../index.mjs'
 
 test('rect point in other using Rect', () => {
     const container = createRectFromCenter({ x: 100, y: 100 }, 200, 200)

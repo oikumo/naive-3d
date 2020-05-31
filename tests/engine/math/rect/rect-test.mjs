@@ -1,5 +1,5 @@
 import { equals, objAreEquals, test } from 'naive-tests'
-import { createRectFromCenter, createRectFromCorners, inRect } from '../../../../engine/math/rect/rect.mjs'
+import { createRectFromCenter, createRectFromCorners, inRect } from '../../../../index.mjs'
 
 test('rect creation from center and dimensions', () => {
     const rect = createRectFromCenter({ x: 50, y: 50 }, 10, 30)
