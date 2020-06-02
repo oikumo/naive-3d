@@ -1,5 +1,5 @@
 import { equals, test } from 'naive-tests'
-import { Entity } from '../../engine/world/entity.mjs'
+import { Entity } from '../../index.mjs'
 
 test('entity dummy', () => {
     let entity = new Entity(2, 2, 100, 100)

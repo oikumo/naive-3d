@@ -3,8 +3,9 @@ import { RenderTexture } from './engine/html/render-texture.mjs'
 import { Entity } from './engine/world/entity.mjs'
 import { Texture } from './engine/rendering/textures/texture.mjs'
 import { moveTo } from './engine/math/vector.mjs'
-import { rectPointsInOther, Rect } from './engine/math/geometry.mjs'
-import { uiComponent } from './engine/ui/ui-component.mjs'
+import { createRectFromCenter, createRectFromCorners, inRect } from './engine/math/rect/rect.mjs'
+import { rectInOther } from './engine/math/rect/rect-collisions.mjs'
+import * as ui from './engine/ui/ui-component.mjs'
 
 export {
     CanvasRenderer,
@@ -12,7 +13,7 @@ export {
     Entity,
     Texture,
     moveTo,
-    rectPointsInOther,
-    Rect,
-    uiComponent
+    createRectFromCenter, createRectFromCorners, inRect,
+    rectInOther,
+    ui
 }
