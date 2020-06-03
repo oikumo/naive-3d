@@ -1,30 +1,43 @@
-const UiComponent = function (rect, position, backgroundColor) {
+const UiComponent = function (rect, backgroundColor) {
     this.rect = rect
-    this.position = position
     this.backgroundColor = () => backgroundColor
 }
 
-UiComponent.prototype.inside = function (point) {
-    return point.y <= this.position.y + this.rect.bottomRight.y
-        && point.y > this.position.y - this.rect.topLeft.y
-        && point.x >= this.rect.topLeft.x + this.position.x
-        && point.x <= this.rect.bottomRight.x + this.position.x
+const UiRect = function (position, width, height) {
+    this.width = width
+    this.height = height
+    this.topLeft = { x: position.x, y: position.y }
+    this.bottomRight = { x: position.x + this.width, y: position.y + this.height}
 }
 
-const createUiComponent = (rect, position, backgroundColor) => {
-    return new UiComponent(rect, position, backgroundColor)
+UiRect.prototype.translate = function({x, y}) {    
+    this.topLeft.x += x
+    this.topLeft.y += y
+    this.bottomRight.x += x
+    this.bottomRight.y += y 
+}
+
+UiRect.prototype.inside = function(point) {
+    return this.topLeft.y <= point.y && point.y <= this.bottomRight.y
+    && this.topLeft.x <= point.x && point.x <= this.bottomRight.x
+}
+
+UiComponent.prototype.inside = function (point) {
+    return this.rect.inside(point)
+}
+
+const createUiComponent = (rect, backgroundColor) => {
+    return new UiComponent(rect, backgroundColor)
 }
 
 const drawUiComponent = (component, target, targetWidth) => {
     const color = component.backgroundColor
     const rect = component.rect
-    const position = component.position
-
     const width = rect.width
     const size = rect.width * rect.height
 
-    const dx = position.x
-    const dy = position.y
+    const dx = rect.topLeft.x
+    const dy = rect.topLeft.y
 
     let col = 0
     let row = 0
@@ -43,5 +56,6 @@ const drawUiComponent = (component, target, targetWidth) => {
 
 export {
     createUiComponent,
-    drawUiComponent
+    drawUiComponent,
+    UiRect
 }
