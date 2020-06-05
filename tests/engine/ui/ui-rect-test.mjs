@@ -1,19 +1,22 @@
 import { assertions, test } from 'naive-tests'
-import { ui } from '../../../index.mjs'
+import { ui, createRectFromCorners } from '../../../index.mjs'
 const { createUiComponent, drawUiComponent, UiRect } = ui
 const { equals, objAreEquals } = assertions
 
 test('create ui component', () => {
     const backgroundColor = 0xFF555555
-    const rect = new UiRect({ x:0 , y:0 }, 20, 35)
+    const rect = createRectFromCorners({ x: 45, y: 65 }, { x: 55, y: 35 })
     const component = createUiComponent(rect, backgroundColor)
     equals(component.backgroundColor(), backgroundColor)
     objAreEquals(component.rect, {
-        width: 20,
-        height: 35,
-        topLeft: { x: 0, y: 0 },
-        bottomRight: { x: 20, y: 35 }
-    }, 'component rect has not expected values')
+        center: { x: 50, y: 50 },
+        width: 10,
+        height: 30,
+        topLeft: { x: 45, y: 65 },
+        topRight: { x: 55, y: 65 },
+        bottomLeft: { x: 45, y: 35 },
+        bottomRight: { x: 55, y: 35 },
+    })
 })
 
 test('draw ui component', () => {

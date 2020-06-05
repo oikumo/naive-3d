@@ -5,7 +5,7 @@ import { Texture } from './engine/rendering/textures/texture.mjs'
 import { moveTo } from './engine/math/vector.mjs'
 import { createRectFromCenter, createRectFromCorners, inRect } from './engine/math/rect/rect.mjs'
 import { rectInOther } from './engine/math/rect/rect-collisions.mjs'
-import * as ui from './engine/ui/ui-component.mjs'
+import * as ui from './engine/ui/ui.mjs'
 
 export {
     CanvasRenderer,

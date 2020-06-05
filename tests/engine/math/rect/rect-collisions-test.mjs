@@ -1,5 +1,6 @@
-import { equals, test } from 'naive-tests'
+import { assertions, test } from 'naive-tests'
 import { rectInOther, createRectFromCenter, createRectFromCorners } from '../../../../index.mjs'
+const { equals } = assertions
 
 test('rect point in other using Rect', () => {
     const container = createRectFromCenter({ x: 100, y: 100 }, 200, 200)
