@@ -1,5 +1,6 @@
-import { equals, test } from 'naive-tests'
+import { assertions, test } from 'naive-tests'
 import { moveTo } from '../../../index.mjs'
+const { equals } = assertions
 
 test('move a point using interpolation', () => {
     const movement = moveTo({ x: 2, y: 2 }, { x: 3, y: 2 })
