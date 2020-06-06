@@ -9,5 +9,5 @@ test('move a point using interpolation', () => {
         point = movement(i)
     }
     equals(point.x, 3)
-    equals(point.y, 2)
+    equals(point.y, 3)
 })
