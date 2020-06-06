@@ -8,6 +8,6 @@ test('move a point using interpolation', () => {
     for (let i = 0; i <= 1; i += 0.1) {
         point = movement(i)
     }
-    equals(point.x, 2)
+    equals(point.x, 3)
     equals(point.y, 2)
 })
