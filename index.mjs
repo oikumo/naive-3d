@@ -6,6 +6,7 @@ import { moveTo } from './engine/math/vector.mjs'
 import { createRectFromCenter, createRectFromCorners, inRect } from './engine/math/rect/rect.mjs'
 import { rectInOther } from './engine/math/rect/rect-collisions.mjs'
 import * as ui from './engine/ui/ui.mjs'
+import { hex2bin, BMPImage, abgr2bgr } from './engine/images/formats/bmp/bmp.mjs'
 
 export {
     CanvasRenderer,
@@ -15,5 +16,6 @@ export {
     moveTo,
     createRectFromCenter, createRectFromCorners, inRect,
     rectInOther,
-    ui
+    ui,
+    hex2bin, BMPImage, abgr2bgr
 }

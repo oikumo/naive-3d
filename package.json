@@ -1,6 +1,6 @@
 {
   "name": "naive-3d",
-  "version": "0.0.23",
+  "version": "0.0.24",
   "description": "A naive 3D Engine for javascript",
   "main": "index.mjs",
   "directories": {
@@ -25,6 +25,6 @@
   },
   "homepage": "https://github.com/oikumo/Naive-3D#readme",
   "dependencies": {
-    "naive-tests": "^1.0.17"
+    "naive-tests": "^1.0.19"
   }
 }
