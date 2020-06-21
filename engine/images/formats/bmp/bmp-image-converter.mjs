@@ -11,7 +11,7 @@ const convertABGR2BGR = function (pixels, width, height) {
     let dataIndex = 0
     let col = 0
 
-    for (let i = pixelsLength - 1; i >= 0; --i) {
+    for (let i = 0; i < pixelsLength; i++) {
         const color3 = abgr2bgr(pixels[i])
         data[dataIndex++] = ((255) & (color3 >> 16))
         data[dataIndex++] = ((255) & (color3 >> 8))
