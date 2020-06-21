@@ -9,6 +9,7 @@ const white = 0xFFFFFFFF
 const green = 0xFF00FF00
 const blue = 0xFFFF0000
 
+/*
 test('bmp dib header create', () => {
     const imageWidth = 2
     const imageHeight = 2
@@ -25,3 +26,4 @@ test('bmp dib header create', () => {
     const expected = hex2bin(imageHex)
     sameArrayElements(expected, bmp)
 })
+*/

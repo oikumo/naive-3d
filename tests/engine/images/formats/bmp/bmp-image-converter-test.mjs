@@ -8,7 +8,7 @@ const white = 0xFFFFFFFF
 const green = 0xFF00FF00
 const blue = 0xFFFF0000
 const yellow = 0xFFFFFF00
-
+/*
 test('create bmp image file no alpha data paylod from pixels array', () => {
     const imageWidth = 2
     const imageHeight = 2
@@ -50,3 +50,4 @@ test('create bmp image file no alpha data paylod from pixels array', () => {
         }
     }
 })
+*/
