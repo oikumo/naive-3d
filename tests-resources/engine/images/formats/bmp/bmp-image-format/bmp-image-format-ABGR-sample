@@ -1,3 +1,5 @@
+bmp-image-format-ABGR-sample (from https://en.wikipedia.org/wiki/BMP_file_format)
+
 BMP header
 42 4D	    | "BM"	ID field (42h, 4Dh)
 9A 00 00 00	| 154 bytes (122+32)	Size of the BMP file

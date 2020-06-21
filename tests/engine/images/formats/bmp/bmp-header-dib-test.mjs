@@ -1,6 +1,6 @@
 import { test, assertions } from 'naive-tests'
-import { createBmp } from '../../../../../engine/images/formats/bmp/bmp.mjs'
 import { hex2bin } from '../../../../../engine/images/formats/bmp/bytes-utils.mjs'
+import { createDibHeader } from '../../../../../engine/images/formats/bmp/bmp-header-dib.mjs'
 
 const { sameArrayElements } = assertions
 
@@ -8,6 +8,7 @@ const red = 0xFF0000FF
 const white = 0xFFFFFFFF
 const green = 0xFF00FF00
 const blue = 0xFFFF0000
+const yellow = 0xFFFFFF00
 
 test('bmp dib header create', () => {
     const imageWidth = 2
@@ -16,12 +17,12 @@ test('bmp dib header create', () => {
     const imagePixels = new Uint32Array(imageLength)
 
     imagePixels[0] = red
-    imagePixels[1] = white
+    imagePixels[1] = green
     imagePixels[2] = blue
-    imagePixels[3] = green
+    imagePixels[3] = yellow
 
-    const bmp = createBmp(imagePixels, imageWidth, imageHeight)
-    const imageHex = '424D460000000000000036000000280000000200000002000000010018000000000010000000130B0000130B000000000000000000000000FFFFFFFF0000FF000000FF000000'
-    const expected = hex2bin(imageHex)
-    sameArrayElements(expected, bmp)
+    const dibHeader = createDibHeader(imageWidth, imageHeight)
+    const expected = hex2bin('280000000200000002000000010018000000000010000000130B0000130B00000000000000000000')
+
+    sameArrayElements(expected, dibHeader)
 })
