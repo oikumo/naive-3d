@@ -11,15 +11,18 @@ const green = 0xFF00FF00
 const blue = 0xFFFF0000
 
 test('bmp dib header create', () => {
-    const imageWidth = 2
-    const imageHeight = 2
+    const imageWidth = 4
+    const imageHeight = 4
 
     const imagePixels = new Uint32Array([
-        blue, green, red, white
+        blue, green, red, white,
+        blue, blue, white, red,
+        green, green, red, blue,
+        green, white, blue, red,
     ])
 
     const bmp = createBmp(imagePixels, imageWidth, imageHeight)
-    //fs.writeFileSync('./img.bmp', bmp)
+    fs.writeFileSync('./img.bmp', bmp)
 })
 
 

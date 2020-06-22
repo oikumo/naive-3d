@@ -11,6 +11,7 @@ const convertABGR2BGR = function (pixels, width, height) {
     let dataIndex = 0
     let pixelsPivot = width - 1
     let pixelsPivotOffset = 0
+    let currentCol = 0
     let col = 0
 
     for (let i = 0; i < pixelsLength; i++) {
@@ -21,16 +22,24 @@ const convertABGR2BGR = function (pixels, width, height) {
         data[dataIndex++] = ((255) & (color3 >> 8))
         data[dataIndex++] = ((255) & (color3 >> 0))
 
+        if (currentCol + 1 === width) {
+            currentCol = 0
+            pixelsPivotOffset = 0
+        }
+        else {
+            currentCol++
+            pixelsPivotOffset += 2
+        }
+
         if (col + 1 === padding) {
             for (let paddingIndex = 0; paddingIndex < padding; paddingIndex++) {
                 data[dataIndex++] = 0
             }
             col = 0
-            pixelsPivotOffset = 0
         }
         else {
             col++
-            pixelsPivotOffset += 2
+
         }
     }
     return data
