@@ -1,6 +1,7 @@
 import { test, assertions } from 'naive-tests'
 import { createBmp } from '../../../../../engine/images/formats/bmp/bmp.mjs'
 import { hex2bin } from '../../../../../engine/images/formats/bmp/bytes-utils.mjs'
+import fs from 'fs'
 
 const { sameArrayElements } = assertions
 
@@ -9,6 +10,20 @@ const white = 0xFFFFFFFF
 const green = 0xFF00FF00
 const blue = 0xFFFF0000
 
+test('bmp dib header create', () => {
+    const imageWidth = 2
+    const imageHeight = 2
+
+    const imagePixels = new Uint32Array([
+        blue, green, red, white
+    ])
+
+    const bmp = createBmp(imagePixels, imageWidth, imageHeight)
+    //fs.writeFileSync('./img.bmp', bmp)
+})
+
+
+/*
 test('bmp dib header create', () => {
     const imageWidth = 2
     const imageHeight = 2
@@ -25,3 +40,4 @@ test('bmp dib header create', () => {
     const expected = hex2bin(imageHex)
     sameArrayElements(expected, bmp)
 })
+*/
