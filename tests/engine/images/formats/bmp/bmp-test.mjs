@@ -1,6 +1,8 @@
 import { test, assertions } from 'naive-tests'
 import { BMPCreator } from '../../../../../engine/images/formats/bmp/bmp.mjs'
 import { hex2bin } from '../../../../../engine/images/formats/bmp/utils/bytes-utils.mjs'
+import fs from 'fs'
+
 
 const { sameArrayElements } = assertions
 
