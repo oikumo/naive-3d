@@ -1,6 +1,6 @@
 import { test, assertions } from 'naive-tests'
-import { hex2bin } from '../../../../../engine/images/formats/bmp/bytes-utils.mjs'
-import { createDibHeader } from '../../../../../engine/images/formats/bmp/bmp-header-dib.mjs'
+import { hex2bin } from '../../../../../engine/images/formats/bmp/utils/bytes-utils.mjs'
+import { createDibHeader } from '../../../../../engine/images/formats/bmp/headers/bmp-header-dib.mjs'
 
 const { sameArrayElements } = assertions
 

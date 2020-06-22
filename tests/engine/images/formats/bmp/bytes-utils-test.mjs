@@ -2,7 +2,7 @@ import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import { test, assertions } from 'naive-tests'
-import { hex2bin, abgr2bgr, reversed4bytes, reversed2bytes } from '../../../../../engine/images/formats/bmp/bytes-utils.mjs'
+import { hex2bin, abgr2bgr, reversed4bytes, reversed2bytes } from '../../../../../engine/images/formats/bmp/utils/bytes-utils.mjs'
 
 const { equals, sameArrayElements, sameArrayElementsOnly } = assertions
 

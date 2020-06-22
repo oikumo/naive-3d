@@ -1,6 +1,6 @@
 import { test, assertions } from 'naive-tests'
-import { abgr2bgr } from '../../../../../engine/images/formats/bmp/bytes-utils.mjs'
-import { convertABGR2BGR } from '../../../../../engine/images/formats/bmp/bmp-image-converter.mjs'
+import { abgr2bgr } from '../../../../../../engine/images/formats/bmp/utils/bytes-utils.mjs'
+import { convertBottomRightTexABGR2BGR } from '../../../../../../engine/images/formats/bmp/converters/bmp-image-bottom-right-tex.mjs'
 const { equals } = assertions
 
 const red = 0xFF0000FF
@@ -9,26 +9,48 @@ const green = 0xFF00FF00
 const blue = 0xFFFF0000
 const yellow = 0xFFFFFF00
 
-/*
-test('create bmp image file no alpha data paylod from pixels array', () => {
-    const imageWidth = 2
+test('convert texture bottom to right abgr to bgr no padding pixels', () => {
+    const imageWidth = 4
     const imageHeight = 2
-    const imageLength = imageWidth * imageHeight
-    const imagePixels = new Uint32Array(imageLength)
 
-    imagePixels[0] = red
-    imagePixels[1] = green
-    imagePixels[2] = blue
-    imagePixels[3] = yellow
-
-    const data = convertABGR2BGR(imagePixels, imageHeight, imageWidth)
+    const imagePixels = new Uint32Array([
+        red, red, red, red,
+        red, green, red, red
+    ])
 
     const expectedColors = [
-        abgr2bgr(yellow),
-        abgr2bgr(blue),
-        abgr2bgr(green),
-        abgr2bgr(red)
+        abgr2bgr(red), abgr2bgr(red), abgr2bgr(red), abgr2bgr(red),
+        abgr2bgr(red), abgr2bgr(green), abgr2bgr(red), abgr2bgr(red)
     ]
+
+    const data = convertBottomRightTexABGR2BGR(imagePixels, imageWidth, imageHeight)
+
+    let dataIndex = 0
+    let colorIndex = 0
+    while (dataIndex < data.length) {
+        let obtainedColor = 0
+        obtainedColor |= data[dataIndex++] << 16
+        obtainedColor |= data[dataIndex++] << 8
+        obtainedColor |= data[dataIndex++] << 0
+        equals(expectedColors[colorIndex++], obtainedColor)
+    }
+})
+
+test('convert texture bottom to right abgr to bgr with padding pixels', () => {
+    const imageWidth = 2
+    const imageHeight = 2
+
+    const imagePixels = new Uint32Array([
+        red, blue,
+        white, green
+    ])
+
+    const expectedColors = [
+        abgr2bgr(red), abgr2bgr(blue),
+        abgr2bgr(white), abgr2bgr(green)
+    ]
+
+    const data = convertBottomRightTexABGR2BGR(imagePixels, imageWidth, imageHeight)
 
     let col = 0
     let dataIndex = 0

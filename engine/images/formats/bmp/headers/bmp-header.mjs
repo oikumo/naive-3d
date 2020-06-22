@@ -1,4 +1,4 @@
-import { createBufferUint8, reversed4bytes, as2bytes } from './bytes-utils.mjs'
+import { createBufferUint8, reversed4bytes, as2bytes } from '../utils/bytes-utils.mjs'
 
 const createBmpHeader = function (imageDataBytesSize, dibBytesSize) {
     const bmpHeaderBytesSize = 14
