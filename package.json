@@ -1,6 +1,6 @@
 {
   "name": "naive-3d",
-  "version": "0.0.34",
+  "version": "0.0.35",
   "description": "A naive 3D Engine for javascript",
   "main": "index.mjs",
   "directories": {
@@ -8,7 +8,8 @@
   },
   "scripts": {
     "test": "node test-runner.mjs",
-    "pub": "npm publish --access public"
+    "pub": "npm publish --access public",
+    "ins": "npm i"
   },
   "repository": {
     "type": "git",
