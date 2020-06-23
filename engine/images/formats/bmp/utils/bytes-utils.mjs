@@ -5,6 +5,16 @@ const reversed4bytes = (number) => new Uint8Array([
     255 & number >> 24
 ])
 
+const unreversebytes = (bytes) => {
+    let number = 0
+    let shift = 0
+    let len = bytes.length
+    for (let i = 0; i < len; i++) {
+        number |= bytes[i] << 8 * shift++
+    }
+    return number
+}
+
 const reversed2bytes = (number) => new Uint8Array([
     255 & number >> 0,
     255 & number >> 8
@@ -52,6 +62,7 @@ const createBufferUint8 = (...items) => {
 export {
     reversed4bytes,
     reversed2bytes,
+    unreversebytes,
     as2bytes,
     abgr2bgr,
     hex2bin,
