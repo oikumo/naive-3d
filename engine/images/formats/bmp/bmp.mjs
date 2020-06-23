@@ -1,8 +1,8 @@
 import { createBufferUint8 } from './utils/bytes-utils.mjs'
 import { convertBottomRightTexABGR2BGR } from './converters/bmp-image-bottom-right-tex.mjs'
 import { convertTopRightTexABGR2BGR } from './converters/bmp-image-top-right-tex.mjs'
-import { createBmpHeader } from './headers/bmp-header.mjs'
-import { createDibHeader } from './headers/bmp-header-dib.mjs'
+import { createBmpHeader } from './headers/bmp-header/bmp-header-creator.mjs'
+import { createDibHeader } from './headers/dib-header/dib-header-creator.mjs'
 
 const createBmp = (pixels, width, height, converter) => {
     const imageData = converter(pixels, width, height)

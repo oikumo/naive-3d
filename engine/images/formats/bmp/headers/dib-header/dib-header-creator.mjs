@@ -1,5 +1,5 @@
-import { createBufferUint8, reversed4bytes, reversed2bytes } from '../utils/bytes-utils.mjs'
-import { getPaddingBytesPerRow, getPixelsBytesPerRow } from '../utils/bmp-utils.mjs'
+import { createBufferUint8, reversed4bytes, reversed2bytes } from '../../utils/bytes-utils.mjs'
+import { getPaddingBytesPerRow, getPixelsBytesPerRow } from '../../utils/bmp-utils.mjs'
 
 const pixelDataByteCount = function (width, height) {
     const bytesPerPixel = 3
