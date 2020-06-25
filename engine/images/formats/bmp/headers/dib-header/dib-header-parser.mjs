@@ -1,13 +1,13 @@
 import { DataReader } from '../../utils/data-reader.mjs'
 
 const DibHeader = function (dibHeaderBytes, bitMapWidth, bitMapHeight,
-    colorPlanes, bytesPerPixel, pyxelCompression, dataBitmapSize,
+    colorPlanes, bitsPerPixel, pyxelCompression, dataBitmapSize,
     pixelPerMetreHorizontal, pixelPerMetreVertical, colorInPallete, colorAreImportant) {
     this.dibHeaderBytes = dibHeaderBytes
     this.bitMapWidth = bitMapWidth
     this.bitMapHeight = bitMapHeight
     this.colorPlanes = colorPlanes
-    this.bytesPerPixel = bytesPerPixel
+    this.bitsPerPixel = bitsPerPixel
     this.pyxelCompression = pyxelCompression
     this.dataBitmapSize = dataBitmapSize
     this.pixelPerMetreHorizontal = pixelPerMetreHorizontal
@@ -16,13 +16,14 @@ const DibHeader = function (dibHeaderBytes, bitMapWidth, bitMapHeight,
     this.colorAreImportant = colorAreImportant
 }
 
-const parseDibHeader = function (data) {
+const parseDibHeader = function (data, dibOffset = 14) {
     const reader = new DataReader(data)
+    reader.seekFromCursor(dibOffset)
     const dibHeaderBytes = reader.nextReversedNumber(4)
     const bitMapWidth = reader.nextReversedNumber(4)
     const bitMapHeight = reader.nextReversedNumber(4)
     const colorPlanes = reader.nextReversedNumber(2)
-    const bytesPerPixel = reader.nextReversedNumber(2)
+    const bitsPerPixel = reader.nextReversedNumber(2)
     const pyxelCompression = reader.nextReversedNumber(4)
     const dataBitmapSize = reader.nextReversedNumber(4)
     const pixelPerMetreHorizontal = reader.nextReversedNumber(4)
@@ -30,13 +31,12 @@ const parseDibHeader = function (data) {
     const colorInPallete = reader.nextReversedNumber(4)
     const colorAreImportant = reader.nextReversedNumber(4)
 
-
     return new DibHeader(
         dibHeaderBytes,
         bitMapWidth,
         bitMapHeight,
         colorPlanes,
-        bytesPerPixel,
+        bitsPerPixel,
         pyxelCompression,
         dataBitmapSize,
         pixelPerMetreHorizontal,

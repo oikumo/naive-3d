@@ -11,6 +11,10 @@ DataReader.prototype.slice = function (bytes) {
     return dataSlice
 }
 
+DataReader.prototype.seekFromCursor = function (offset) {
+    this.cursor += offset
+}
+
 DataReader.prototype.nextString = function (bytes) {
     return String.fromCharCode.apply(null, this.slice(bytes))
 }
