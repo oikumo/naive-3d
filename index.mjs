@@ -6,7 +6,7 @@ import { moveTo } from './engine/math/vector.mjs'
 import { createRectFromCenter, createRectFromCorners, inRect } from './engine/math/rect/rect.mjs'
 import { rectInOther } from './engine/math/rect/rect-collisions.mjs'
 import * as ui from './engine/ui/ui.mjs'
-import { texture2bmp } from './engine/images/images.mjs'
+import { texture2bmp, bmp2texture } from './engine/images/images.mjs'
 
 export {
     CanvasRenderer,
@@ -17,5 +17,5 @@ export {
     createRectFromCenter, createRectFromCorners, inRect,
     rectInOther,
     ui,
-    texture2bmp
+    texture2bmp, bmp2texture
 }
