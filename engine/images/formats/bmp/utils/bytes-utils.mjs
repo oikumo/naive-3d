@@ -33,6 +33,37 @@ const abgr2bgr = (abgrColor) => {
     return bgrColor
 }
 
+const ColorConverter = function () {
+    const buf = new ArrayBuffer(4)
+    this.abgr = new Uint32Array(buf)
+}
+
+ColorConverter.prototype.bgrBytes2abgr = function (bgr) {
+    this.abgr[0] = bgr[2] << 0
+        | bgr[1] << 8
+        | bgr[0] << 16
+        | 255 << 24
+    return this.abgr[0]
+}
+
+ColorConverter.prototype.bgr2abgr = function (bgr) {
+    this.abgr[0] = ((255) & (bgr >> 0))
+        | ((255) & (bgr >> 8)) << 8
+        | ((255) & (bgr >> 16)) << 16
+        | (255) << 24
+    return this.abgr[0]
+}
+
+const bgr2abgr = (bgr) => {
+    const buf = new ArrayBuffer(4)
+    const abgr = new Uint32Array(buf)
+    abgr[0] |= ((255) & (bgr >> 0))
+    abgr[0] |= ((255) & (bgr >> 8)) << 8
+    abgr[0] |= ((255) & (bgr >> 16)) << 16
+    abgr[0] |= (255) << 24
+    return abgr[0]
+}
+
 const hex2bin = (hex) => {
     if (!hex) return new Uint8Array()
     const arr = []
@@ -65,6 +96,8 @@ export {
     unreversebytes,
     as2bytes,
     abgr2bgr,
+    ColorConverter,
+    bgr2abgr,
     hex2bin,
     createBufferUint8
 }
