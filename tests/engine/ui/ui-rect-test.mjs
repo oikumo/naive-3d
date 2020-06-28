@@ -1,62 +1,43 @@
 import { assertions, test } from 'naive-tests'
-import { ui, createRectFromCorners } from '../../../index.mjs'
-const { createUiComponent, drawUiComponent, UiRect } = ui
+import { ui } from '../../../index.mjs'
+const { UiRect } = ui
 const { equals, objAreEquals } = assertions
 
-test('create ui component', () => {
-    const backgroundColor = 0xFF555555
-    const rect = createRectFromCorners({ x: 45, y: 65 }, { x: 55, y: 35 })
-    const component = createUiComponent(rect, backgroundColor)
-    equals(component.backgroundColor(), backgroundColor)
-    objAreEquals(component.rect, {
-        center: { x: 50, y: 50 },
+test('ui rect create', () => {
+    const rect = new UiRect({ x: 45, y: 65 }, 10, 20)
+    objAreEquals(rect, {
         width: 10,
-        height: 30,
+        height: 20,
         topLeft: { x: 45, y: 65 },
-        topRight: { x: 55, y: 65 },
-        bottomLeft: { x: 45, y: 35 },
-        bottomRight: { x: 55, y: 35 },
+        bottomRight: { x: 55, y: 85 },
     })
 })
 
-test('draw ui component', () => {
-    const rect = new UiRect({ x: 0, y: 0 }, 2, 4)
-    equals(rect.width, 2)
-    equals(rect.height, 4)
-    const backgroundColor = 0xFF555555
-    const component = createUiComponent(rect, backgroundColor)
+test('ui rect create claped to floor position and dimension', () => {
+    const rect = new UiRect({ x: 45, y: 65.1 }, 10.11, 20.9)
+    const clampedRect = UiRect.floor(rect)
 
-    const pixelsWidth = 6
-    const pixelsHeight = 7
-    const pixelsSize = pixelsWidth * pixelsHeight
-    const pixles = new Uint32Array(pixelsSize)
+    objAreEquals(clampedRect, {
+        width: 10,
+        height: 20,
+        topLeft: { x: 45, y: 65 },
+        bottomRight: { x: 55, y: 85 },
+    })
+})
 
-    drawUiComponent(component, pixles, pixelsWidth)
+test('ui rect translate', () => {
+    const rect = new UiRect({ x: 45, y: 65 }, 10, 20)
+    rect.translate({ x: 5, y: 1})
+    objAreEquals(rect, {
+        width: 10,
+        height: 20,
+        topLeft: { x: 50, y: 66 },
+        bottomRight: { x: 60, y: 86 },
+    })
+})
 
-    let paintedPixels = 0
-    const componenentSize = rect.width * rect.height
-
-    let col = 0
-    let row = 0
-
-    for (let i = 0; i < pixelsSize; i++) {
-        if (component.rect.inside({ x: col, y: row })) {
-            equals(pixles[i], backgroundColor, `pixel color doesn't match at: [${col}, ${row}]`)
-            paintedPixels++
-        }
-        else {
-            equals(pixles[i], 0)
-        }
-
-        if (col + 1 == pixelsWidth) {
-            col = 0
-            row++
-        }
-        else {
-            col++
-        }
-    }
-
-
-    equals(paintedPixels, componenentSize, `requiered pixels wasn't painted`)
+test('ui rect check if a point is inside of it', () => {
+    const rect = new UiRect({ x: 45, y: 65 }, 30, 20)
+    equals(rect.inside({ x: 50, y: 65 }, rect), true)
+    equals(rect.inside({ x: 0, y: 0 }, rect), false)
 })
