@@ -17,6 +17,18 @@ UiRect.prototype.inside = function (point) {
         && this.topLeft.x <= point.x && point.x < this.bottomRight.x
 }
 
+UiRect.floor = function (rect) {
+    const topLeft = rect.topLeft
+    const position = {
+        x: Math.floor(topLeft.x),
+        y: Math.floor(topLeft.y)
+    }
+    const width = Math.floor(rect.width)
+    const height = Math.floor(rect.height)
+    return new UiRect(position, width, height)
+}
+
+
 export {
     UiRect
 }

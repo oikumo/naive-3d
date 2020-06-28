@@ -5,7 +5,7 @@ const { equals, objAreEquals } = assertions
 
 test('create ui component', () => {
     const backgroundColor = 0xFF555555
-    const rect = new UiRect({ x:0 , y:0 }, 20, 35)
+    const rect = new UiRect({ x: 0, y: 0 }, 20, 35)
     const component = createUiComponent(rect, backgroundColor)
     equals(component.backgroundColor(), backgroundColor)
     objAreEquals(component.rect, {
@@ -16,9 +16,9 @@ test('create ui component', () => {
     }, 'component rect has not expected values')
 })
 
-test('draw ui component', () => {
-    const rect = new UiRect({ x: 0, y: 0 }, 2, 4)
-    equals(rect.width, 2)
+test('draw ui component using decimal numbers for rect', () => {
+    const rect = new UiRect({ x: 0, y: 0.1 }, 2.1, 4)
+    equals(rect.width, 2.1)
     equals(rect.height, 4)
     const backgroundColor = 0xFF555555
     const component = createUiComponent(rect, backgroundColor)
@@ -26,23 +26,23 @@ test('draw ui component', () => {
     const pixelsWidth = 6
     const pixelsHeight = 7
     const pixelsSize = pixelsWidth * pixelsHeight
-    const pixles = new Uint32Array(pixelsSize)
+    const pixels = new Uint32Array(pixelsSize)
 
-    drawUiComponent(component, pixles, pixelsWidth)
+    drawUiComponent(component, pixels, pixelsWidth)
 
     let paintedPixels = 0
-    const componenentSize = rect.width * rect.height
-
     let col = 0
     let row = 0
 
+    const flooredRect = UiRect.floor(component.rect)
+
     for (let i = 0; i < pixelsSize; i++) {
-        if (component.rect.inside({ x: col, y: row })) {
-            equals(pixles[i], backgroundColor, `pixel color doesn't match at: [${col}, ${row}]`)
+        if (flooredRect.inside({ x: col, y: row })) {
+            equals(pixels[i], backgroundColor, `pixel color doesn't match at: [${col}, ${row}]`)
             paintedPixels++
         }
         else {
-            equals(pixles[i], 0)
+            equals(pixels[i], 0)
         }
 
         if (col + 1 == pixelsWidth) {
@@ -54,6 +54,6 @@ test('draw ui component', () => {
         }
     }
 
-
+    const componenentSize = flooredRect.width * flooredRect.height
     equals(paintedPixels, componenentSize, `requiered pixels wasn't painted`)
 })
