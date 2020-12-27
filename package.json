@@ -1,13 +1,14 @@
 {
+  "type": "module",
   "name": "naive-3d",
   "version": "0.0.38",
   "description": "A naive 3D Engine for javascript",
-  "main": "index.mjs",
+  "main": "index.js",
   "directories": {
     "test": "tests"
   },
   "scripts": {
-    "test": "node test-runner.mjs",
+    "test": "node test-runner.js",
     "pub": "npm publish --access public",
     "ins": "npm i"
   },

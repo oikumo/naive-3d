@@ -1,4 +1,4 @@
-import { Entity } from "../world/entity.mjs"
+import { Entity } from "../world/entity.js"
 export function Scene() {
     this.entities = []
 }
