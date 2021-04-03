@@ -1,5 +1,6 @@
-import { equals, test } from 'naive-tests'
-import { Entity } from '../../engine/world/entity.mjs'
+import { assertions, test } from 'naive-tests'
+import { Entity } from '../../index.js'
+const { equals } = assertions
 
 test('entity dummy', () => {
     let entity = new Entity(2, 2, 100, 100)

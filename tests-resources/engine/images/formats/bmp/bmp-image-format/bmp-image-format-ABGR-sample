@@ -1,0 +1,46 @@
+bmp-image-format-ABGR-sample (from https://en.wikipedia.org/wiki/BMP_file_format)
+
+BMP header
+42 4D	    | "BM"	ID field (42h, 4Dh)
+9A 00 00 00	| 154 bytes (122+32)	Size of the BMP file
+00 00	    | Unused	Application specific
+00 00	    | Unused	Application specific
+7A 00 00 00	| 122 bytes (14+108)	Offset where the pixel array (bitmap data) can be found
+
+DIB Header
+6C 00 00 00	| 108 bytes	Number of bytes in the DIB header (from this point)
+04 00 00 00	| 4 pixels (left to right order)	Width of the bitmap in pixels
+02 00 00 00	| 2 pixels (bottom to top order)	Height of the bitmap in pixels
+01 00	    | 1 plane	Number of color planes being used
+20 00	    | 32 bits	Number of bits per pixel
+03 00 00 00 | 3	BI_BITFIELDS, no pixel array compression used
+20 00 00 00 | 32 bytes	Size of the raw bitmap data (including padding)
+13 0B 00 00 | 2835 pixels/metre horizontal	Print resolution of the image, 72 DPI × 39.3701 inches per metre yields 2834.6472
+13 0B 00 00 | 2835 pixels/metre vertical
+00 00 00 00 | 0 colors	Number of colors in the palette
+00 00 00 00 | 0 important colors	0 means all colors are important
+00 00 FF 00 | 00FF0000 in big-endian	Red channel bit mask (valid because BI_BITFIELDS is specified)
+00 FF 00 00 | 0000FF00 in big-endian	Green channel bit mask (valid because BI_BITFIELDS is specified)
+FF 00 00 00 | 000000FF in big-endian	Blue channel bit mask (valid because BI_BITFIELDS is specified)
+00 00 00 FF | FF000000 in big-endian	Alpha channel bit mask
+20 6E 69 57 | little-endian "Win "	LCS_WINDOWS_COLOR_SPACE
+
+4Ah	24h	(24h=36 veces 00 )24h* 00...00	CIEXYZTRIPLE Color Space endpoints	Unused for LCS "Win " or "sRGB"
+
+00 00 00 00	| 0 Red Gamma	Unused for LCS "Win " or "sRGB"
+00 00 00 00	| 0 Green Gamma	Unused for LCS "Win " or "sRGB"
+00 00 00 00	| 0 Blue Gamma	Unused for LCS "Win " or "sRGB"
+
+Start of the Pixel Array (the bitmap Data)
+FF 00 00 7F	| 255 0 0 127	Blue (Alpha: 127), Pixel (1,0)
+00 FF 00 7F	| 0 255 0 127	Green (Alpha: 127), Pixel (1,1)
+00 00 FF 7F	| 0 0 255 127	Red (Alpha: 127), Pixel (1,2)
+FF FF FF 7F	| 255 255 255 127	White (Alpha: 127), Pixel (1,3)
+FF 00 00 FF	| 255 0 0 255	Blue (Alpha: 255), Pixel (0,0)
+00 FF 00 FF	| 0 255 0 255	Green (Alpha: 255), Pixel (0,1)
+00 00 FF FF	| 0 0 255 255	Red (Alpha: 255), Pixel (0,2)
+FF FF FF FF	| 255 255 255 255	White (Alpha: 255), Pixel (0,3)
+
+Hex
+BMP header
+424D9A000000000000007A0000006C0000000400000002000000010020000300000020000000130B0000130B000000000000000000000000FF0000FF0000FF000000000000FF206E6957000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000FF00007F00FF007F0000FF7FFFFFFF7FFF0000FF00FF00FF0000FFFFFFFFFFFF

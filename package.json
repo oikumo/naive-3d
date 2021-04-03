@@ -1,14 +1,16 @@
 {
+  "type": "module",
   "name": "naive-3d",
-  "version": "0.0.14",
+  "version": "0.0.40",
   "description": "A naive 3D Engine for javascript",
-  "main": "index.mjs",
+  "main": "index.js",
   "directories": {
     "test": "tests"
   },
   "scripts": {
-    "test": "node test-runner.mjs",
-    "pub": "npm publish --access public"
+    "test": "node test-runner.js",
+    "pub": "npm publish --access public",
+    "ins": "npm i"
   },
   "repository": {
     "type": "git",
@@ -19,12 +21,12 @@
     "javascript"
   ],
   "author": "oikumo",
-  "license": "GPL-3.0-or-later",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/oikumo/Naive-3D/issues"
   },
   "homepage": "https://github.com/oikumo/Naive-3D#readme",
   "dependencies": {
-    "naive-tests": "^1.0.13"
+    "naive-tests": "^1.0.19"
   }
 }

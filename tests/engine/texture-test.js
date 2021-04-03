@@ -1,5 +1,6 @@
-import { equals, test } from 'naive-tests'
-import { Texture } from '../../engine/rendering/textures/texture.mjs'
+import { assertions, test } from 'naive-tests'
+import { Texture } from '../../index.js'
+const { equals } = assertions
 
 test('fill a squared texture with a solid color', () => {
     const tex = new Texture(10, 10)
