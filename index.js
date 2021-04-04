@@ -12,7 +12,6 @@ export {
     CanvasRenderer,
     RenderTexture,
     Entity,
-    Texture,
     createRectFromCenter, createRectFromCorners, inRect,
     rectInOther,
     ui,
