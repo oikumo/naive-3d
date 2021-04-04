@@ -1,4 +1,4 @@
-import { Texture } from "./texture";
+import { Texture } from "./texture.js";
 
 export function createTexture(width, height, color) {
     const tex = new Texture(width, height);
