@@ -1,11 +1,11 @@
-import { runTests } from 'naive-tests'
-import path from 'path'
+import { runTests } from 'naive-tests';
+import path from 'path';
 
 
 runTests(path.join(process.cwd(), 'tests'), (err, results) => {
     if (err) {
-        console.error(`test runner import fails - Error${err.message}`)
-        process.exit(1)
+        console.error(`test runner import fails - Error${err.message}`);
+        process.exit(1);
     }
 
     const testsPassed = results.filter((result) => result.errors.length === 0)

@@ -1,7 +1,6 @@
-import { test, assertions } from 'naive-tests'
+import { test, assert } from 'naive-tests';
 import { abgr2bgr } from '../../../../../../engine/images/formats/bmp/utils/bytes-utils.js'
 import { convertTopRightTexABGR2BGR } from '../../../../../../engine/images/formats/bmp/converters/bmp-image-top-right-tex.js'
-const { equals } = assertions
 
 const red = 0xFF0000FF
 const white = 0xFFFFFFFF
@@ -32,7 +31,7 @@ test('convert texture top to right abgr to bgr no padding pixels', () => {
         obtainedColor |= data[dataIndex++] << 16
         obtainedColor |= data[dataIndex++] << 8
         obtainedColor |= data[dataIndex++] << 0
-        equals(expectedColors[colorIndex++], obtainedColor)
+        assert.equals(expectedColors[colorIndex++], obtainedColor)
     }
 })
 
@@ -60,11 +59,11 @@ test('convert texture top to right abgr to bgr with padding pixels', () => {
         obtainedColor |= data[dataIndex++] << 16
         obtainedColor |= data[dataIndex++] << 8
         obtainedColor |= data[dataIndex++] << 0
-        equals(expectedColors[colorIndex++], obtainedColor)
+        assert.equals(expectedColors[colorIndex++], obtainedColor)
 
         if (col + 1 === imageWidth) {
             for (let paddingIndex = 0; paddingIndex < imageWidth; paddingIndex++) {
-                equals(0, data[dataIndex++])
+                assert.equals(0, data[dataIndex++]);
             }
             col = 0
         }

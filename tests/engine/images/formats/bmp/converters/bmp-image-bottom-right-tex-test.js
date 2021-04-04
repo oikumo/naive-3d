@@ -1,13 +1,12 @@
-import { test, assertions } from 'naive-tests'
-import { abgr2bgr } from '../../../../../../engine/images/formats/bmp/utils/bytes-utils.js'
-import { convertBottomRightTexABGR2BGR } from '../../../../../../engine/images/formats/bmp/converters/bmp-image-bottom-right-tex.js'
-const { equals } = assertions
+import { test, assert } from 'naive-tests';
+import { abgr2bgr } from '../../../../../../engine/images/formats/bmp/utils/bytes-utils.js';
+import { convertBottomRightTexABGR2BGR } from '../../../../../../engine/images/formats/bmp/converters/bmp-image-bottom-right-tex.js';
 
-const red = 0xFF0000FF
-const white = 0xFFFFFFFF
-const green = 0xFF00FF00
-const blue = 0xFFFF0000
-const yellow = 0xFFFFFF00
+const red = 0xFF0000FF;
+const white = 0xFFFFFFFF;
+const green = 0xFF00FF00;
+const blue = 0xFFFF0000;
+const yellow = 0xFFFFFF00;
 
 test('convert texture bottom to right abgr to bgr no padding pixels', () => {
     const imageWidth = 4
@@ -32,7 +31,7 @@ test('convert texture bottom to right abgr to bgr no padding pixels', () => {
         obtainedColor |= data[dataIndex++] << 16
         obtainedColor |= data[dataIndex++] << 8
         obtainedColor |= data[dataIndex++] << 0
-        equals(expectedColors[colorIndex++], obtainedColor)
+        assert.equals(expectedColors[colorIndex++], obtainedColor)
     }
 })
 
@@ -52,24 +51,24 @@ test('convert texture bottom to right abgr to bgr with padding pixels', () => {
 
     const data = convertBottomRightTexABGR2BGR(imagePixels, imageWidth, imageHeight)
 
-    let col = 0
-    let dataIndex = 0
-    let colorIndex = 0
+    let col = 0;
+    let dataIndex = 0;
+    let colorIndex = 0;
     while (dataIndex < data.length) {
-        let obtainedColor = 0
-        obtainedColor |= data[dataIndex++] << 16
-        obtainedColor |= data[dataIndex++] << 8
-        obtainedColor |= data[dataIndex++] << 0
-        equals(expectedColors[colorIndex++], obtainedColor)
+        let obtainedColor = 0;
+        obtainedColor |= data[dataIndex++] << 16;
+        obtainedColor |= data[dataIndex++] << 8;
+        obtainedColor |= data[dataIndex++] << 0;
+        assert.equals(expectedColors[colorIndex++], obtainedColor);
 
         if (col + 1 === imageWidth) {
             for (let paddingIndex = 0; paddingIndex < imageWidth; paddingIndex++) {
-                equals(0, data[dataIndex++])
+                assert.equals(0, data[dataIndex++]);
             }
-            col = 0
+            col = 0;
         }
         else {
-            col++
+            col++;
         }
     }
 })
