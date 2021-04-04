@@ -1,3 +1,4 @@
+import { textures } from '../../index.js'
 import { Texture } from '../rendering/textures/texture.js'
 import { BMPCreator } from './formats/bmp/bmp.js'
 
@@ -7,7 +8,7 @@ const texture2bmp = (texture) => {
 
 const bmp2texture = (imageBytes) => {
     const image = BMPCreator.fromImageBytes2TopRightImage(imageBytes)
-    const texture = new Texture(image.width, image.height)
+    const texture = textures.createTexture(image.width, image.height)
     texture.pixels = image.pixels
     return texture
 }
