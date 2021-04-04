@@ -1,8 +1,7 @@
-import { test, assertions } from 'naive-tests'
+import { test, assert } from 'naive-tests';
 import { hex2bin } from '../../../../../../engine/images/formats/bmp/utils/bytes-utils.js'
 import { bmpData2TopRightImage } from '../../../../../../engine/images/formats/bmp/image-data/image-data-parser.js'
 
-const { equals } = assertions
 const blue = parseInt(0xFFFF0000)
 const green = parseInt(0xFF00FF00)
 const red = parseInt(0xFF0000FF)
@@ -17,11 +16,11 @@ test('bmp image data parse', () => {
     const bytesPerPixel = bitsPerPixel / 8
     const dataOffset = 54
     const image = bmpData2TopRightImage(data, dataOffset, width, height, bytesPerPixel)
-    equals(width, image.width)
-    equals(height, image.height)
-    equals(width * height, image.pixels.length)
-    equals(blue, image.pixels[0])
-    equals(green, image.pixels[1])
-    equals(red, image.pixels[2])
-    equals(white, image.pixels[3])
+    assert.equals(width, image.width);
+    assert.equals(height, image.height)
+    assert.equals(width * height, image.pixels.length)
+    assert.equals(blue, image.pixels[0])
+    assert.equals(green, image.pixels[1])
+    assert.equals(red, image.pixels[2])
+    assert.equals(white, image.pixels[3])
 })

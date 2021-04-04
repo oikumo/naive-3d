@@ -1,11 +1,10 @@
-import { assertions, test } from 'naive-tests'
-import { ui } from '../../../index.js'
-const { UiRect } = ui
-const { equals, objAreEquals } = assertions
+import { assert, test } from 'naive-tests';
+import { ui } from '../../../index.js';
+const { UiRect } = ui;
 
 test('ui rect create', () => {
     const rect = new UiRect({ x: 45, y: 65 }, 10, 20)
-    objAreEquals(rect, {
+    assert.objAreEquals(rect, {
         width: 10,
         height: 20,
         topLeft: { x: 45, y: 65 },
@@ -17,7 +16,7 @@ test('ui rect create claped to floor position and dimension', () => {
     const rect = new UiRect({ x: 45, y: 65.1 }, 10.11, 20.9)
     const clampedRect = UiRect.floor(rect)
 
-    objAreEquals(clampedRect, {
+    assert.objAreEquals(clampedRect, {
         width: 10,
         height: 20,
         topLeft: { x: 45, y: 65 },
@@ -28,7 +27,7 @@ test('ui rect create claped to floor position and dimension', () => {
 test('ui rect translate', () => {
     const rect = new UiRect({ x: 45, y: 65 }, 10, 20)
     rect.translate({ x: 5, y: 1 })
-    objAreEquals(rect, {
+    assert.objAreEquals(rect, {
         width: 10,
         height: 20,
         topLeft: { x: 50, y: 66 },
@@ -38,6 +37,6 @@ test('ui rect translate', () => {
 
 test('ui rect check if a point is inside of it', () => {
     const rect = new UiRect({ x: 45, y: 65 }, 30, 20)
-    equals(rect.inside({ x: 50, y: 65 }, rect), true)
-    equals(rect.inside({ x: 0, y: 0 }, rect), false)
+    assert.equals(rect.inside({ x: 50, y: 65 }, rect), true)
+    assert.equals(rect.inside({ x: 0, y: 0 }, rect), false)
 })

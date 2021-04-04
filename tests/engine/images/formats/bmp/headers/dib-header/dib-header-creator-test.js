@@ -1,8 +1,6 @@
-import { test, assertions } from 'naive-tests'
-import { hex2bin } from '../../../../../../../engine/images/formats/bmp/utils/bytes-utils.js'
-import { createDibHeader } from '../../../../../../../engine/images/formats/bmp/headers/dib-header/dib-header-creator.js'
-
-const { sameArrayElements } = assertions
+import { test, assert } from 'naive-tests';
+import { hex2bin } from '../../../../../../../engine/images/formats/bmp/utils/bytes-utils.js';
+import { createDibHeader } from '../../../../../../../engine/images/formats/bmp/headers/dib-header/dib-header-creator.js';
 
 const red = 0xFF0000FF
 const white = 0xFFFFFFFF
@@ -24,5 +22,5 @@ test('bmp dib header create', () => {
     const dibHeader = createDibHeader(imageWidth, imageHeight)
     const expected = hex2bin('280000000200000002000000010018000000000010000000130B0000130B00000000000000000000')
 
-    sameArrayElements(expected, dibHeader)
+    assert.sameArrayElements(expected, dibHeader);
 })
