@@ -1,14 +1,13 @@
-import { assertions, test } from 'naive-tests'
-import { ui } from '../../../index.js'
+import { assert, test } from 'naive-tests';
+import { ui } from '../../../index.js';
 const { createUiComponent, drawUiComponent, UiRect } = ui
-const { equals, objAreEquals } = assertions
 
 test('create ui component', () => {
     const backgroundColor = 0xFF555555
     const rect = new UiRect({ x: 0, y: 0 }, 20, 35)
     const component = createUiComponent(rect, backgroundColor)
-    equals(component.backgroundColor(), backgroundColor)
-    objAreEquals(component.rect, {
+    assert.equals(component.backgroundColor(), backgroundColor)
+    assert.objAreEquals(component.rect, {
         width: 20,
         height: 35,
         topLeft: { x: 0, y: 0 },
@@ -18,8 +17,8 @@ test('create ui component', () => {
 
 test('draw ui component using decimal numbers for rect', () => {
     const rect = new UiRect({ x: 0, y: 0.1 }, 2.1, 4)
-    equals(rect.width, 2.1)
-    equals(rect.height, 4)
+    assert.equals(rect.width, 2.1);
+    assert.equals(rect.height, 4);
     const backgroundColor = 0xFF555555
     const component = createUiComponent(rect, backgroundColor)
 
@@ -38,11 +37,11 @@ test('draw ui component using decimal numbers for rect', () => {
 
     for (let i = 0; i < pixelsSize; i++) {
         if (flooredRect.inside({ x: col, y: row })) {
-            equals(pixels[i], backgroundColor, `pixel color doesn't match at: [${col}, ${row}]`)
+            assert.equals(pixels[i], backgroundColor, `pixel color doesn't match at: [${col}, ${row}]`)
             paintedPixels++
         }
         else {
-            equals(pixels[i], 0)
+            assert.equals(pixels[i], 0)
         }
 
         if (col + 1 == pixelsWidth) {
@@ -55,5 +54,5 @@ test('draw ui component using decimal numbers for rect', () => {
     }
 
     const componenentSize = flooredRect.width * flooredRect.height
-    equals(paintedPixels, componenentSize, `requiered pixels wasn't painted`)
+    assert.equals(paintedPixels, componenentSize, `requiered pixels wasn't painted`)
 })

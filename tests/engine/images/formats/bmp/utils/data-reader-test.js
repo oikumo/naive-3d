@@ -1,7 +1,5 @@
-import { test, assertions } from 'naive-tests'
-import { DataReader } from '../../../../../../engine/images/formats/bmp/utils/data-reader.js'
-
-const { equals } = assertions
+import { test, assert } from 'naive-tests';
+import { DataReader } from '../../../../../../engine/images/formats/bmp/utils/data-reader.js';
 
 test('data reader', () => {
     const data = new Uint8Array([
@@ -22,11 +20,11 @@ test('data reader', () => {
     ])
 
     const reader = new DataReader(data)
-    equals('BM', reader.nextString(2))
-    equals(70, reader.nextReversedNumber(4))
-    equals(0, reader.nextReversedNumber(2))
-    equals(0, reader.nextReversedNumber(2))
-    equals(54, reader.nextReversedNumber(4))
+    assert.equals('BM', reader.nextString(2))
+    assert.equals(70, reader.nextReversedNumber(4))
+    assert.equals(0, reader.nextReversedNumber(2))
+    assert.equals(0, reader.nextReversedNumber(2))
+    assert.equals(54, reader.nextReversedNumber(4))
 })
 
 test('data reader seek', () => {
@@ -48,7 +46,7 @@ test('data reader seek', () => {
     ])
 
     const reader = new DataReader(data)
-    equals('BM', reader.nextString(2))
-    reader.seekFromCursor(8)
-    equals(54, reader.nextReversedNumber(4))
+    assert.equals('BM', reader.nextString(2));
+    reader.seekFromCursor(8);
+    assert.equals(54, reader.nextReversedNumber(4));
 })
