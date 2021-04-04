@@ -6,7 +6,7 @@ import { rectInOther } from './engine/math/rect/rect-collisions.js';
 import * as ui from './engine/ui/ui.js';
 import { texture2bmp, bmp2texture } from './engine/images/images.js';
 
-import * as textures from './engine/rendering/textures';
+import * as textures from './engine/rendering/textures/index.js';
 
 export {
     CanvasRenderer,
