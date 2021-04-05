@@ -1,5 +1,5 @@
 import { test, assert } from 'naive-tests';
-import { red, white } from '../../../../../src/core/colors/colors.js';
+import { red, white } from '../../../../../src/core/colors/index.js';
 import { Point2d } from '../../../../../src/core/geometry/primitives/points/point2d.js';
 import { drawTriangle2dTexuredLeftToRight } from '../../../../../src/core/geometry/primitives/triangles/triangle-2d-textured.js';
 import { Triangle2d } from '../../../../../src/core/geometry/primitives/triangles/triangle-2d.js';

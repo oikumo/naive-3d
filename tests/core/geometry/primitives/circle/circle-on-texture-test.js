@@ -1,6 +1,6 @@
 import { test, assert } from 'naive-tests';
 import { textures } from '../../../../../index.js';
-import { red, white } from '../../../../../src/core/colors/colors.js';
+import { red, white } from '../../../../../src/core/colors/index.js';
 import { drawCircleOnTexture } from '../../../../../src/core/geometry/primitives/circle/circle-on-texture.js';
 
 test('circle on texture draw', () => {

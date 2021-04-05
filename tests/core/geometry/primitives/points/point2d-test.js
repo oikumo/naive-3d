@@ -1,5 +1,5 @@
 import { test, assert } from 'naive-tests';
-import { blue, red } from '../../../../../src/core/colors/colors.js';
+import { blue, red } from '../../../../../src/core/colors/index.js';
 import { Point2d } from '../../../../../src/core/geometry/primitives/points/point2d.js';
 import { createTexture } from '../../../../../src/core/textures/index.js';
 
