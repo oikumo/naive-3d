@@ -32,17 +32,17 @@ export class Line2d {
         let i, t, x, y;
 
         for (i = n - 1; i >= 0; --i) {
-            t = i / n
+            t = i / n;
 
-            x = Math.floor(p.position[0] + (t * delta[0]))
+            x = Math.floor(p.position[0] + (t * delta[0]));
             if (x < 0 || x >= tex.width)
-                continue
+                continue;
 
-            y = p.position[1] + Math.floor(t * delta[1])
+            y = p.position[1] + Math.floor(t * delta[1]);
             if (y < 0 || y >= tex.height)
-                continue
+                continue;
 
-            tex.pixels[Math.floor(y * tex.width) + x] = color
+            tex.pixels[Math.floor(y * tex.width) + x] = color;
         }
     }
 }

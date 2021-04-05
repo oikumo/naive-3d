@@ -1,5 +1,6 @@
-import { vector2Distance, vector2lerp, vector2Translate } from "../../../../common/math/vector/vector2-utils.js";
-import { vector2, vector2AreEquals, vector2Sub } from "../../../../common/math/vector/vector2.js";
+import { vector2Distance, vector2lerp, vector2Translate } from "../../../math/vector/vector2-utils.js";
+import { vector2, vector2AreEquals, vector2Sub } from "../../../math/vector/vector2.js";
+
 
 export class Point2d {
     constructor(x, y) {

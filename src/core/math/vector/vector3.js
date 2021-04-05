@@ -1,5 +1,5 @@
 export function vector3(x, y, z) {
-    return new Float32Array([x, y, z])
+    return new Float32Array([x, y, z]);
 }
 
 export function vector3Forward() {

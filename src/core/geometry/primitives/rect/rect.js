@@ -11,12 +11,12 @@ const createRectFromCenter = (center, width, height) => {
 };
 
 const createRectFromCorners = (topLeft, bottomRight) => {
-    const width = bottomRight.x - topLeft.x
-    const height = topLeft.y - bottomRight.y
+    const width = bottomRight.x - topLeft.x;
+    const height = topLeft.y - bottomRight.y;
     const center = {
         x: topLeft.x + width / 2,
         y: bottomRight.y + height / 2
-    }
+    };
     return new Rect(center, width, height, topLeft, bottomRight);
 };
 

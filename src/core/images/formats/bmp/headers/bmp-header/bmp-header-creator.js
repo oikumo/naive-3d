@@ -1,13 +1,13 @@
-import { createBufferUint8, reversed4bytes, as2bytes } from '../../utils/bytes-utils.js'
+import { createBufferUint8, reversed4bytes, as2bytes } from '../../utils/bytes-utils.js';
 
-const createBmpHeader = function (imageDataBytesSize, dibBytesSize) {
-    const bmpHeaderBytesSize = 14
-    const fileSize = bmpHeaderBytesSize + dibBytesSize + imageDataBytesSize
-    const id = new Uint8Array([parseInt('0x42'), parseInt('0x4D')])
-    const reversedFileSize = reversed4bytes(fileSize)
-    const unused0 = as2bytes(0)
-    const unused1 = as2bytes(0)
-    const pixelDataOffset = reversed4bytes(bmpHeaderBytesSize + dibBytesSize)
+export function createBmpHeader(imageDataBytesSize, dibBytesSize) {
+    const bmpHeaderBytesSize = 14;
+    const fileSize = bmpHeaderBytesSize + dibBytesSize + imageDataBytesSize;
+    const id = new Uint8Array([parseInt('0x42'), parseInt('0x4D')]);
+    const reversedFileSize = reversed4bytes(fileSize);
+    const unused0 = as2bytes(0);
+    const unused1 = as2bytes(0);
+    const pixelDataOffset = reversed4bytes(bmpHeaderBytesSize + dibBytesSize);
 
     return createBufferUint8(
         id,
@@ -15,9 +15,5 @@ const createBmpHeader = function (imageDataBytesSize, dibBytesSize) {
         unused0,
         unused1,
         pixelDataOffset
-    )
-}
-
-export {
-    createBmpHeader
+    );
 }

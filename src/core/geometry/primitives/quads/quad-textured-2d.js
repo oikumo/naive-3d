@@ -1,6 +1,3 @@
-import { texture2bmp } from "naive-3d";
-import { green, red, yellow } from "../../../../common/colors.js";
-import { vector2 } from "../../../../common/math/vector/vector2.js";
 import { Line2d } from "../line/line2d.js";
 import { Point2d } from "../points/point2d.js";
 import { Quad2dScanline } from "./quad-2d-scanline.js";
@@ -69,7 +66,7 @@ export class QuadTextured2d {
                 pIndex = 0;
             }
             else {
-                col++
+                col++;
             }
         }
     }

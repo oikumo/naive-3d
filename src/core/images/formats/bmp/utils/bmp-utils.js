@@ -1,13 +1,10 @@
-const getPixelsBytesPerRow = (width, bytesPerPixel) => width * bytesPerPixel
-
-const getPaddingBytesPerRow = (width, bytesPerPixel) => {
-    const pixelsBytesPerRow = getPixelsBytesPerRow(width, bytesPerPixel)
-    const module = pixelsBytesPerRow % 4
-    const paddingBytesPerRow = module === 0 ? 0 : 4 - module
-    return paddingBytesPerRow
+export function getPixelsBytesPerRow(width, bytesPerPixel) {
+    return width * bytesPerPixel;
 }
 
-export {
-    getPixelsBytesPerRow,
-    getPaddingBytesPerRow
+export function getPaddingBytesPerRow(width, bytesPerPixel) {
+    const pixelsBytesPerRow = getPixelsBytesPerRow(width, bytesPerPixel);
+    const module = pixelsBytesPerRow % 4;
+    const paddingBytesPerRow = module === 0 ? 0 : 4 - module;
+    return paddingBytesPerRow;
 }
