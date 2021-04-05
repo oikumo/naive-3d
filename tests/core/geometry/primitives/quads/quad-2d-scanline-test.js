@@ -1,5 +1,5 @@
 import { test, assert } from 'naive-tests';
-import { blue, green } from '../../../../../src/core/colors/colors.js';
+import { blue, green } from '../../../../../src/core/colors/index.js';
 import { Point2d } from '../../../../../src/core/geometry/primitives/points/point2d.js';
 import { Quad2dScanline } from '../../../../../src/core/geometry/primitives/quads/quad-2d-scanline.js';
 import { Quad2d } from '../../../../../src/core/geometry/primitives/quads/quad-2d.js';

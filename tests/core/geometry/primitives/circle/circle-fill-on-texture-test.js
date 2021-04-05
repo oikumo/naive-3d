@@ -1,5 +1,5 @@
 import { test, assert } from 'naive-tests';
-import { red, white } from '../../../../../src/core/colors/colors.js';
+import { red, white } from '../../../../../src/core/colors/index.js';
 import { drawCircleFillOnTexture } from '../../../../../src/core/geometry/primitives/circle/circle-fill-on-texture.js';
 import { createTexture } from '../../../../../src/core/textures/index.js';
 
