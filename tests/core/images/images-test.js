@@ -4,7 +4,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { texture2bmp, bmp2texture } from '../../../src/core/images/images.js';
 import { Textures } from '../../../index.js';
-import { Color } from '../../../src/core/colors/index.js';
+import { Color } from '../../../index.js';
 
 test('texture2bmp big texture', () => {
     const texture = Textures.createTexture(1000, 1000);

@@ -1,5 +1,5 @@
 import { test, assert } from 'naive-tests';
-import { Color } from '../../../../../../src/core/colors/index.js';
+import { Color } from '../../../../../../index.js';
 import { convertBottomRightTexABGR2BGR } from '../../../../../../src/core/images/formats/bmp/converters/bmp-image-bottom-right-tex.js';
 import { abgr2bgr } from '../../../../../../src/core/images/formats/bmp/utils/bytes-utils.js';
 
