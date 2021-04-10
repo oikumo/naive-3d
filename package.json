@@ -1,7 +1,7 @@
 {
   "type": "module",
   "name": "naive-3d",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A naive 3D Engine for javascript",
   "main": "index.js",
   "directories": {
@@ -27,6 +27,6 @@
   },
   "homepage": "https://github.com/oikumo/Naive-3D#readme",
   "dependencies": {
-    "naive-tests": "^1.1.4"
+    "naive-tests": "^1.1.5"
   }
 }

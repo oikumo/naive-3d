@@ -1,28 +1,23 @@
 import { test, assert } from 'naive-tests';
+import { Color } from '../../../../../../src/core/colors/index.js';
 import { convertBottomRightTexABGR2BGR } from '../../../../../../src/core/images/formats/bmp/converters/bmp-image-bottom-right-tex.js';
 import { abgr2bgr } from '../../../../../../src/core/images/formats/bmp/utils/bytes-utils.js';
-
-const red = 0xFF0000FF;
-const white = 0xFFFFFFFF;
-const green = 0xFF00FF00;
-const blue = 0xFFFF0000;
-const yellow = 0xFFFFFF00;
 
 test('convert texture bottom to right abgr to bgr no padding pixels', () => {
     const imageWidth = 4;
     const imageHeight = 2;
 
     const imagePixels = new Uint32Array([
-        red, red, red, red,
-        red, green, red, red
+        Color.red, Color.red, Color.red, Color.red,
+        Color.red, Color.green, Color.red, Color.red
     ]);
 
     const expectedColors = [
-        abgr2bgr(red), abgr2bgr(red), abgr2bgr(red), abgr2bgr(red),
-        abgr2bgr(red), abgr2bgr(green), abgr2bgr(red), abgr2bgr(red)
+        abgr2bgr(Color.red), abgr2bgr(Color.red), abgr2bgr(Color.red), abgr2bgr(Color.red),
+        abgr2bgr(Color.red), abgr2bgr(Color.green), abgr2bgr(Color.red), abgr2bgr(Color.red)
     ];
 
-    const data = convertBottomRightTexABGR2BGR(imagePixels, imageWidth, imageHeight)
+    const data = convertBottomRightTexABGR2BGR(imagePixels, imageWidth, imageHeight);
 
     let dataIndex = 0;
     let colorIndex = 0;
@@ -33,14 +28,14 @@ test('convert texture bottom to right abgr to bgr no padding pixels', () => {
         obtainedColor |= data[dataIndex++] << 0;
         assert.equals(expectedColors[colorIndex++], obtainedColor);
     }
-})
+});
 
 test('convert texture bottom to right abgr to bgr with padding pixels', () => {
     const imageWidth = 2;
     const imageHeight = 2;
-    const imagePixels = new Uint32Array([red, blue, white, green]);
+    const imagePixels = new Uint32Array([Color.red, Color.blue, Color.white, Color.green]);
 
-    const expectedColors = [abgr2bgr(red), abgr2bgr(blue), abgr2bgr(white), abgr2bgr(green)];
+    const expectedColors = [abgr2bgr(Color.red), abgr2bgr(Color.blue), abgr2bgr(Color.white), abgr2bgr(Color.green)];
     const data = convertBottomRightTexABGR2BGR(imagePixels, imageWidth, imageHeight);
 
     let col = 0;

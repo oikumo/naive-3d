@@ -1,11 +1,11 @@
 import { test, assert } from 'naive-tests';
-import { textures } from '../../../../../index.js';
-import { red, white } from '../../../../../src/core/colors/colors.js';
+import { Textures } from '../../../../../index.js';
+import { Color } from '../../../../../src/core/colors/index.js';
 import { drawCircleOnTexture } from '../../../../../src/core/geometry/primitives/circle/circle-on-texture.js';
 
 test('circle on texture draw', () => {
-    const tex = textures.createTexture(50, 50, white);
-    drawCircleOnTexture(tex, red, 0.99);
+    const tex = Textures.createTexture(50, 50, Color.white);
+    drawCircleOnTexture(tex, Color.red, 0.99);
 
     const pixelRadiusMaxError = 2;
     const len = tex.width * tex.height;
@@ -22,7 +22,7 @@ test('circle on texture draw', () => {
 
     for (let i = 0; i < len; i++) {
 
-        if (pixels[i] === red) {
+        if (pixels[i] === Color.red) {
             distance = Math.sqrt(Math.pow(x - centerX, 2) + Math.pow(y - centerY, 2));
             error = Math.abs(distance - radius);
             acceptableRadiusLen = error < pixelRadiusMaxError;

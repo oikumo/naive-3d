@@ -1,4 +1,4 @@
-export class HtmlCanvasCanvas {
+export class HtmlCanvasInput {
     constructor(canvas) {
         this.canvas = canvas;
         this.screenInput = null;
@@ -30,3 +30,5 @@ export class HtmlCanvasCanvas {
         };
     }
 }
+
+export function a() { }

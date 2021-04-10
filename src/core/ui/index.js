@@ -1,8 +1,2 @@
-import { UiRect } from './ui-rect.js';
-import { createUiComponent, drawUiComponent } from './ui-component.js';
-
-export {
-    UiRect,
-    createUiComponent,
-    drawUiComponent
-};
+export { UiRect } from './ui-rect.js';
+export { createUiComponent, drawUiComponent } from './ui-component.js';

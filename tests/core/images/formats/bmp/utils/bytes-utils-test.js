@@ -43,8 +43,8 @@ test('convert abgr to bgr color', () => {
 });
 
 test('convert bgr to abgr color', () => {
-    const bgrColorRed = parseInt('0x0000FF');
-    const abgrColor = bgr2abgr(bgrColorRed);
+    const bgrColor = parseInt('0x0000FF');
+    const abgrColor = bgr2abgr(bgrColor);
     const expected = parseInt('0xFF0000FF');
     assert.equals(expected, abgrColor);
 });
@@ -62,8 +62,8 @@ test('convert bgr to abgr color using converter', () => {
 
     const converter = new ColorConverter();
     assert.equals(expectedColorYellow, converter.bgr2abgr(bgrColorYellow));
-    assert.equals(expectedColorRed, converter.bgr2abgr(bgrColorRed));
-    assert.equals(expectedColorWhite, converter.bgr2abgr(bgrColorWhite));
+    assert.equals(expectedColorRed, converter.bgr2abgr(expectedColorRed));
+    assert.equals(expectedColorWhite, converter.bgr2abgr(expectedColorWhite));
     assert.equals(expectedColorBlue, converter.bgr2abgr(bgrColorBlue));
 });
 
