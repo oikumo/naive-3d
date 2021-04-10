@@ -1,5 +1,5 @@
 import { test, assert } from 'naive-tests';
-import { Color } from '../../../../../../src/core/colors/index.js';
+import { Color } from '../../../../../../index.js';
 import { bmpData2TopRightImage } from '../../../../../../src/core/images/formats/bmp/image-data/image-data-parser.js';
 import { hex2bin } from '../../../../../../src/core/images/formats/bmp/utils/bytes-utils.js';
 

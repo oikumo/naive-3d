@@ -1,4 +1,4 @@
-import { Color } from "../colors/index.js";
+import { Color } from "../../../index.js";
 import { Texture } from "./texture.js";
 
 export class Textures {

@@ -1,4 +1,4 @@
-import { Color } from "../../../colors/index.js";
+import { Color } from "../../../../../index.js";
 import { Line2d } from "../line/line2d.js";
 import { Point2d } from "../points/point2d.js";
 import { Quad2dScanline } from "./quad-2d-scanline.js";

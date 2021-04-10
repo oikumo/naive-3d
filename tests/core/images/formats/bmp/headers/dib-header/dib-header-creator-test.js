@@ -1,7 +1,7 @@
 import { test, assert } from 'naive-tests';
 import { hex2bin } from '../../../../../../../src/core/images/formats/bmp/utils/bytes-utils.js';
 import { createDibHeader } from '../../../../../../../src/core/images/formats/bmp/headers/dib-header/dib-header-creator.js';
-import { Color } from '../../../../../../../src/core/colors/index.js';
+import { Color } from '../../../../../../../index.js';
 
 test('bmp dib header create', () => {
     const imageWidth = 2;
