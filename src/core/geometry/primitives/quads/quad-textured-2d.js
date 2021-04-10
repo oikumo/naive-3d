@@ -1,3 +1,4 @@
+import { Color } from "../../../colors/index.js";
 import { Line2d } from "../line/line2d.js";
 import { Point2d } from "../points/point2d.js";
 import { Quad2dScanline } from "./quad-2d-scanline.js";
@@ -18,10 +19,10 @@ export class QuadTextured2d {
         const points = this.quad.points;
 
         for (let i = 1; i < pointsLength; i++) {
-            Line2d.draw(targetTex, points[i - 1], points[i], green);
+            Line2d.draw(targetTex, points[i - 1], points[i], Color.green);
         }
 
-        Line2d.draw(targetTex, points[pointsLength - 1], points[0], green);
+        Line2d.draw(targetTex, points[pointsLength - 1], points[0], Color.green);
     }
 
     drawTextured(targetTex) {

@@ -1,22 +1,17 @@
 import { test, assert } from 'naive-tests';
+import { Color } from '../../../../../../src/core/colors/index.js';
 import { convertTopRightTexABGR2BGR } from '../../../../../../src/core/images/formats/bmp/converters/bmp-image-top-right-tex.js';
 import { abgr2bgr } from '../../../../../../src/core/images/formats/bmp/utils/bytes-utils.js';
-
-const red = 0xFF0000FF;
-const white = 0xFFFFFFFF;
-const green = 0xFF00FF00;
-const blue = 0xFFFF0000;
-const yellow = 0xFFFFFF00;
 
 test('convert texture top to right abgr to bgr no padding pixels', () => {
     const imageWidth = 4;
     const imageHeight = 2;
 
-    const imagePixels = new Uint32Array([red, red, red, red, red, green, red, red]);
+    const imagePixels = new Uint32Array([Color.red, Color.red, Color.red, Color.red, Color.red, Color.green, Color.red, Color.red]);
 
     const expectedColors = [
-        abgr2bgr(red), abgr2bgr(green), abgr2bgr(red), abgr2bgr(red),
-        abgr2bgr(red), abgr2bgr(red), abgr2bgr(red), abgr2bgr(red)
+        abgr2bgr(Color.red), abgr2bgr(Color.green), abgr2bgr(Color.red), abgr2bgr(Color.red),
+        abgr2bgr(Color.red), abgr2bgr(Color.red), abgr2bgr(Color.red), abgr2bgr(Color.red)
     ];
 
     const data = convertTopRightTexABGR2BGR(imagePixels, imageWidth, imageHeight);
@@ -35,9 +30,9 @@ test('convert texture top to right abgr to bgr no padding pixels', () => {
 test('convert texture top to right abgr to bgr with padding pixels', () => {
     const imageWidth = 2;
     const imageHeight = 2;
-    const imagePixels = new Uint32Array([red, blue, white, green]);
+    const imagePixels = new Uint32Array([Color.red, Color.blue, Color.white, Color.green]);
 
-    const expectedColors = [abgr2bgr(white), abgr2bgr(green), abgr2bgr(red), abgr2bgr(blue)];
+    const expectedColors = [abgr2bgr(Color.white), abgr2bgr(Color.green), abgr2bgr(Color.red), abgr2bgr(Color.blue)];
     const data = convertTopRightTexABGR2BGR(imagePixels, imageWidth, imageHeight);
 
     let col = 0;

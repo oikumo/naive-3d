@@ -1,6 +1,8 @@
-export const white = 0xFFFFFFFF;
-export const black = 0xFF000000;
-export const red = 0xFF0000FF;
-export const blue = 0xFFFF0000;
-export const green = 0xFF00FF00;
-export const yellow = 0xFF00FFFF;
+export class Color {
+    static get white() { return 0xFFFFFFFF; }
+    static get black() { return 0xFF000000; }
+    static get red() { return 0xFF0000FF; }
+    static get blue() { return 0xFFFF0000; }
+    static get green() { return 0xFF00FF00; }
+    static get yellow() { return 0xFF00FFFF; }
+}

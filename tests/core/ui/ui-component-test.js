@@ -53,5 +53,5 @@ test('draw ui component using decimal numbers for rect', () => {
     }
 
     const componenentSize = flooredRect.width * flooredRect.height;
-    assert.equals(paintedPixels, componenentSize, `requiered pixels wasn't painted`);
+    assert.equals(paintedPixels, componenentSize, `requieColor.red pixels wasn't painted`);
 });
