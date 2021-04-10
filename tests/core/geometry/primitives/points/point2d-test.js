@@ -1,7 +1,7 @@
 import { test, assert } from 'naive-tests';
-import { blue, red } from '../../../../../src/core/colors/index.js';
+import { Color } from '../../../../../src/core/colors/index.js';
 import { Point2d } from '../../../../../src/core/geometry/primitives/points/point2d.js';
-import { createTexture } from '../../../../../src/core/textures/index.js';
+import { Textures } from '../../../../../src/core/textures/index.js';
 
 test('point2d', () => {
     const point = new Point2d(1, 2);
@@ -85,14 +85,14 @@ test('point2d: distance', () => {
 
 test('point2d: draw', () => {
     const point = new Point2d(10, 20);
-    const tex = createTexture(50, 50, blue);
-    Point2d.draw(tex, point, red);
+    const tex = Textures.createTexture(50, 50, Color.blue);
+    Point2d.draw(tex, point, Color.red);
 
     const found = [];
     let col = 0, row = 0;
 
     for (let i = 0; i < tex.pixels.length; i++) {
-        if (tex.pixels[i] === red) found.push([col, row]);
+        if (tex.pixels[i] === Color.red) found.push([col, row]);
         if (col + 1 === tex.width) {
             col = 0;
             row++;

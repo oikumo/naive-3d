@@ -21,8 +21,8 @@ DIB Header
 00 00 00 00	| 0 important colors	0 means all colors are important
 
 Start of pixel array (bitmap data)
-00 00 FF	| 0 0 255	Red, Pixel (0,1)
-FF FF FF	| 255 255 255	White, Pixel (1,1)
+00 00 FF	| 0 0 255	Color.red, Pixel (0,1)
+FF FF FF	| 255 255 255	Color.white, Pixel (1,1)
 00 00	    | 0 0	Padding for 4 byte alignment (could be a value other than zero)
 FF 00 00	| 255 0 0	Blue, Pixel (0,0)
 00 FF 00	| 0 255 0	Green, Pixel (1,0)

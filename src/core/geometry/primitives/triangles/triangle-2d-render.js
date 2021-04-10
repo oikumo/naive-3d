@@ -25,8 +25,8 @@ export class Triangle2dRender {
     }
 
     static leftArc(triangle) {
-        const pointsOrdered = Point2d.getPointsOrderedByAsc(triangle.points);
-        const leftMost = pointsOrdered[0];
+        const pointsOrded = Point2d.getPointsOrder.redByAsc(triangle.points);
+        const leftMost = pointsOrded[0];
 
         if (Point2d.equals(leftMost, triangle.a)) {
             return new RendererArc(
