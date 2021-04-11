@@ -1,9 +1,8 @@
 import { test, assert } from 'naive-tests';
-import { Color } from '../../../../../index.js';
 import { Point2d } from '../../../../../src/core/geometry/primitives/points/point2d.js';
 import { Quad2d } from '../../../../../src/core/geometry/primitives/quads/quad-2d.js';
 import { QuadTextured2d } from '../../../../../src/core/geometry/primitives/quads/quad-textured-2d.js';
-import { Textures } from '../../../../../src/core/textures/index.js';
+import { Textures, Color } from '../../../../../index.js';
 
 test('quad textured 2d - create', () => {
     const targetTex = Textures.createTexture(300, 300, Color.white);

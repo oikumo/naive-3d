@@ -1,9 +1,8 @@
 import { test, assert } from 'naive-tests';
-import { Color } from '../../../../../index.js';
+import { Color, Textures } from '../../../../../index.js';
 import { Point2d } from '../../../../../src/core/geometry/primitives/points/point2d.js';
 import { Quad2dScanline } from '../../../../../src/core/geometry/primitives/quads/quad-2d-scanline.js';
 import { Quad2d } from '../../../../../src/core/geometry/primitives/quads/quad-2d.js';
-import { Textures } from '../../../../../src/core/textures/index.js';
 
 test('quad 2d - get scanline', () => {
     const tex = Textures.createCheckerTexture(100, 100, Color.blue, Color.green, 10, 10);

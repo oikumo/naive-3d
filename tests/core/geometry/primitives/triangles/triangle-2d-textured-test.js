@@ -1,9 +1,8 @@
 import { test, assert } from 'naive-tests';
-import { Color } from '../../../../../index.js';
+import { Color, Textures } from '../../../../../index.js';
 import { Point2d } from '../../../../../src/core/geometry/primitives/points/point2d.js';
 import { drawTriangle2dTexuredLeftToRight } from '../../../../../src/core/geometry/primitives/triangles/triangle-2d-textured.js';
 import { Triangle2d } from '../../../../../src/core/geometry/primitives/triangles/triangle-2d.js';
-import { Textures } from '../../../../../src/core/textures/index.js';
 
 test('triangle 2d textuColor.red - draw', () => {
     const a = new Point2d(0, 0);

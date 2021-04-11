@@ -1,7 +1,6 @@
 import { test, assert } from 'naive-tests';
-import { Color } from '../../../../../index.js';
+import { Color, Textures } from '../../../../../index.js';
 import { Point2d } from '../../../../../src/core/geometry/primitives/points/point2d.js';
-import { Textures } from '../../../../../src/core/textures/index.js';
 
 test('point2d', () => {
     const point = new Point2d(1, 2);
