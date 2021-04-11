@@ -1,6 +1,5 @@
 import { assert, test } from 'naive-tests';
-import { Textures } from '../../../index.js';
-import { Color } from '../../../index.js';
+import { Color, Textures } from '../../../index.js';
 
 test('fill a squaColor.red texture with a solid color', () => {
     const tex = Textures.createTexture(10, 10);

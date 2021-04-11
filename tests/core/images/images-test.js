@@ -2,8 +2,7 @@ import { test, assert } from 'naive-tests';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { Textures } from '../../../index.js';
-import { Color } from '../../../index.js';
+import { Color, Textures } from '../../../index.js';
 import { Image } from '../../../src/core/images/image.js';
 
 test('texture2bmp big texture', () => {
