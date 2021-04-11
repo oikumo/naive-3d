@@ -30,5 +30,3 @@ export class HtmlCanvasInput {
         };
     }
 }
-
-export function a() { }
