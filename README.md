@@ -1,3 +1,3 @@
 # Naive-3D
 
-A very simple JavaScript 3D engine.
+A very simple JavaScript 3D Game Engine.
