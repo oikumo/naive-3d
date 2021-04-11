@@ -1,5 +1,5 @@
 import { assert, test } from 'naive-tests';
-import { UiRect } from '../../../src/core/ui/index.js';
+import { UiRect } from '../../../index.js';
 
 test('ui rect create', () => {
     const rect = new UiRect({ x: 45, y: 65 }, 10, 20);

@@ -1,7 +1,6 @@
 import { test, assert } from 'naive-tests';
-import { Color } from '../../../../../index.js';
+import { Color, Textures } from '../../../../../index.js';
 import { drawCircleFillOnTexture } from '../../../../../src/core/geometry/primitives/circle/circle-fill-on-texture.js';
-import { Textures } from '../../../../../src/core/textures/index.js';
 
 test('circle fill on texture - draw', () => {
     const tex = Textures.createTexture(50, 50, Color.white);

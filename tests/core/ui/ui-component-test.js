@@ -1,10 +1,10 @@
 import { assert, test } from 'naive-tests';
-import { createUiComponent, drawUiComponent, UiRect } from '../../../src/core/ui/index.js';
+import { UiComponent, UiRect } from '../../../index.js';
 
 test('create ui component', () => {
     const backgroundColor = 0xFF555555;
     const rect = new UiRect({ x: 0, y: 0 }, 20, 35);
-    const component = createUiComponent(rect, backgroundColor);
+    const component = new UiComponent(rect, backgroundColor);
     assert.equals(component.backgroundColor(), backgroundColor);
     assert.objAreEquals(component.rect, {
         width: 20,
@@ -19,14 +19,14 @@ test('draw ui component using decimal numbers for rect', () => {
     assert.equals(rect.width, 2.1);
     assert.equals(rect.height, 4);
     const backgroundColor = 0xFF555555;
-    const component = createUiComponent(rect, backgroundColor);
+    const component = new UiComponent(rect, backgroundColor);
 
     const pixelsWidth = 6;
     const pixelsHeight = 7;
     const pixelsSize = pixelsWidth * pixelsHeight;
     const pixels = new Uint32Array(pixelsSize);
 
-    drawUiComponent(component, pixels, pixelsWidth);
+    component.draw(pixels, pixelsWidth);
 
     let paintedPixels = 0;
     let col = 0;
