@@ -26,7 +26,7 @@
     "url": "https://github.com/oikumo/Naive-3D/issues"
   },
   "homepage": "https://github.com/oikumo/Naive-3D#readme",
-  "dependencies": {
-    "naive-tests": "^1.1.5"
+  "devDependencies": {
+    "naive-tests": "^1.1.9"
   }
 }

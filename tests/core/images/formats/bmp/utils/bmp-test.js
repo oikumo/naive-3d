@@ -10,5 +10,5 @@ test('bmp creator from Bottom Right Tex Abgr', () => {
     const bmp = BMPCreator.fromBottomRightTexAbgr(imagePixels, imageWidth, imageHeight);
     const imageHex = '424D460000000000000036000000280000000200000002000000010018000000000010000000130B0000130B000000000000000000000000FFFFFFFF0000FF000000FF000000';
     const expected = hex2bin(imageHex);
-    assert.sameArrayElements(expected, bmp);
+    assert.equalsArrayElements(expected, bmp);
 });
