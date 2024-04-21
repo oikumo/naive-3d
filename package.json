@@ -1,7 +1,7 @@
 {
   "type": "module",
   "name": "naive-3d",
-  "version": "0.2.5",
+  "version": "0.2.14",
   "description": "A naive 3D Game Engine for javascript",
   "main": "index.js",
   "directories": {
