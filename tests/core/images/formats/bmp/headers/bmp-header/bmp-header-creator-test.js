@@ -11,5 +11,5 @@ test('bmp header create', () => {
     const dibHeaderBytes = 40;
 
     const bmpHeader = createBmpHeader(pixelsBytes, dibHeaderBytes);
-    assert.sameArrayElements(expected, bmpHeader);
+    assert.equalsArrayElements(expected, bmpHeader);
 });

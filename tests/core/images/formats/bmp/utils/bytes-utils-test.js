@@ -14,7 +14,7 @@ test('reverse number 4 bytes', () => {
         255 & expected >> 8,
         255 & expected >> 0]);
 
-    assert.sameArrayElements(expectedBytes, reversed);
+    assert.equalsArrayElements(expectedBytes, reversed);
 });
 
 test('un reverse number in bytes reversed', () => {
@@ -32,7 +32,7 @@ test('reversenumber2 bytes', () => {
         255 & expected >> 8,
         255 & expected >> 0]);
 
-    assert.sameArrayElements(expectedBytes, reversed);
+    assert.equalsArrayElements(expectedBytes, reversed);
 });
 
 test('convert abgr to bgr color', () => {
