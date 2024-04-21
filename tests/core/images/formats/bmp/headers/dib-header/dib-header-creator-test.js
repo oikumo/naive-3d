@@ -17,5 +17,5 @@ test('bmp dib header create', () => {
     const dibHeader = createDibHeader(imageWidth, imageHeight);
     const expected = hex2bin('280000000200000002000000010018000000000010000000130B0000130B00000000000000000000');
 
-    assert.sameArrayElements(expected, dibHeader);
+    assert.equalsArrayElements(expected, dibHeader);
 });
