@@ -1,7 +1,7 @@
 import { Timer } from '../core/time/timer.js';
 import { Renderer } from '../core/renderer/renderer.js';
 
-export class Game {
+export class GameManager {
     constructor(renderer, playerInput) {
         this.renderer = Renderer.create(renderer);
         this.playerInput = playerInput;
