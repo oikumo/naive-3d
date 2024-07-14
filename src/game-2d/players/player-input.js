@@ -1,7 +1,9 @@
+import { vector3Zero } from "../../core/math/vector/vector3.js";
+
 export class PlayerInput {
     constructor() {
         this.player = null;
-        this.position = vector3Zero();
+        this.position =  vector3Zero();
     }
 
     setPlayer(player) {
