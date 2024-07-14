@@ -6,8 +6,9 @@ import { PlayerInput } from "./players/player-input.js";
 
 export class GameMain {
     constructor(htmlWindow, htmlCanvas, maxFps = 60) {
-        const intervalMilliSeconds = Math.ceil(1 / maxFps * 1000);
-        const renderer = new HtmlRenderer(htmlCanvas);
+        this.drawPeriod = GameMain.calculateDrawPeriod(maxFps);
+        this.renderer = new HtmlRenderer(htmlCanvas);
+
         const screenInput = new HtmlCanvasInput(htmlCanvas);
         const playerInput = new PlayerInput();
         screenInput.register(playerInput);
@@ -15,10 +16,16 @@ export class GameMain {
         
         this.game = new GameManager(renderer, playerInput);
 
-        renderer.clear(Color.yellow);
+        this.renderer.clear(Color.yellow);
+    }
 
+    run() {
         setInterval(() => {
-            renderer.draw();
-        }, intervalMilliSeconds);
+            this.renderer.draw();
+        }, this.drawPeriod);
+    }
+
+    static calculateDrawPeriod(fps) {
+        return Math.ceil(1 / fps * 1000);
     }
 }
