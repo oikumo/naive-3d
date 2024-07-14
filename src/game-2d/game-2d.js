@@ -1,5 +1,5 @@
-import { Timer } from '../time/timer.js';
-import { Renderer } from '../renderer/renderer.js';
+import { Timer } from '../core/time/timer.js';
+import { Renderer } from '../core/renderer/renderer.js';
 
 export class Game {
     constructor(renderer, playerInput) {

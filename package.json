@@ -8,6 +8,9 @@
     "test": "tests"
   },
   "scripts": {
+    "simple-game": "vite samples/simple-game",
+    "simple-game-build": "vite build samples/simple-game",
+    "simple-game-serve": "vite preview samples/simple-game",
     "test": "node test-runner.js",
     "pub": "npm publish --access public",
     "ins": "npm i"
@@ -17,8 +20,9 @@
     "url": "git+https://github.com/oikumo/Naive-3D.git"
   },
   "keywords": [
-    "3D",
-    "javascript"
+    "3d",
+    "javascript",
+    "games"
   ],
   "author": "oikumo",
   "license": "MIT",
@@ -27,6 +31,7 @@
   },
   "homepage": "https://github.com/oikumo/Naive-3D#readme",
   "devDependencies": {
-    "naive-tests": "^1.1.9"
+    "naive-tests": "^1.1.9",
+    "vite": "^5.3.3"
   }
 }
