@@ -1,8 +1,5 @@
 import { HtmlRenderer } from "../managers/renderer/html-renderer.js";
-import { HtmlCanvasInput } from "../managers/input/html-canvas-input.js";
-import { Color } from "../core/colors/color.js";
 import { GameManager } from "../managers/game/game-manager.js";
-import { PlayerInput } from "../managers/input/player-input.js";
 import { InputManager } from "../managers/input/input-manager.js";
 import { Scene } from "../scene/scene.js";
 
