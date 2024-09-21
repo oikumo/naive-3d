@@ -28,21 +28,21 @@ export class Line2d {
 
     static draw(tex, p, q, color) {
         const delta = Point2d.delta(q, p);
-        const n = Math.max(Math.abs(delta[0]), Math.abs(delta[1]));
+        const n = Math.max(Math.abs(delta.x), Math.abs(delta.y));
         let i, t, x, y;
 
         for (i = n - 1; i >= 0; --i) {
             t = i / n;
 
-            x = Math.floor(p.position[0] + (t * delta[0]));
+            x = Math.floor(p.position[0] + (t * delta.x));
             if (x < 0 || x >= tex.width)
                 continue;
 
-            y = p.position[1] + Math.floor(t * delta[1]);
+            y = p.position[1] + Math.floor(t * delta.y);
             if (y < 0 || y >= tex.height)
                 continue;
 
-            tex.pixels[Math.floor(y * tex.width) + x] = color;
+            tex.tex[Math.floor(y * tex.width) + x] = color;
         }
     }
 }
